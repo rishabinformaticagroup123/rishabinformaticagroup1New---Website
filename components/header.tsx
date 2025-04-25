@@ -31,7 +31,7 @@ export default function Header() {
             <div className="flex items-center gap-3">
               <Image
                 src="/logo.png"
-                width={120}
+                width={40}
                 height={40}
                 alt="Rishab Informatica Group Logo"
                 className="h-auto w-auto"
@@ -86,9 +86,9 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-                  width={100}
-                  height={30}
-                  alt="Rishab Informatica Group Logo"
+				  alt="Rishab Informatica Group Logo"
+                  width={40}
+                  height={40}
                   className="h-auto w-auto"
                 />
                 <span className="font-bold text-lg">RIG</span>
