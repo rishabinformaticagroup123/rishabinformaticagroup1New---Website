@@ -86,9 +86,10 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-				  alt="Rishab Informatica Group Logo"
-                  width={40}
-                  height={40}
+				    src="/logo.png"
+                    width={100}
+                    height={100}
+                    alt="R"
                   className="h-auto w-auto"
                 />
                 <span className="font-bold text-lg">RIG</span>
