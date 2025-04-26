@@ -30,7 +30,7 @@ export default function Header() {
           <Link href="/" className="-m-1.5 p-1.5">
             <div className="flex items-center gap-3">
               <Image
-                src="/rishab.jpg"
+                src="/logo.png"
                 width={40}
                 height={40}
                 alt="Rishab Informatica Group Logo"
