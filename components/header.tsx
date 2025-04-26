@@ -1,181 +1,137 @@
-import { Fragment } from "react";
-import { Popover, Transition } from "@headlessui/react";
-import Link from "next/link";
+"use client"
 
-const courses = [
-  { name: "IICS Combo", href: "/courses/iics-combo" },
-  { name: "IICS", href: "/courses/iics" },
-  { name: "PowerCenter", href: "/courses/powercenter" },
-  { name: "SQL", href: "/courses/sql" },
-  { name: "Snowflake", href: "/courses/snowflake" },
-  { name: "Azure", href: "/courses/azure" },
-  { name: "Talend", href: "/courses/talend" },
-  { name: "Performance Engineering", href: "/courses/performance-engineering" },
-];
+import { useState } from "react"
+import Link from "next/link"
+import { Menu, X } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
+import Image from "next/image"
 
-const interviewQuestions = [
-  { name: "PowerCenter", href: "/interview-questions/powercenter" },
-  { name: "IICS", href: "/interview-questions/iics" },
-  { name: "SQL", href: "/interview-questions/sql" },
-  { name: "Snowflake", href: "/interview-questions/snowflake" },
-];
-
-const studyMaterials = [
-  { name: "PowerCenter", href: "/study-materials/powercenter" },
-  { name: "IICS", href: "/study-materials/iics" },
-  { name: "SQL", href: "/study-materials/sql" },
-  { name: "Snowflake", href: "/study-materials/snowflake" },
-];
-
-const internship = [
-  { name: "Internship Details", href: "/internship/details" },
-  { name: "Real Projects", href: "/internship/projects" },
-];
+const navigation = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Student Stories", href: "/testimonials" },
+  { name: "Blogs", href: "/blogs" },
+  { name: "Our Top Courses", href: "/courses" },
+  { name: "Refund Policy", href: "/refund-policy" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+]
 
 export default function Header() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const pathname = usePathname()
+
   return (
-    <header className="bg-white shadow sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <Link href="/">
-                <span className="text-2xl font-bold text-blue-600">Rishab Informatica Group</span>
-              </Link>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
+        {/* Left: Logo and Site Name */}
+        <div className="flex items-center lg:flex-1">
+          <Link href="/" className="-m-1.5 p-1.5">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/logo.png"
+                width={40}
+                height={40}
+                alt="Rishab Informatica Group Logo"
+                className="h-auto w-auto"
+              />
+              <span className="font-bold text-lg hidden sm:inline-block">Rishab Informatica Group</span>
+              <span className="font-bold text-lg sm:hidden">RIG</span>
             </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link href="/" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">Home</Link>
+          </Link>
+        </div>
 
-              <Link href="/about" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">About</Link>
+        {/* Desktop Menu */}
+        <div className="hidden lg:flex lg:gap-x-6 ml-8">
+          {navigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              className={cn(
+                "text-sm font-semibold leading-6 transition-colors",
+                pathname === item.href ? "text-primary font-bold" : "text-muted-foreground hover:text-primary",
+              )}
+            >
+              {item.name}
+            </Link>
+          ))}
+        </div>
 
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">
-                      Courses
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1">
-                          {courses.map((item) => (
-                            <Link key={item.name} href={item.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
+        {/* Contact Us Button */}
+        <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+          <Button asChild>
+            <Link href="/contact">Contact Us</Link>
+          </Button>
+        </div>
 
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">
-                      Interview Q&A
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1">
-                          {interviewQuestions.map((item) => (
-                            <Link key={item.name} href={item.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
+        {/* Mobile Menu Button */}
+        <div className="flex lg:hidden">
+          <Button
+            variant="ghost"
+            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <span className="sr-only">Open main menu</span>
+            <Menu className="h-6 w-6" aria-hidden="true" />
+          </Button>
+        </div>
+      </nav>
 
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">
-                      Study Materials
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1">
-                          {studyMaterials.map((item) => (
-                            <Link key={item.name} href={item.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
+      {/* Mobile Menu Panel */}
+      <div className={cn("lg:hidden", mobileMenuOpen ? "fixed inset-0 z-50" : "hidden")}>
+        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="flex items-center justify-between">
+            <Link href="/" className="-m-1.5 p-1.5">
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/logo.png"
+				    src="/logo.png"
+                    width={100}
+                    height={100}
+                    alt="R"
+                  className="h-auto w-auto"
+                />
+                <span className="font-bold text-lg">RIG</span>
+              </div>
+            </Link>
+            <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
+              <span className="sr-only">Close menu</span>
+              <X className="h-6 w-6" aria-hidden="true" />
+            </Button>
+          </div>
 
-              <Popover className="relative">
-                {({ open }) => (
-                  <>
-                    <Popover.Button className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">
-                      Internship
-                    </Popover.Button>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-200"
-                      enterFrom="opacity-0 translate-y-1"
-                      enterTo="opacity-100 translate-y-0"
-                      leave="transition ease-in duration-150"
-                      leaveFrom="opacity-100 translate-y-0"
-                      leaveTo="opacity-0 translate-y-1"
-                    >
-                      <Popover.Panel className="absolute z-10 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
-                        <div className="py-1">
-                          {internship.map((item) => (
-                            <Link key={item.name} href={item.href} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                              {item.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </Popover.Panel>
-                    </Transition>
-                  </>
-                )}
-              </Popover>
-
-              <Link href="/testimonials" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">Testimonials</Link>
-
-              <Link href="/blog" className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-blue-600">Blog</Link>
-
-              <Link href="/contact" className="inline-flex items-center px-4 py-2 ml-4 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white text-sm font-semibold">
-                Contact
-              </Link>
-
+          {/* Mobile Links */}
+          <div className="mt-6 flow-root">
+            <div className="-my-6 divide-y divide-gray-500/10">
+              <div className="space-y-2 py-6">
+                {navigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
+                      pathname === item.href
+                        ? "text-primary font-bold bg-muted"
+                        : "text-muted-foreground hover:bg-muted",
+                    )}
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="py-6">
+                <Button asChild className="w-full">
+                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                    Contact Us
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </header>
-  );
+  )
 }
