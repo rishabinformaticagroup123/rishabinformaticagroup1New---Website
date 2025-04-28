@@ -61,7 +61,7 @@ export default function Header() {
         {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link href="/contact">Contact Us</Link>
+            <Link href="/contact">Contact</Link>
           </Button>
         </div>
 
