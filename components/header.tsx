@@ -126,7 +126,7 @@ export default function Header() {
               <div className="py-6">
                 <Button asChild className="w-full">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    Contact Us
+                    Contact 
                   </Link>
                 </Button>
               </div>
