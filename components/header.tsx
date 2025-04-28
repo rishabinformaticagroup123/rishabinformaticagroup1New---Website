@@ -36,7 +36,7 @@ export default function Header() {
                 alt="Rishab Informatica Group Logo"
                 className="h-auto w-auto"
               />
-              <span className="font-bold text-lg hidden sm:inline-block">Rishab Informatica Group</span>
+              <span className="font-bold text-lg hidden sm:inline-block"></span>
               <span className="font-bold text-lg sm:hidden">RIG</span>
             </div>
           </Link>
