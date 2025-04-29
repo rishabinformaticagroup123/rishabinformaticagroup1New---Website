@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        {/* Left: Logo and Site Name */}
+        {/* Left: Logo */}
         <div className="flex items-center lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <div className="flex items-center gap-3">
@@ -58,22 +58,36 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Contact Us Button */}
+        {/* Desktop: Contact/Login Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-		  <Link
-            href="https://web.classplusapp.com/login?orgCode=zfghut"
-			target="_blank" 
-			rel="noopener noreferrer"
-			className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
-		   >
-             Student Log in
+            <Link
+              href="https://web.classplusapp.com/login?orgCode=zfghut"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
+            >
+              Student Log in
             </Link>
-		  </Button>
+          </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex lg:hidden">
+        {/* Mobile: Menu Button */}
+        <div className="flex lg:hidden items-center gap-2">
+          {/* Mobile-only Download App Button */}
+          <Button
+            asChild
+            className="lg:hidden bg-green-600 text-white px-4 py-2 rounded-md text-sm"
+          >
+            <Link
+              href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download App
+            </Link>
+          </Button>
+
           <Button
             variant="ghost"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
@@ -93,10 +107,9 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-				    src="/logo.png"
-                    width={100}
-                    height={100}
-                    alt="R"
+                  width={100}
+                  height={100}
+                  alt="R"
                   className="h-auto w-auto"
                 />
                 <span className="font-bold text-lg">RIG</span>
