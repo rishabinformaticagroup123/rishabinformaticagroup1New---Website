@@ -34,8 +34,10 @@ export default function Header() {
                 width={40}
                 height={40}
                 alt="Rishab Informatica Group Logo"
-                className="w-10 h-10 sm:w-12 sm:h-12"
+                className="h-auto w-auto"
               />
+              <span className="font-bold text-lg hidden sm:inline-block"></span>
+              <span className="font-bold text-lg sm:hidden"></span>
             </div>
           </Link>
         </div>
@@ -59,15 +61,15 @@ export default function Header() {
         {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link
-              href="https://web.classplusapp.com/login?orgCode=zfghut"
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
-            >
-              Student Log in
+		  <Link
+            href="https://web.classplusapp.com/login?orgCode=zfghut"
+			target="_blank" 
+			rel="noopener noreferrer"
+			className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
+		   >
+             Student Log in
             </Link>
-          </Button>
+		  </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -91,11 +93,13 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-                  width={100}
-                  height={100}
-                  alt="Logo"
+				    src="/logo.png"
+                    width={100}
+                    height={100}
+                    alt="R"
                   className="h-auto w-auto"
                 />
+                <span className="font-bold text-lg">RIG</span>
               </div>
             </Link>
             <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
@@ -134,27 +138,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* Mobile Header with "Download App" button */}
-      <div className="flex items-center justify-between w-full lg:hidden p-4">
-        <Link href="/" className="-m-1.5 p-1.5">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/logo.png"
-              width={40}
-              height={40}
-              alt="Rishab Informatica Group Logo"
-              className="w-10 h-10 sm:w-12 sm:h-12"
-            />
-          </div>
-        </Link>
-        <Link
-          href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
-          className="ml-auto text-sm font-semibold bg-green-600 text-white px-2 py-1.5 rounded-lg block sm:hidden hover:bg-green-700 active:bg-green-600"
-        >
-          Download App
-        </Link>
       </div>
     </header>
   )
