@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        {/* Logo */}
+        {/* Left: Logo and Site Name */}
         <div className="flex items-center lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <div className="flex items-center gap-3">
@@ -40,7 +40,7 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Menu */}
         <div className="hidden lg:flex lg:gap-x-6 ml-8">
           {navigation.map((item) => (
             <Link
@@ -48,7 +48,7 @@ export default function Header() {
               href={item.href}
               className={cn(
                 "text-sm font-semibold leading-6 transition-colors",
-                pathname === item.href ? "text-primary font-bold" : "text-muted-foreground hover:text-primary"
+                pathname === item.href ? "text-primary font-bold" : "text-muted-foreground hover:text-primary",
               )}
             >
               {item.name}
@@ -56,12 +56,12 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Desktop Button */}
+        {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
             <Link
               href="https://web.classplusapp.com/login?orgCode=zfghut"
-              target="_blank"
+              target="_blank" 
               rel="noopener noreferrer"
               className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
             >
@@ -88,13 +88,15 @@ export default function Header() {
         <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
-              <Image
-                src="/logo.png"
-                width={40}
-                height={40}
-                alt="Rishab Informatica Group Logo"
-                className="w-10 h-10"
-              />
+              <div className="flex items-center gap-3">
+                <Image
+                  src="/logo.png"
+                  width={100}
+                  height={100}
+                  alt="Logo"
+                  className="h-auto w-auto"
+                />
+              </div>
             </Link>
             <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Close menu</span>
@@ -114,7 +116,7 @@ export default function Header() {
                       "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
                       pathname === item.href
                         ? "text-primary font-bold bg-muted"
-                        : "text-muted-foreground hover:bg-muted"
+                        : "text-muted-foreground hover:bg-muted",
                     )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -122,26 +124,37 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
-              <div className="py-4 space-y-3">
-                <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-                  <Link
-                    href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Download App
-                  </Link>
-                </Button>
+              <div className="py-6">
                 <Button asChild className="w-full">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    Contact Us
+                    Contact us
                   </Link>
                 </Button>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Mobile Header with "Download App" button */}
+      <div className="flex items-center justify-between w-full lg:hidden p-4">
+        <Link href="/" className="-m-1.5 p-1.5">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/logo.png"
+              width={40}
+              height={40}
+              alt="Rishab Informatica Group Logo"
+              className="w-10 h-10 sm:w-12 sm:h-12"
+            />
+          </div>
+        </Link>
+        <Link
+          href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
+          className="ml-auto text-sm font-semibold bg-green-600 text-white px-2 py-1.5 rounded-lg block sm:hidden hover:bg-green-700 active:bg-green-600"
+        >
+          Download App
+        </Link>
       </div>
     </header>
   )
