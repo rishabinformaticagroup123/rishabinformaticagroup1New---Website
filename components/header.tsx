@@ -37,7 +37,7 @@ export default function Header() {
                 className="h-auto w-auto"
               />
               <span className="font-bold text-lg hidden sm:inline-block"></span>
-              <span className="font-bold text-lg sm:hidden">RIG</span>
+              <span className="font-bold text-lg sm:hidden"></span>
             </div>
           </Link>
         </div>
@@ -65,9 +65,10 @@ export default function Header() {
             href="https://web.classplusapp.com/login?orgCode=zfghut"
 			target="_blank" 
 			rel="noopener noreferrer"
-			>
-              Student Log in
-             </Link>
+			className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
+		   >
+             Student Log in
+            </Link>
 		  </Button>
         </div>
 
