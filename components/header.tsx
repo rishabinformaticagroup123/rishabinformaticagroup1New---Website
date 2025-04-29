@@ -25,7 +25,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        {/* Left: Logo and Site Name */}
+        {/* Left: Logo */}
         <div className="flex items-center lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
             <div className="flex items-center gap-3">
@@ -36,8 +36,6 @@ export default function Header() {
                 alt="Rishab Informatica Group Logo"
                 className="h-auto w-auto"
               />
-              <span className="font-bold text-lg hidden sm:inline-block"></span>
-              <span className="font-bold text-lg sm:hidden"></span>
             </div>
           </Link>
         </div>
@@ -61,15 +59,15 @@ export default function Header() {
         {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-		  <Link
-            href="https://web.classplusapp.com/login?orgCode=zfghut"
-			target="_blank" 
-			rel="noopener noreferrer"
-			className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
-		   >
-             Student Log in
+            <Link
+              href="https://web.classplusapp.com/login?orgCode=zfghut"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
+            >
+              Student Log in
             </Link>
-		  </Button>
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -93,13 +91,11 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-				    src="/logo.png"
-                    width={100}
-                    height={100}
-                    alt="R"
+                  width={80} // Slightly smaller size on mobile
+                  height={80}
+                  alt="Logo"
                   className="h-auto w-auto"
                 />
-                <span className="font-bold text-lg">RIG</span>
               </div>
             </Link>
             <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
@@ -132,6 +128,20 @@ export default function Header() {
                 <Button asChild className="w-full">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                     Contact us
+                  </Link>
+                </Button>
+              </div>
+
+              {/* Mobile Download App Button */}
+              <div className="py-6">
+                <Button asChild className="w-full">
+                  <Link
+                    href="https://web.classplusapp.com/login?orgCode=zfghut"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
+                  >
+                    Download App
                   </Link>
                 </Button>
               </div>
