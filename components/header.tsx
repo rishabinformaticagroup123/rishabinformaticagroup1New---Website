@@ -61,7 +61,7 @@ export default function Header() {
         {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link href="https://classplusapp.com/login" target="_blank" rel="noopener noreferrer">
+            href="https://web.classplusapp.com/login?orgCode=zfghut" target="_blank" rel="noopener noreferrer">
               Log in
              </Link>
 		  </Button>
