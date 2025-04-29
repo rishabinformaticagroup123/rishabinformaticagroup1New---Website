@@ -25,22 +25,21 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
-        {/* Left: Logo */}
+        
+        {/* Logo */}
         <div className="flex items-center lg:flex-1">
           <Link href="/" className="-m-1.5 p-1.5">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo.png"
-                width={40}
-                height={40}
-                alt="Rishab Informatica Group Logo"
-                className="h-auto w-auto"
-              />
-            </div>
+            <Image
+              src="/logo.png"
+              width={40}
+              height={40}
+              alt="Rishab Informatica Group Logo"
+              className="h-auto w-auto"
+            />
           </Link>
         </div>
 
-        {/* Desktop Menu */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex lg:gap-x-6 ml-8">
           {navigation.map((item) => (
             <Link
@@ -56,14 +55,13 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Contact Us Button */}
+        {/* Desktop Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
             <Link
               href="https://web.classplusapp.com/login?orgCode=zfghut"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
             >
               Student Log in
             </Link>
@@ -86,17 +84,17 @@ export default function Header() {
       {/* Mobile Menu Panel */}
       <div className={cn("lg:hidden", mobileMenuOpen ? "fixed inset-0 z-50" : "hidden")}>
         <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          
+          {/* Mobile Menu Header */}
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5">
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/logo.png"
-                  width={80} // Slightly smaller size on mobile
-                  height={80}
-                  alt="Logo"
-                  className="h-auto w-auto"
-                />
-              </div>
+              <Image
+                src="/logo.png"
+                width={60}
+                height={60}
+                alt="Logo"
+                className="h-auto w-auto"
+              />
             </Link>
             <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Close menu</span>
@@ -107,6 +105,7 @@ export default function Header() {
           {/* Mobile Links */}
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
+              
               <div className="space-y-2 py-6">
                 {navigation.map((item) => (
                   <Link
@@ -124,6 +123,8 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
+
+              {/* Contact Us - Mobile */}
               <div className="py-6">
                 <Button asChild className="w-full">
                   <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
@@ -132,14 +133,16 @@ export default function Header() {
                 </Button>
               </div>
 
-              {/* Mobile Download App Button */}
+              {/* Download App - Mobile Only */}
               <div className="py-6">
-                <Button asChild className="w-full">
+                <Button
+                  asChild
+                  className="w-full bg-primary text-white font-bold hover:bg-primary/90"
+                >
                   <Link
                     href="https://web.classplusapp.com/login?orgCode=zfghut"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-bold text-white bg-primary hover:bg-primary-dark px-6 py-3 rounded-lg transition-colors"
                   >
                     Download App
                   </Link>
