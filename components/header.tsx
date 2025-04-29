@@ -58,19 +58,17 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Updated Contact Us Button */}
+        {/* Contact Us Button */}
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Button asChild>
-            <Link
-              href="https://web.classplusapp.com/login?orgCode=zfghut"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center leading-tight"
-            >
-              <span className="text-base font-semibold">Student Login</span>
-              <span className="text-xs text-white/80">To Get Access After Enrolled</span>
-            </Link>
-          </Button>
+		  <Link
+            href="https://web.classplusapp.com/login?orgCode=zfghut"
+			target="_blank" 
+			rel="noopener noreferrer"
+			>
+              Student Log in
+             </Link>
+		  </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -94,9 +92,10 @@ export default function Header() {
               <div className="flex items-center gap-3">
                 <Image
                   src="/logo.png"
-                  width={100}
-                  height={100}
-                  alt="R"
+				    src="/logo.png"
+                    width={100}
+                    height={100}
+                    alt="R"
                   className="h-auto w-auto"
                 />
                 <span className="font-bold text-lg">RIG</span>
