@@ -70,11 +70,10 @@ export default function Header() {
 
         {/* Mobile Buttons (Download App + Menu) */}
         <div className="flex lg:hidden gap-2">
-          {/* New Download App Button - Mobile Only */}
+          {/* Download App Button - Blue to match logo */}
           <Button
             asChild
-            variant="outline"
-            className="lg:hidden"
+            className="lg:hidden bg-[#2563EB] hover:bg-[#1D4ED8] text-white"
           >
             <Link
               href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
@@ -85,11 +84,11 @@ export default function Header() {
             </Link>
           </Button>
           
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - Now properly toggles menu */}
           <Button
             variant="ghost"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
-            onClick={() => setMobileMenuOpen(true)}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} // Fixed toggle
           >
             <span className="sr-only">Open main menu</span>
             <Menu className="h-6 w-6" aria-hidden="true" />
@@ -97,78 +96,78 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile Menu Panel */}
-      <div className={cn("lg:hidden", mobileMenuOpen ? "fixed inset-0 z-50" : "hidden")}>
-        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
-          
-          {/* Mobile Menu Header */}
-          <div className="flex items-center justify-between">
-            <Link href="/" className="-m-1.5 p-1.5">
-              <Image
-                src="/logo.png"
-                width={60}
-                height={60}
-                alt="Logo"
-                className="h-auto w-auto"
-              />
-            </Link>
-            <Button variant="ghost" className="-m-2.5 rounded-md p-2.5" onClick={() => setMobileMenuOpen(false)}>
-              <span className="sr-only">Close menu</span>
-              <X className="h-6 w-6" aria-hidden="true" />
-            </Button>
-          </div>
+      {/* Mobile Menu Panel - Now opens/closes properly */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden fixed inset-0 z-50">
+          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-background px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+            <div className="flex items-center justify-between">
+              <Link href="/" className="-m-1.5 p-1.5">
+                <Image
+                  src="/logo.png"
+                  width={60}
+                  height={60}
+                  alt="Logo"
+                  className="h-auto w-auto"
+                />
+              </Link>
+              <Button 
+                variant="ghost" 
+                className="-m-2.5 rounded-md p-2.5" 
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <span className="sr-only">Close menu</span>
+                <X className="h-6 w-6" aria-hidden="true" />
+              </Button>
+            </div>
 
-          {/* Mobile Links */}
-          <div className="mt-6 flow-root">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              
-              <div className="space-y-2 py-6">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    className={cn(
-                      "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
-                      pathname === item.href
-                        ? "text-primary font-bold bg-muted"
-                        : "text-muted-foreground hover:bg-muted",
-                    )}
-                    onClick={() => setMobileMenuOpen(false)}
+            <div className="mt-6 flow-root">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  {navigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={cn(
+                        "-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7",
+                        pathname === item.href
+                          ? "text-primary font-bold bg-muted"
+                          : "text-muted-foreground hover:bg-muted",
+                      )}
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+
+                <div className="py-6">
+                  <Button asChild className="w-full">
+                    <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+                      Contact us
+                    </Link>
+                  </Button>
+                </div>
+
+                <div className="py-6">
+                  <Button
+                    asChild
+                    className="w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white"
                   >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
-
-              {/* Contact Us - Mobile */}
-              <div className="py-6">
-                <Button asChild className="w-full">
-                  <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
-                    Contact us
-                  </Link>
-                </Button>
-              </div>
-
-              {/* Download App - Mobile Only (also included in menu for redundancy) */}
-              <div className="py-6">
-                <Button
-                  asChild
-                  className="w-full bg-primary text-white font-bold hover:bg-primary/90"
-                >
-                  <Link
-                    href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Download App
-                  </Link>
-                </Button>
+                    <Link
+                      href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Download App
+                    </Link>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   )
 }
