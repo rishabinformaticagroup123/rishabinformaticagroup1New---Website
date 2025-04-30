@@ -68,8 +68,24 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex lg:hidden">
+        {/* Mobile Buttons (Download App + Menu) */}
+        <div className="flex lg:hidden gap-2">
+          {/* New Download App Button - Mobile Only */}
+          <Button
+            asChild
+            variant="outline"
+            className="lg:hidden"
+          >
+            <Link
+              href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download App
+            </Link>
+          </Button>
+          
+          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5"
@@ -133,16 +149,17 @@ export default function Header() {
                 </Button>
               </div>
 
-              {/* Download App - Mobile Only */}
+              {/* Download App - Mobile Only (also included in menu for redundancy) */}
               <div className="py-6">
                 <Button
                   asChild
                   className="w-full bg-primary text-white font-bold hover:bg-primary/90"
                 >
                   <Link
-                    href="https://web.classplusapp.com/login?orgCode=zfghut"
+                    href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral"
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => setMobileMenuOpen(false)}
                   >
                     Download App
                   </Link>
