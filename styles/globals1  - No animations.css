@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===== Theme Variables (Blue Primary) ===== */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -49,11 +50,64 @@
   }
 }
 
+/* ===== Base Styling ===== */
 @layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
+  }
+
+  .dropdown-open {
+    animation: dropdown-open 0.3s ease-out;
+    transform-origin: top center;
+  }
+
+  .dropdown-close {
+    animation: dropdown-close 0.3s ease-in;
+    transform-origin: top center;
+  }
+
+  @keyframes dropdown-open {
+    0% {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes dropdown-close {
+    0% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    100% {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Optional scrollbar styles */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(100, 100, 100, 0.5);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(80, 80, 80, 0.7);
   }
 }

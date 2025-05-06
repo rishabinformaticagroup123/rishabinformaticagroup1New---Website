@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 import { usePathname } from "next/navigation"
 import Image from "next/image"
 
-// ▼ YOUR COMPLETE MENU STRUCTURE (100% preserved) ▼
 const MENU_ITEMS = [
   { 
     name: "Home", 
@@ -82,11 +81,12 @@ export default function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const pathname = usePathname()
 
-  // ▼ PRESERVED LOGIC ▼
+  // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false)
   }, [pathname])
 
+  // Smooth scroll lock for mobile
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -96,7 +96,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         
-        {/* ▼ PRESERVED LOGO ▼ */}
+        {/* Logo */}
         <Link href="/" className="flex-shrink-0" aria-label="Home">
           <Image 
             src="/logo.png" 
@@ -108,7 +108,7 @@ export default function Header() {
           />
         </Link>
 
-        {/* ========== ENHANCED DESKTOP NAV ========== */}
+        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-1">
           {MENU_ITEMS.map((item) => (
             <div 
@@ -123,7 +123,8 @@ export default function Header() {
                   className={cn(
                     "px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md",
                     "hover:text-primary hover:bg-gray-50",
-                    pathname === item.href ? "text-primary" : "text-gray-800"
+                    pathname === item.href ? "text-primary" : "text-gray-800",
+                    item.name === "Contact" && "hidden" // Hide Contact from desktop nav (will show as button)
                   )}
                 >
                   {item.name}
@@ -136,16 +137,16 @@ export default function Header() {
                 )}
               </div>
 
-              {/* ▼ ENHANCED DROPDOWN ANIMATION ▼ */}
+              {/* Smooth Dropdown */}
               {item.subItems && (
                 <div 
                   className={cn(
                     "absolute left-0 top-full mt-1 w-56 origin-top",
                     "bg-white rounded-lg shadow-lg border border-gray-100",
                     "transition-all duration-200 ease-out",
-                    "transform-gpu", // Hardware acceleration
+                    "overflow-hidden",
                     activeDropdown === item.name 
-                      ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+                      ? "opacity-100 scale-100 translate-y-0" 
                       : "opacity-0 scale-95 -translate-y-1 pointer-events-none"
                   )}
                 >
@@ -154,7 +155,7 @@ export default function Header() {
                       key={subItem.name}
                       href={subItem.href}
                       className={cn(
-                        "block px-4 py-2.5 text-sm transition-colors duration-150",
+                        "block px-4 py-2.5 text-sm transition-colors",
                         "hover:bg-gray-50 hover:text-primary",
                         pathname === subItem.href ? "text-primary font-medium" : "text-gray-700"
                       )}
@@ -168,7 +169,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* ▼ PRESERVED ACTION BUTTONS ▼ */}
+        {/* Action Buttons - Desktop */}
         <div className="hidden md:flex items-center gap-3">
           <Button asChild variant="ghost" className="hover:bg-gray-50">
             <Link href="https://app.classplusapp.com" target="_blank" className="text-sm font-medium">
@@ -182,7 +183,7 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* ========== ENHANCED MOBILE MENU ========== */}
+        {/* Mobile Menu Toggle and Download App Button */}
         <div className="md:hidden flex items-center gap-2">
           <Button asChild size="sm" className="bg-primary hover:bg-primary-dark text-white">
             <Link 
@@ -193,7 +194,7 @@ export default function Header() {
             </Link>
           </Button>
           <button
-            className="p-2 rounded-md hover:bg-gray-100 transition-colors duration-150"
+            className="p-2 rounded-md hover:bg-gray-100 transition-colors"
             onClick={() => setMobileMenuOpen(true)}
             aria-label="Open menu"
           >
@@ -202,12 +203,12 @@ export default function Header() {
         </div>
       </div>
 
-      {/* ▼ ENHANCED MOBILE OVERLAY ▼ */}
+      {/* Mobile Menu with Smooth Animation */}
       {mobileMenuOpen && (
         <div 
           className={cn(
             "md:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-sm",
-            "transition-opacity duration-300 ease-in-out",
+            "transition-opacity duration-300",
             mobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           )}
           onClick={() => setMobileMenuOpen(false)}
@@ -215,7 +216,7 @@ export default function Header() {
           <div 
             className={cn(
               "absolute right-0 top-0 h-full w-80 bg-white shadow-xl",
-              "transition-transform duration-300 ease-in-out transform-gpu",
+              "transition-transform duration-300 ease-in-out",
               mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             )}
             onClick={(e) => e.stopPropagation()}
@@ -230,7 +231,7 @@ export default function Header() {
               />
               <button 
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-1.5 rounded-full hover:bg-gray-100 transition-colors duration-150"
+                className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
                 aria-label="Close menu"
               >
                 <X className="h-6 w-6 text-gray-700" />
@@ -244,7 +245,7 @@ export default function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "flex-1 py-3 px-3 rounded-md hover:bg-gray-50 text-sm font-medium transition-colors duration-150",
+                        "flex-1 py-3 px-3 rounded-md hover:bg-gray-50 text-sm font-medium",
                         pathname === item.href ? "text-primary" : "text-gray-800"
                       )}
                     >
@@ -255,7 +256,7 @@ export default function Header() {
                         onClick={() => setActiveDropdown(
                           activeDropdown === item.name ? null : item.name
                         )}
-                        className="p-1.5 hover:bg-gray-50 rounded-md transition-colors duration-150"
+                        className="p-1.5 hover:bg-gray-50 rounded-md"
                         aria-label={`Toggle ${item.name} menu`}
                       >
                         <ChevronDown className={cn(
@@ -267,18 +268,13 @@ export default function Header() {
                   </div>
 
                   {item.subItems && activeDropdown === item.name && (
-                    <div 
-                      className={cn(
-                        "ml-4 mt-1 space-y-1",
-                        "animate-in fade-in-50 slide-in-from-top-2 duration-200"
-                      )}
-                    >
+                    <div className="ml-4 mt-1 space-y-1 animate-in fade-in-50">
                       {item.subItems.map((subItem) => (
                         <Link
                           key={subItem.name}
                           href={subItem.href}
                           className={cn(
-                            "block py-2.5 px-3 text-sm rounded-md hover:bg-gray-50 transition-colors duration-150",
+                            "block py-2.5 px-3 text-sm rounded-md hover:bg-gray-50",
                             pathname === subItem.href ? "text-primary font-medium" : "text-gray-700"
                           )}
                         >

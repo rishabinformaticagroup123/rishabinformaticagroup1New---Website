@@ -1,4 +1,18 @@
 "use client"
+import dynamic from "next/dynamic";
+import { AnimatePresence } from "framer-motion";
+
+// 2. Lazy-loaded motion components (SECOND)
+const MotionDiv = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.div),
+  { ssr: false, loading: () => <div className="contents" /> } // Added fallback
+);
+const MotionHeader = dynamic(
+  () => import("framer-motion").then((mod) => mod.motion.header),
+  { ssr: false, loading: () => <header className="contents" /> }
+);
+
+// ▼ Existing component imports (AFTER animation imports) ▼
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Menu, X, ChevronDown, Smartphone } from "lucide-react"

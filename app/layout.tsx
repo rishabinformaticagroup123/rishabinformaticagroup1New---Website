@@ -1,35 +1,24 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Inter } from "next/font/google"
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-
-const inter = Inter({ subsets: ["latin"] })
+import '../styles/globals1.css'
+import type { Metadata } from 'next'
+import Header from '@/components/Header_animations17'
 
 export const metadata: Metadata = {
-  title: "Rishab Informatica Group - Professional IT Training Institute",
-  description:
-    "Leading training institute offering courses in Informatica IICS, Azure Data Engineering, Snowflake, and Performance Engineering.",
-    generator: 'v0.dev'
+  title: 'Rishab Informatica Group',
+  description: 'Advanced Your Tech Career With Expert Training',
 }
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
-        </ThemeProvider>
+    <html lang="en" className="scroll-smooth">
+      <body className="min-h-screen bg-white">
+        <Header />
+        <main className="pt-16">
+          {children}
+        </main>
       </body>
     </html>
   )
