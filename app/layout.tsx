@@ -1,6 +1,6 @@
 import '../styles/globals1.css'
 import type { Metadata } from 'next'
-import Header from '@/components/Header_animations17'
+import Header from '@/components/Header'
 
 export const metadata: Metadata = {
   title: 'Rishab Informatica Group',
