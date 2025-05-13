@@ -35,11 +35,6 @@ body.menu-open {
   to { transform: scale(1); opacity: 1; }
 }
 
-@keyframes slide {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-50%); }
-}
-
 /* ===================== */
 /* Animation Utilities & Custom Components */
 /* ===================== */
@@ -60,13 +55,6 @@ body.menu-open {
 
   .animate-scale-in {
     animation: scaleIn 0.25s ease-out forwards;
-  }
-
-  /* Continuous logo slider animation */
-  .animate-slide {
-    animation: slide 30s linear infinite;
-    display: flex;
-    white-space: nowrap;
   }
 
   /* Transition presets */
