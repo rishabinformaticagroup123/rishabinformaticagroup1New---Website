@@ -48,7 +48,7 @@ export default function CoursesPage() {
                   duration: "12 Weeks",
                   level: "Beginner to Advanced",
                   price: "$999",
-                  href: "https://www.rishabinformaticagroup.com/courses/498547",
+                  href: "https://course.rishabinformaticagroup.com/courses/498547",
                   category: "informatica",
                 },
                 {

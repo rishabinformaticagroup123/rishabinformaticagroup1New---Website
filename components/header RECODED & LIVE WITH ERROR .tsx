@@ -24,35 +24,31 @@ const MENU_ITEMS = [
     href: "/courses",
     subItems: [
       { 
-        name: "All Courses",
-        href: "/courses",
-        isMegamenu: true,
-        columns: [
-          {
-            title: "Live Courses",
-            items: [
-              { name: "Informatica IICS Combo", href: "https://course.rishabinformaticagroup.com/courses/498547" },
-              { name: "Informatica IICS", href: "/courses/iics" },
-              { name: "Informatica PowerCenter", href: "/courses/powercenter" }
-            ]
-          },
-          {
-            title: "Recorded Courses with Support",
-            items: [
-              { name: "SQL", href: "/courses/sql" },
-              { name: "Snowflake", href: "/courses/snowflake" },
-              { name: "Azure Data Eng. Combo", href: "/courses/azure" },
-              { name: "Talend ETL Training", href: "/courses/talend" },
-              { name: "Performance Engineering", href: "/courses/performance-engineering" }
-            ]
-          }
-        ]
+	    name: "All courses",
+		href: "/courses",
+	    megamenu: {
+	    live Courses: [
+	    {
+	      name: "Informatica IICS Combo", 
+		  href: "https://course.rishabinformaticagroup.com/courses/498547" 
+		 },
+        { name: "Informatica IICS", href: "/courses/iics" },
+        { name: "Informatica PowerCenter", href: "/courses/powercenter" }
+	 ],
+	  Recorded courses:[
+        { name: "SQL", href: "/courses/sql" },
+        { name: "Snowflake", href: "/courses/snowflake" },
+        { name: "Azure data Eng. Combo", href: "/courses/azure" },
+        { name: "Talend ETL Training", href: "/courses/talend" },
+        { name: "Performance Engineering", href: "/courses/performance-engineering" }
+       ]
       }
+	 }
     ]
-  },
+   },
   {
     name: "Blogs",
-    href: "/blogs"
+	href: "/blogs"
   },
   {
     name: "Interview Q&A",
@@ -125,7 +121,7 @@ export default function Header() {
           </Link>
         </motion.div>
 
-        {/* Desktop Menu */}
+        {/* Desktop Menu - unchanged */}
         <nav className="hidden md:flex items-center gap-1 bg-white px-4 py-2 rounded-md shadow-sm">
           {MENU_ITEMS.map((item) => (
             <div key={item.name} className="relative group" onMouseEnter={() => setActiveDropdown(item.name)} onMouseLeave={() => setActiveDropdown(null)}>
@@ -134,7 +130,7 @@ export default function Header() {
                   href={item.href}
                   className={cn(
                     "px-3 py-2 text-sm font-semibold rounded-md transition-colors",
-                    isClient && pathname === item.href ? "text-blue-600" : "text-orange-600 hover:text-blue-600 hover:bg-orange-50"
+                    isClient && pathname === item.href ? "text-indigo-600" : "text-orange-600 hover:text-blue-600 hover:bg-orange-50"
                   )}
                 >
                   {item.name}
@@ -145,7 +141,6 @@ export default function Header() {
                   </motion.span>
                 )}
               </motion.div>
-              
               <AnimatePresence>
                 {item.subItems && activeDropdown === item.name && (
                   <motion.div
@@ -154,58 +149,23 @@ export default function Header() {
                     exit="hidden"
                     variants={{
                       hidden: { opacity: 0, y: -15 },
-                      visible: { opacity: 1, y: 0 }
+                      visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.05, delayChildren: 0.1 } },
                     }}
-                    className={cn(
-                      "absolute left-0 top-full mt-2 bg-white rounded-xl shadow-lg border border-gray-100",
-                      item.subItems.some(sub => sub.isMegamenu) ? "w-[600px] p-4" : "w-56"
-                    )}
+                    className="absolute left-0 top-full mt-2 w-56 bg-white rounded-xl shadow-lg border border-gray-100"
                   >
-                    {item.subItems.some(sub => sub.isMegamenu) ? (
-                      <div className="grid grid-cols-2 gap-6">
-                        {item.subItems[0].columns.map((column, colIndex) => (
-                          <div key={colIndex}>
-                            <h4 className="font-bold mb-3 text-gray-800">{column.title}</h4>
-                            <ul className="space-y-2">
-                              {column.items.map((subItem) => (
-                                <li key={subItem.href}>
-                                  <Link
-                                    href={subItem.href}
-                                    className={cn(
-                                      "block px-4 py-2 text-sm font-semibold transition-colors rounded-md",
-                                      isClient && pathname === subItem.href 
-                                        ? "text-blue-600 font-semibold bg-blue-50" 
-                                        : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
-                                    )}
-                                  >
-                                    {subItem.name}
-                                  </Link>
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      item.subItems.map((subItem) => (
-                        <motion.div 
-                          key={subItem.href}
-                          variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}
+                    {item.subItems.map((subItem) => (
+                      <motion.div key={subItem.href} variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}>
+                        <Link
+                          href={subItem.href}
+                          className={cn(
+                            "block px-4 py-2 text-sm transition-colors",
+                            isClient && pathname === subItem.href ? "text-indigo-600 font-semibold" : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
+                          )}
                         >
-                          <Link
-                            href={subItem.href}
-                            className={cn(
-                              "block px-4 py-2 text-sm font-semibold transition-colors",
-                              isClient && pathname === subItem.href 
-                                ? "text-blue-600 font-" 
-                                : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
-                            )}
-                          >
-                            {subItem.name}
-                          </Link>
-                        </motion.div>
-                      ))
-                    )}
+                          {subItem.name}
+                        </Link>
+                      </motion.div>
+                    ))}
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -213,7 +173,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Student Login */}
+        {/* Student Login - unchanged */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:flex">
           <Button asChild className="bg-orange-600 hover:bg-blue-600 text-white">
             <Link href="https://login.rishabinformaticagroup.com/login" target="_blank" className="flex items-center gap-2">
@@ -246,7 +206,7 @@ export default function Header() {
           </motion.button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Fixed Mobile Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -293,48 +253,19 @@ export default function Header() {
                         transition={{ duration: 0.2 }}
                         className="pl-4 overflow-hidden"
                       >
-                        {item.subItems[0]?.columns ? (
-                          <>
-                            {item.subItems[0].columns.map((column, colIndex) => (
-                              <div key={colIndex} className="mb-4">
-                                <h4 className="font-semibold text-gray-800 mb-2">{column.title}</h4>
-                                <div className="space-y-2">
-                                  {column.items.map((subItem) => (
-                                    <Link
-                                      key={subItem.href}
-                                      href={subItem.href}
-                                      className={cn(
-                                        "block px-3 py-2 text-sm fm-semibold",
-                                        isClient && pathname === subItem.href 
-                                          ? "text-blue-600" 
-                                          : "text-orange-600 hover:text-blue-600"
-                                      )}
-                                      onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                      {subItem.name}
-                                    </Link>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </>
-                        ) : (
-                          item.subItems.map((subItem) => (
-                            <Link
-                              key={subItem.href}
-                              href={subItem.href}
-                              className={cn(
-                                "block px-3 py-2 text-sm font-semi bold",
-                                isClient && pathname === subItem.href 
-                                  ? "text-blue-600"
-                                  : "text-orange-600 hover:text-blue-600"
-                              )}
-                              onClick={() => setMobileMenuOpen(false)}
-                            >
-                              {subItem.name}
-                            </Link>
-                          ))
-                        )}
+                        {item.subItems.map((subItem) => (
+                          <Link
+                            key={subItem.href}
+                            href={subItem.href}
+                            className={cn(
+                              "block px-3 py-2 text-sm",
+                              isClient && pathname === subItem.href ? "text-indigo-600 font-medium" : "text-gray-700 hover:text-indigo-600"
+                            )}
+                            onClick={() => setMobileMenuOpen(false)}
+                          >
+                            {subItem.name}
+                          </Link>
+                        ))}
                       </motion.div>
                     )}
                   </div>

@@ -134,7 +134,7 @@ export default function Header() {
                   href={item.href}
                   className={cn(
                     "px-3 py-2 text-sm font-semibold rounded-md transition-colors",
-                    isClient && pathname === item.href ? "text-blue-600" : "text-orange-600 hover:text-blue-600 hover:bg-orange-50"
+                    isClient && pathname === item.href ? "text-indigo-600" : "text-orange-600 hover:text-blue-600 hover:bg-orange-50"
                   )}
                 >
                   {item.name}
@@ -172,10 +172,10 @@ export default function Header() {
                                   <Link
                                     href={subItem.href}
                                     className={cn(
-                                      "block px-4 py-2 text-sm font-semibold transition-colors rounded-md",
+                                      "block px-4 py-2 text-sm transition-colors rounded-md",
                                       isClient && pathname === subItem.href 
-                                        ? "text-blue-600 font-semibold bg-blue-50" 
-                                        : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
+                                        ? "text-indigo-600 font-semibold bg-indigo-50" 
+                                        : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                                     )}
                                   >
                                     {subItem.name}
@@ -195,9 +195,9 @@ export default function Header() {
                           <Link
                             href={subItem.href}
                             className={cn(
-                              "block px-4 py-2 text-sm font-semibold transition-colors",
+                              "block px-4 py-2 text-sm transition-colors",
                               isClient && pathname === subItem.href 
-                                ? "text-blue-600 font-" 
+                                ? "text-indigo-600 font-semibold" 
                                 : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
                             )}
                           >
@@ -304,10 +304,10 @@ export default function Header() {
                                       key={subItem.href}
                                       href={subItem.href}
                                       className={cn(
-                                        "block px-3 py-2 text-sm fm-semibold",
+                                        "block px-3 py-2 text-sm",
                                         isClient && pathname === subItem.href 
-                                          ? "text-blue-600" 
-                                          : "text-orange-600 hover:text-blue-600"
+                                          ? "text-indigo-600 font-medium" 
+                                          : "text-gray-700 hover:text-indigo-600"
                                       )}
                                       onClick={() => setMobileMenuOpen(false)}
                                     >
@@ -324,10 +324,10 @@ export default function Header() {
                               key={subItem.href}
                               href={subItem.href}
                               className={cn(
-                                "block px-3 py-2 text-sm font-semi bold",
+                                "block px-3 py-2 text-sm",
                                 isClient && pathname === subItem.href 
-                                  ? "text-blue-600"
-                                  : "text-orange-600 hover:text-blue-600"
+                                  ? "text-indigo-600 font-medium" 
+                                  : "text-gray-700 hover:text-indigo-600"
                               )}
                               onClick={() => setMobileMenuOpen(false)}
                             >
