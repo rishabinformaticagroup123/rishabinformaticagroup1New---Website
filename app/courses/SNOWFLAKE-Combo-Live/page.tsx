@@ -50,7 +50,7 @@ export default function SnowflakeComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/snowflake.PNG"
+              src="/courses/snowflake.png"
               alt="Snowflake Combo Training"
               width={600}
               height={400}

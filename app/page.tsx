@@ -36,7 +36,7 @@ export default function Home() {
     },
     { 
       type: 'image',
-      src: "/courses/informatica.PNG",
+      src: "/courses/informatica.png",
       alt: "Hands-on Practice"
     }
   ];
@@ -244,7 +244,7 @@ export default function Home() {
           {/* Performance Engineering Course Card */}
           <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
             <Image 
-              src="/courses/performance.PNG" 
+              src="/courses/performance.png" 
               width={400} 
               height={225} 
               alt="Performance Engineering" 
@@ -455,25 +455,25 @@ const courses = [
   {
      title: "Informatica IICS COMBO",
     description: "Master IICS, PowerCenter, SQL & Snowflake in 45 days",
-    image: "/courses/informatica.pn",
+    image: "/courses/informatica.png",
     href: "/courses/IICS-Combo-Live"
   },
   { 
     title: "Azure Data Engineering",
     description: "Learn to build and optimize data solutions with Microsoft Azure.",
-    image: "/courses/azure.PNG",
+    image: "/courses/azure.png",
     href: "/courses/azure-data-engineering"
   },
   { 
     title: "Snowflake Training",
     description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
-    image: "/courses/snowflake.PNG",
+    image: "/courses/snowflake.png",
     href: "/courses/snowflake"
   },
   {
     title: "Performance Engineering",
     description: "Master the techniques to optimize application performance and scalability.",
-    image: "/courses/performance.PNG",
+    image: "/courses/performance.png",
     href: "/courses/performance-engineering"
   }
 ]

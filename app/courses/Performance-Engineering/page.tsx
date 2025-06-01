@@ -51,7 +51,7 @@ export default function PerformanceEngineeringPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/performance.PNG"
+              src="/courses/performance.png"
               alt="Performance Engineering Course"
               width={600}
               height={400}

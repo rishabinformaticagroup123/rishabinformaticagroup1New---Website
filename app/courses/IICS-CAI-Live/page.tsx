@@ -59,7 +59,7 @@ export default function IICSCaiPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src= "/courses/informaticacai-live.PNG"
+              src= "/courses/informaticacai-live.png"
               alt="Informatica IICS CAI Training"
               width={600}
               height={400}

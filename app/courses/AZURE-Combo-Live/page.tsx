@@ -50,7 +50,7 @@ export default function AzureDataEngineeringComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/azure.PNG"
+              src="/courses/azure.png"
               alt="Azure Data Engineering COMBO Training"
               width={600}
               height={400}

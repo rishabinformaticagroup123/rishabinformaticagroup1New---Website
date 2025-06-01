@@ -51,7 +51,7 @@ export default function IICSComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/informatica_iics_cloud.PNG"
+              src="/courses/informatica_iics_cloud.png"
               alt="Informatica IICS COMBO Training"
               width={600}
               height={400}

@@ -114,7 +114,7 @@ export default function CoursesPage() {
                  { 
 				  title: "📼 Recorded | Informatica IICS COMBO Full Course Part-2  (24×7 Tech Support)",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 40 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
