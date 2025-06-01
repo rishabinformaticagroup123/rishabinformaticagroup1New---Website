@@ -71,15 +71,15 @@ export default function Footer() {
             <ul className="mt-4 space-y-2">
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 shrink-0 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">123 Training Street, Tech City, 12345</span>
+                <span className="text-sm text-muted-foreground">Rishab Informatica GROUP , No 7 , 5th main , 15th cross,Subbaraju layout Lakkasandra ,  Bangalore - 560030</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">+1 (555) 123-4567</span>
+                <span className="text-sm text-muted-foreground">+91 8970853557 / 9448005273</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-muted-foreground" />
-                <span className="text-sm text-muted-foreground">info@rishabinformatica.com</span>
+                <span className="text-sm text-muted-foreground">support@rishabinformaticagroup.com</span>
               </li>
             </ul>
           </div>

@@ -31,19 +31,22 @@ const MENU_ITEMS = [
           {
             title: "Live Courses",
             items: [
-              { name: "Informatica IICS Combo", href: "https://course.rishabinformaticagroup.com/courses/498547" },
-              { name: "Informatica IICS", href: "/courses/iics" },
-              { name: "Informatica PowerCenter", href: "/courses/powercenter" }
+              { name: "Informatica IICS Combo", href: "/courses/IICS-Combo-Live"},
+              { name: "Informatica IICS Cloud", href: "/courses/IICS-Cloud-Live" },
+              { name: "Informatica IICS CAI", href: "/courses/IICS-CAI-Live" },
+			  { name: "Azure Data Eng. COMBO",href: "/courses/AZURE-Combo-Live" },
+			  { name: "Snowflake Combo",href: "/courses/SNOWFLAKE-Combo-Live" },
+			  { name: "Performance Engineering",href: "/courses/Performance-Engineering" },
             ]
           },
           {
             title: "Recorded Courses with Support",
             items: [
-              { name: "SQL", href: "/courses/sql" },
-              { name: "Snowflake", href: "/courses/snowflake" },
-              { name: "Azure Data Eng. Combo", href: "/courses/azure" },
-              { name: "Talend ETL Training", href: "/courses/talend" },
-              { name: "Performance Engineering", href: "/courses/performance-engineering" }
+              { name: "Informatica IICS COMBO Full Course", href: "/courses/IICS-Combo-recorded" },
+			  { name: "Informatica IICS COMBO Full Course Part-1", href: "/courses/IICS-Combo-recorded-Part1" },
+			  { name: "Informatica IICS COMBO Full Course Part-2", href: "/courses/IICS-Combo-recorded-Part2" },
+              { name: " Informatica IICS CAI", href: "/courses/IICS-CAI-recorded" },
+              { name: "Informatica Power Center", href: "/courses/Informatica-Powercenter" }
             ]
           }
         ]
@@ -58,9 +61,9 @@ const MENU_ITEMS = [
     name: "Interview Q&A",
     href: "/interview-qa",
     subItems: [
-      { name: "PowerCenter", href: "/interview-qa/powercenter" },
-      { name: "IICS", href: "/interview-qa/iics" },
-      { name: "SQL", href: "/interview-qa/sql" },
+      { name: "Informatica Power center", href: "/Interview-qa/POWERCENTER" },
+      { name: "Informatica IICS - IDMC", href: "/Interview-qa/IICS" },
+      { name: "SQL", href: "/Interview-qa/SQL" },
       { name: "Snowflake", href: "/interview-qa/snowflake" },
     ],
   },
@@ -68,8 +71,8 @@ const MENU_ITEMS = [
     name: "Study Materials",
     href: "/study-materials",
     subItems: [
-      { name: "PowerCenter", href: "/study-materials/powercenter" },
-      { name: "IICS", href: "/study-materials/iics" },
+      { name: "Informatica Power center", href: "/study-materials/powercenter" },
+      { name: "Informatica IICS - IDMC", href: "/study-materials/iics" },
       { name: "SQL", href: "/study-materials/sql" },
       { name: "Snowflake", href: "/study-materials/snowflake" },
     ],

@@ -5,8 +5,42 @@ import Image from "next/image"
 import Link from "next/link"
 import TestimonialSlider from "@/components/testimonial-slider"
 import CompanySlider from "@/components/company-slider"
+import { CheckIcon } from "lucide-react"
+import VideoSlider from "@/components/video-slider"
 
 export default function Home() {
+  // Video slider content configuration
+  const slides = [
+    { 
+      type: 'short-video', 
+      src: "/videos/video1.mp4",
+      duration: 10000 // 3 seconds duration
+    },
+    { 
+      type: 'short-video',
+      src: "/videos/video2.mp4",
+      duration: 10000
+	},
+    {   
+	  type: 'short-video',
+      src: "/videos/video3.mp4",
+      duration: 10000  
+    },
+    { 
+      type: 'youtube',
+      videoId: "4DfifZbfk7w" // Replace with actual YouTube ID
+    },
+    { 
+      type: 'youtube',
+      videoId: "Kg86_3njK6A" // Replace with actual YouTube ID
+    },
+    { 
+      type: 'image',
+      src: "/courses/informatica.PNG",
+      alt: "Hands-on Practice"
+    }
+  ];
+
   return (
     <div className="flex flex-col gap-0 pb-16">
       {/* Hero Section */}
@@ -32,27 +66,21 @@ export default function Home() {
 
               {/* Alumni Section */}
               <div className="pt-0">
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900mb-0">
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">
                   Our Students Excel At Leading Companies
                 </h2>
                 <p className="mt-2 text-gray-600">
-                  
+                  {/* Optional description can go here */}
                 </p>
               </div>
             </div>
 
-            {/* Right Column - Video */}
+            {/* Right Column - Updated Video Slider */}
             <div className="flex flex-col items-center justify-center">
-              <div className="w-full aspect-video rounded-xl shadow-lg overflow-hidden">
-                <Image
-                  src="/placeholder.svg"
-                  width={800}
-                  height={450}
-                  alt="Training preview"
-                  className="w-full h-full object-cover"
-                  priority
-                />
-              </div>
+              <VideoSlider 
+                slides={slides}
+                slideDuration={4000} // Default duration for images/YouTube
+              />
             </div>
           </div>
         </section>
@@ -64,19 +92,19 @@ export default function Home() {
           <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
           
           <CompanySlider 
-		    direction="right-to-left" 
-			fullWidth
+            direction="right-to-left" 
+            fullWidth
             logos={[
               { name: "Accenture", src: "/logos/Accenture.PNG", width: 180, height: 60 }, 
               { name: "TCS", src: "/logos/TCS.PNG", width: 120, height: 60},
               { name: "Wipro", src: "/logos/Wipro.PNG", width: 140, height: 60},
               { name: "Cognizant", src: "/logos/Cognizant.PNG", width: 160, height: 60 },
-              { name: "Infosys", src: "/logos/Infosys.PNG" , width: 150, height: 60 },
+              { name: "Infosys", src: "/logos/Infosys.PNG", width: 150, height: 60 },
             ]}
-            speed="medium" // slow/medium/fast
+            speed="medium"
           />
-		 </div>
-       </div>
+        </div>
+      </div>
 
       {/* Stats Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -90,19 +118,174 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Courses */}
+      {/* Featured Courses - MODIFIED SECTION */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Our Top Courses</h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-            Industry-relevant courses designed to help you master the latest technologies.
+            Industry-relevant courses designed to help you master the latest technologies and advance your career.
           </p>
         </div>
-        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {courses.map((course) => (
-            <CourseCard key={course.title} {...course} />
-          ))}
+        <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {/* IICS Combo Course Card */}
+          <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
+            <Image 
+              src="/courses/informatica.PNG" 
+              width={400} 
+              height={225} 
+              alt="Informatica IICS COMBO" 
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-bold">Informatica IICS COMBO</h3>
+              <p className="mt-2 text-muted-foreground">
+                Master IICS, PowerCenter, SQL & Snowflake in 45 days
+              </p>
+              
+              <ul className="mt-4 space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Live Training</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Placement Assistance</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Real-time Projects</span>
+                </li>
+              </ul>
+              
+              <Button asChild className="mt-6 w-full">
+                <Link href="/courses/IICS-Combo-Live">
+                  Enroll Now
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Azure Data Engineering Course Card */}
+          <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
+            <Image 
+              src="/courses/azure.PNG" 
+              width={400} 
+              height={225} 
+              alt="Azure Data Engineering" 
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-bold">Azure Data Engineering</h3>
+              <p className="mt-2 text-muted-foreground">
+                Learn to build and optimize data solutions with Microsoft Azure.
+              </p>
+              
+              <ul className="mt-4 space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Live Training</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Placement Assistance</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Real-time Projects</span>
+                </li>
+              </ul>
+              
+              <Button asChild className="mt-6 w-full">
+                <Link href="/courses/azure-data-engineering">
+                  Enroll Now
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Snowflake Training Course Card */}
+          <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
+            <Image 
+              src="/courses/snowflake.PNG" 
+              width={400} 
+              height={225} 
+              alt="Snowflake Training" 
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-bold">Snowflake Training</h3>
+              <p className="mt-2 text-muted-foreground">
+                Become proficient in Snowflake's cloud data platform and analytics capabilities.
+              </p>
+              
+              <ul className="mt-4 space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Live Training</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Placement Assistance</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Real-time Projects</span>
+                </li>
+              </ul>
+              
+              <Button asChild className="mt-6 w-full">
+                <Link href="/courses/snowflake">
+                  Enroll Now
+                </Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Performance Engineering Course Card */}
+          <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
+            <Image 
+              src="/courses/performance.PNG" 
+              width={400} 
+              height={225} 
+              alt="Performance Engineering" 
+              className="h-48 w-full object-cover"
+            />
+            <div className="p-6">
+              <h3 className="text-xl font-bold">Performance Engineering</h3>
+              <p className="mt-2 text-muted-foreground">
+                Master the techniques to optimize application performance and scalability.
+              </p>
+              
+              <ul className="mt-4 space-y-2">
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Live Training</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Placement Assistance</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <CheckIcon className="h-4 w-4 text-green-500" />
+                  <span>Real-time Projects</span>
+                </li>
+              </ul>
+              
+              <Button asChild className="mt-6 w-full">
+                <Link href="/courses/performance-engineering">
+                  Enroll Now
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
+        
+        {/* View All Courses Button */}
+        <div className="mt-12 text-center">
+          <Button asChild size="lg">
+            <Link href="/courses">View All Courses</Link>
+          </Button>
+        </div>		
       </section>
 
       {/* Why Choose Us */}
@@ -123,7 +306,7 @@ export default function Home() {
   )
 }
 
-// Supporting components
+// Rest of your components remain EXACTLY THE SAME...
 const CourseCard = ({ title, description, image, href }: { title: string, description: string, image: string, href: string }) => (
   <Card className="overflow-hidden hover:shadow-lg transition-shadow">
     <Image src={image} width={400} height={225} alt={title} className="h-48 w-full object-cover" />
@@ -132,7 +315,7 @@ const CourseCard = ({ title, description, image, href }: { title: string, descri
       <p className="mt-2 text-muted-foreground">{description}</p>
       <Button asChild variant="link" className="mt-4 px-0 text-primary">
         <Link href={href} className="flex items-center">
-          Learn more <ArrowRight className="ml-2 h-4 w-4" />
+          View Details <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </Button>
     </CardContent>
@@ -143,12 +326,12 @@ const WhyChooseUs = () => (
   <section className="bg-muted py-16">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Choose Us</h2>
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Choose Rishab Informatica Group</h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-          We're committed to providing the highest quality training.
+          We're committed to providing the highest quality training to help you succeed in your tech career.
         </p>
       </div>
-      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4">
         {whyChooseUsItems.map((item, index) => (
           <div key={index} className="flex flex-col items-center rounded-lg bg-background p-8 text-center shadow-sm hover:shadow-md transition-shadow">
             <div className="rounded-full bg-primary/10 p-4 text-primary">
@@ -233,6 +416,11 @@ const LatestBlogs = () => (
         </Card>
       ))}
     </div>
+    <div className="mt-12 text-center">
+      <Button asChild size="lg">
+        <Link href="/blogs">View All Blogs</Link>
+      </Button>
+    </div>	
   </section>
 )
 
@@ -247,7 +435,7 @@ const CTA = () => (
         <Button asChild size="lg" className="rounded-full bg-white text-primary hover:bg-white/90">
           <Link href="/courses">Explore Courses</Link>
         </Button>
-        <Button asChild size="lg" variant="outline" className="rounded-full border-white text-white hover:bg-white/10">
+        <Button asChild size="lg" variant="outline" className="rounded-full border-white text-black hover:bg-white/10">
           <Link href="/contact">Contact Us</Link>
         </Button>
       </div>
@@ -255,7 +443,7 @@ const CTA = () => (
   </section>
 )
 
-// Data
+// Data (unchanged)
 const stats = [
   { value: "5000+", label: "Students Trained" },
   { value: "15+", label: "Professional Courses" },
@@ -265,38 +453,44 @@ const stats = [
 
 const courses = [
   {
-    title: "Informatica IICS COMBO",
-    description: "Master Informatica Intelligent Cloud Services with our comprehensive training program.",
-    image: "/courses/informatica.jpg",
-    href: "/courses/informatica-iics"
+     title: "Informatica IICS COMBO",
+    description: "Master IICS, PowerCenter, SQL & Snowflake in 45 days",
+    image: "/courses/informatica.PNG",
+    href: "/courses/IICS-Combo-Live"
   },
-  {
+  { 
     title: "Azure Data Engineering",
     description: "Learn to build and optimize data solutions with Microsoft Azure.",
-    image: "/courses/azure.jpg",
+    image: "/courses/azure.PNG",
     href: "/courses/azure-data-engineering"
   },
-  {
+  { 
     title: "Snowflake Training",
     description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
-    image: "/courses/snowflake.jpg",
+    image: "/courses/snowflake.PNG",
     href: "/courses/snowflake"
+  },
+  {
+    title: "Performance Engineering",
+    description: "Master the techniques to optimize application performance and scalability.",
+    image: "/courses/performance.PNG",
+    href: "/courses/performance-engineering"
   }
 ]
 
 const whyChooseUsItems = [
   {
-    icon: <GraduationCap className="h-6 w-6" />,
+    icon: <GraduationCap className="h-10 w-10" />,
     title: "Expert Instructors",
     description: "Learn from industry professionals with real-world experience."
   },
   {
-    icon: <BookOpen className="h-6 w-6" />,
+    icon: <BookOpen className="h-10 w-10" />,
     title: "Comprehensive Curriculum",
     description: "Courses covering both theory and practical applications."
   },
   {
-    icon: <Users className="h-6 w-6" />,
+    icon: <Users className="h-10 w-10" />,
     title: "Placement Assistance",
     description: "Get help with resume building and interview preparation."
   }
