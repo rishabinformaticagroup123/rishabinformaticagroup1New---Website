@@ -130,7 +130,7 @@ export default function Home() {
           {/* IICS Combo Course Card */}
           <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
             <Image 
-              src="/courses/informatica.PNG" 
+              src="/courses/informatica.png" 
               width={400} 
               height={225} 
               alt="Informatica IICS COMBO" 
@@ -168,7 +168,7 @@ export default function Home() {
           {/* Azure Data Engineering Course Card */}
           <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
             <Image 
-              src="/courses/azure.PNG" 
+              src="/courses/azure.png" 
               width={400} 
               height={225} 
               alt="Azure Data Engineering" 
@@ -206,7 +206,7 @@ export default function Home() {
           {/* Snowflake Training Course Card */}
           <div className="group relative overflow-hidden rounded-xl border bg-card shadow-sm transition-all hover:shadow-md">
             <Image 
-              src="/courses/snowflake.PNG" 
+              src="/courses/snowflake.png" 
               width={400} 
               height={225} 
               alt="Snowflake Training" 
@@ -455,7 +455,7 @@ const courses = [
   {
      title: "Informatica IICS COMBO",
     description: "Master IICS, PowerCenter, SQL & Snowflake in 45 days",
-    image: "/courses/informatica.PNG",
+    image: "/courses/informatica.pn",
     href: "/courses/IICS-Combo-Live"
   },
   { 

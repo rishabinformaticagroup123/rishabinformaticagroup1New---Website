@@ -44,7 +44,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live | Informatica IICS COMBO - Online Training",
                   description: "Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica.PNG",
+                  image: "/courses/informatica.png",
                   duration:"45 Days  (Daily 1.5 to 2 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹9600",
@@ -54,7 +54,7 @@ export default function CoursesPage() {
                 { 
 				  title: "🔴 Live | Informatica IICS Cloud - Online Training",
                   description: "Learn SQL + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_iics_cloud.PNG",
+                  image: "/courses/informatica_iics_cloud.png",
                   duration:"45 Days  (Daily 1.5 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹8200",
@@ -64,7 +64,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live |Azure Data Engineering COMBO - Online Training",
                   description: "Learn to build and optimize data solutions with Microsoft Azure.",
-                  image: "/courses/azure.PNG",
+                  image: "/courses/azure.png",
                   duration: "60 Days ( Daily 1 Hour)",
                   level: "Beginner to Advanced",
                   price: "₹12000",
@@ -74,7 +74,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live | Snowflake Combo - Online Training",
                   description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
-                  image: "/courses/snowflake.PNG",
+                  image: "/courses/snowflake.png",
                   duration: "42 Days ( Daily 1 Hour)",
                   level: "Intermediate",
                   price: "₹9600",
@@ -84,7 +84,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live | Performance Engineering - Online Training",
                   description: "Master the techniques to optimize application performance and scalability.",
-                  image: "/courses/performance.PNG",
+                  image: "/courses/performance.png",
                   duration: "42 Days ( Daily 1 Hour)",
                   level: "Beginner to Advanced",
                   price: "₹12000",
@@ -94,7 +94,7 @@ export default function CoursesPage() {
                 {
                   title: "📼 Recorded | Informatica IICS COMBO Full Course - 24×7 Tech Support",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹5100",
@@ -104,7 +104,7 @@ export default function CoursesPage() {
                  { 
 				  title: "📼 Recorded | Informatica IICS COMBO Full Course Part-1  (24×7 Tech Support)",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 40 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
@@ -124,7 +124,7 @@ export default function CoursesPage() {
                  {		
                  title: "🔴 Live | Informatica IICS CAI - Online Training",
                   description: "Learn Cloud Application Integration concepts and real-time implementation with Informatica CAI.",
-                  image: "/courses/informaticacai-live.PNG",
+                  image: "/courses/informaticacai-live.png",
                   duration: "11 Days (Daily 1.5 to 2 Hours)",
                   level: "Beginner to Advanced",
                   price: "₹3600",
@@ -134,7 +134,7 @@ export default function CoursesPage() {
                 { 
 				 title: "📼 Recorded | Informatica IICS CAI - 24×7 Tech Support",
                   description: "Learn Cloud Application Integration concepts and real-time implementation with Informatica CAI.",
-                  image: "/courses/informaticacai_record.PNG",
+                  image: "/courses/informaticacai_record.png",
                   duration: "TOtal 18 + Hours with 20+ Docs",
                   level: "Beginner to Advanced",
                   price: "₹2900",
@@ -144,7 +144,7 @@ export default function CoursesPage() {
 				{ 		  		  				  			 				                		
 				 title: "🔴 Live | Azure Data Factory - Online Training",
                   description: "Master Azure Data Factory for cloud-based data integration and ETL processes.",
-                  image: "/courses/azure2.PNG",
+                  image: "/courses/azure2.png",
                   duration:  "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Intermediate",
                   price: "₹9600",
@@ -154,7 +154,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live | Snowflake Administration - Online Training",
                   description: "Learn to administer and manage Snowflake cloud data platform efficiently.",
-                  image: "/courses/snowflake2.PNG",
+                  image: "/courses/snowflake2.png",
                   duration: "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Advanced",
                   price: "₹9600",
@@ -164,7 +164,7 @@ export default function CoursesPage() {
                 {
                   title: "🔴 Live | Load Testing with JMeter - Online Training",
                   description: "Master load testing techniques using Apache JMeter for web applications.",
-                  image: "/courses/performance2.PNG",
+                  image: "/courses/performance2.png",
                   duration: "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Intermediate",
                   price: "₹12000",
@@ -174,7 +174,7 @@ export default function CoursesPage() {
                 {  
 				 title: " 📼 Recorded | Informatica Power Center - 24×7 Tech Support",
                   description: "Learn Informatica PowerCenter for ETL development and data integration.",
-                  image: "/courses/informaticapc_record.PNG",
+                  image: "/courses/informaticapc_record.png",
                   duration: "Total 35 + Hours with 100 + Docs",
                   level: "Beginner to Intermediate",
                   price: "₹3300",
@@ -225,7 +225,7 @@ export default function CoursesPage() {
                     title: "🔴 Live | Informatica IICS COMBO - Online Training",
                     description:
                       "Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration..",
-                    image: "/courses/informatica.PNG",
+                    image: "/courses/informatica.png",
                     duration: "45 Days  (Daily 1.5 to Hours)",
                     level: "Beginner to Advanced",
                     price: "₹9600",
@@ -235,7 +235,7 @@ export default function CoursesPage() {
                   {
 				    title: "🔴 Live | Informatica IICS Cloud - Online Training",
                   description: "Learn SQL + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_iics_cloud.PNG",
+                  image: "/courses/informatica_iics_cloud.png",
                   duration:"45 Days  (Daily 1.5 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹8200",
@@ -245,7 +245,7 @@ export default function CoursesPage() {
                   { 			  						  				  			  
 				   title: "🔴 Live |Azure Data Engineering COMBO - Online Training",
                     description: "Learn to build and optimize data solutions with Microsoft Azure.",
-                    image: "/courses/azure.PNG",
+                    image: "/courses/azure.png",
                     duration: "60 Days ( Daily 1 Hour)",
                     level: "Intermediate",
                     price: "₹12000",
@@ -255,7 +255,7 @@ export default function CoursesPage() {
                   {
                     title: "🔴 Live | Snowflake Combo - Online Training",
                     description: "Master Snowflake to store and analyze data in the cloud.",
-                    image: "/courses/snowflake.PNG",
+                    image: "/courses/snowflake.png",
                     duration: "42 Days ( Daily 1 Hour)",
                     level: "Intermediate",
                     price: "₹9600",
@@ -265,7 +265,7 @@ export default function CoursesPage() {
                   {
                     title: "🔴 Live | Performance Engineering - Online Training",
                     description: "Master the techniques to optimize application performance and scalability.",
-                    image: "/courses/performance.PNG",
+                    image: "/courses/performance.png",
                     duration: "42 Days ( Daily 1 Hour)",
                     level: "Advanced",
                     price: "₹12000",
@@ -275,7 +275,7 @@ export default function CoursesPage() {
                   {
 				   title: "📼 Recorded | Informatica IICS COMBO Full Course - 24×7 Tech Support",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹5100",
@@ -285,7 +285,7 @@ export default function CoursesPage() {
                   {	  
                    title: "📼 Recorded | Informatica IICS COMBO Full Course Part-1  24×7 Tech Support",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
@@ -295,7 +295,7 @@ export default function CoursesPage() {
                   {
 				    title: "📼 Recorded | Informatica IICS COMBO Full Course Part-2  24×7 Tech Support",
                   description: " Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
-                  image: "/courses/informatica_record.PNG",
+                  image: "/courses/informatica_record.png",
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
@@ -305,7 +305,7 @@ export default function CoursesPage() {
                   {                                			  
 				   title: " 📼 Recorded | Informatica Power Center - 24×7 Tech Support",
                     description: "Learn Informatica PowerCenter for ETL development and data integration.",
-                    image: "/courses/informaticapc_record.PNG",
+                    image: "/courses/informaticapc_record.png",
                     duration: "Total 35 + Hours with 100 + Docs",
                     level: "Beginner to Intermediate",
                     price: "₹3300",
@@ -315,7 +315,7 @@ export default function CoursesPage() {
                   {
                     title:  "🔴 Live | Azure Data Factory - Online Training",
                     description: "Master Azure Data Factory for cloud-based data integration and ETL processes.",
-                    image: "/courses/azure2.PNG",
+                    image: "/courses/azure2.png",
                     duration: "30 Days (Daily 1.5 to 2 Hours)",
                     level: "Intermediate",
                     price: "₹9600",
@@ -325,7 +325,7 @@ export default function CoursesPage() {
                   {
                     title:  "🔴 Live | Snowflake Administration - Online Training",
                     description: "Learn to administer and manage Snowflake cloud data platform efficiently.",
-                    image: "/courses/snowflake2.PNG",
+                    image: "/courses/snowflake2.png",
                     duration: "30 Days (Daily 1.5 to 2 Hours)",
                     level: "Advanced",
                     price: "₹9600",
@@ -335,7 +335,7 @@ export default function CoursesPage() {
                   {
                     title: "🔴 Live | Load Testing with JMeter - Online Training",
                     description: "Master load testing techniques using Apache JMeter for web applications.",
-                    image: "/courses/performance2.PNG",
+                    image: "/courses/performance2.png",
                   duration: "30 Days (Daily 1.5 to 2 Hours)",
                     duration: "4 Weeks",
                     level: "Intermediate",
@@ -346,7 +346,7 @@ export default function CoursesPage() {
                   {
                     title:"🔴 Live | Informatica IICS CAI - Online Training",
                     description: "Learn Cloud Application Integration concepts and real-time implementation with Informatica CAI.",
-                    image: "/courses/informaticacai-live.PNG",
+                    image: "/courses/informaticacai-live.png",
                     duration: "11 Days (Daily 1.5 to 2 Hours)",
                     level: "Advanced",
                     price: "₹3600",
@@ -356,7 +356,7 @@ export default function CoursesPage() {
                   {	
 				 title: "📼 Recorded | Informatica IICS CAI - 24×7 Tech Support",
                   description: "Learn Cloud Application Integration concepts and real-time implementation with Informatica CAI.",
-                  image: "/courses/informaticacai_record.PNG",
+                  image: "/courses/informaticacai_record.png",
                   duration: "TOtal 18 + Hours with 20+ Docs",
                   level: "Advanced",
                   price: "₹2900",
