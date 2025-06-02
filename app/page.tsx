@@ -36,7 +36,7 @@ export default function Home() {
     },
     { 
       type: 'image',
-      src: "/courses/informatica.png",
+      src: "/courses/informaticaYT.png",
       alt: "Hands-on Practice"
     }
   ];
