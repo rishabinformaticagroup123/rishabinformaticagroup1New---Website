@@ -1,48 +1,59 @@
 export default function OurStoryPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
+      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
         {/* Hero Section */}
-        <div className="bg-blue-800 text-white p-8 text-center">
-          <h1 className="text-4xl font-bold mb-4">Our Story</h1>
-          <p className="text-xl">Transforming careers from Non-IT to IT since [Year]</p>
+        <div className="bg-blue-900 text-white p-10 text-center">
+          <h1 className="text-4xl font-bold mb-3">Our Story</h1>
+          <p className="text-lg max-w-3xl mx-auto">
+            Bridging the gap between Non-IT dreams and IT careers since 2021
+          </p>
         </div>
 
-        {/* Content Section */}
-        <div className="p-8">
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4">The Challenge We Address</h2>
-            <p className="text-gray-700 mb-6">
-              Many are struggling to transition from Non-IT to IT careers. We are committed to helping them make this transition successfully!
+        {/* Body Content */}
+        <div className="p-10 space-y-12">
+          {/* Challenge Section */}
+          <section>
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">Why We Exist</h2>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Millions of capable individuals from non-technical backgrounds aspire to transition into IT, but face a lack of structured guidance. Many feel lost, underqualified, or stuck in underpaid roles.
             </p>
-            <p className="text-gray-700">
-              At Rishab Informatica Group, we are dedicated to helping individuals from non-IT backgrounds secure software jobs in as little as 45 days. With our proven strategies and structured plan, we guide and support you throughout the process to ensure success.
+            <p className="text-gray-700 leading-relaxed">
+              At <strong>Rishab Informatica Group</strong>, we change that. Through a proven, step-by-step system, we help learners gain confidence, build real-world skills, and get hired in just 45 days.
             </p>
-          </div>
+          </section>
 
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4">Our Approach</h2>
-            <p className="text-gray-700">
-              Our approach is designed to make the transition to IT careers as smooth and efficient as possible. We focus on practical, job-ready skills that employers actually need.
+          {/* Our Approach Section */}
+          <section>
+            <h2 className="text-2xl font-bold text-blue-800 mb-4">How We Help</h2>
+            <p className="text-gray-700 leading-relaxed mb-2">
+              Our training is built on 3 core pillars:
             </p>
-          </div>
+            <ul className="list-disc list-inside text-gray-700 space-y-1">
+              <li><strong>Industry-Relevant Curriculum:</strong> Focused on tools like Informatica IICS, Azure, Snowflake & SQL.</li>
+              <li><strong>Live Projects:</strong> Real-world scenarios that simulate actual work environments.</li>
+              <li><strong>Mock Interviews & Career Support:</strong> Personalized resume building, mock interviews, and job portal optimization.</li>
+            </ul>
+          </section>
 
-          <div className="bg-blue-50 p-6 rounded-lg mb-8">
-            <h2 className="text-2xl font-semibold text-blue-700 mb-4">Founder's Story</h2>
-            <p className="text-gray-700 mb-4">
-              Hari Krishnan is a highly respected IT engineer with over 20 years of experience as a Technical and ETL Trainer. He has worked with prestigious companies such as Intex Technologies, TCS, IBM, and others.
+          {/* Founder's Story */}
+          <section className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-600">
+            <h2 className="text-2xl font-bold text-blue-800 mb-3">Meet Our Founder</h2>
+            <p className="text-gray-700 leading-relaxed mb-2">
+              <strong>Hari Krishnan</strong> is a seasoned IT engineer with 20+ years of experience in companies like TCS, IBM, and Intex Technologies. As a Technical & ETL Trainer, he has helped thousands level up.
             </p>
-            <p className="text-gray-700">
-              Driven by a passion for education and career development, Hari's goal is to help individuals overcome job struggles by equipping them with the skills needed to succeed in the IT industry. His expertise and dedication are at the core of our mission to provide high-quality training that leads to real career opportunities.
+            <p className="text-gray-700 leading-relaxed">
+              Inspired by the struggles of job seekers, he founded Rishab Informatica Group to uplift non-IT aspirants and drive economic growth through practical education.
             </p>
-          </div>
+          </section>
 
-          <div className="bg-white border border-blue-200 rounded-lg p-6">
-            <h3 className="text-xl font-semibold text-blue-700 mb-3">Our Impact</h3>
-            <p className="text-gray-700">
-              We aim to eliminate the struggle of job seekers and contribute to India's GDP through exclusive Informatica IICS Combo Trainings. Our alumni now work at top companies across India and globally.
+          {/* Impact Section */}
+          <section className="bg-white border border-blue-100 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-blue-800 mb-3">Our Growing Impact</h2>
+            <p className="text-gray-700 leading-relaxed">
+              From small towns to metro cities, our students now work at top firms across India and abroad. Every success story fuels our mission: to unlock hidden potential and help India grow—one IT job at a time.
             </p>
-          </div>
+          </section>
         </div>
       </div>
     </div>

@@ -27,7 +27,7 @@ export default function AboutPage() {
             <div className="mt-4 text-blue-600 font-medium">Explore →</div>
           </Link>
 
-          <Link href="/about/contact-us" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+          <Link href="/about/contact" className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <h2 className="text-2xl font-semibold text-blue-700 mb-3">Contact Us</h2>
             <p className="text-gray-600">Get in touch with our team</p>
             <div className="mt-4 text-blue-600 font-medium">Reach out →</div>

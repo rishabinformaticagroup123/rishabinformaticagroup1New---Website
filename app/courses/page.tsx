@@ -432,7 +432,7 @@ export default function CoursesPage() {
               </ul>
               <div className="mt-8">
                 <Button asChild size="lg">
-                  <Link href="/courses/informatica-iics">
+                  <Link href="/courses/IICS-Cloud-Live">
                     Explore Course <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -620,7 +620,7 @@ export default function CoursesPage() {
                 asChild
                 size="lg"
                 variant="outline"
-                className="rounded-full border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+                className="rounded-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
               >
                 <Link href="/contact">Contact Us</Link>
               </Button>

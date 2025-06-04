@@ -28,7 +28,7 @@ export default function Home() {
     },
     { 
       type: 'youtube',
-      videoId: "4DfifZbfk7w" // Replace with actual YouTube ID
+      videoId: "4DfifZbfk7w" // Replace with actual 2YouTube ID
     },
     { 
       type: 'youtube',
@@ -65,7 +65,7 @@ export default function Home() {
               </div>
 
               {/* Alumni Section */}
-              <div className="pt-0">
+              <div className="pt-10">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-4">
                   Our Students Excel At Leading Companies
                 </h2>
@@ -331,7 +331,7 @@ const WhyChooseUs = () => (
           We're committed to providing the highest quality training to help you succeed in your tech career.
         </p>
       </div>
-      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-4">
+      <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
         {whyChooseUsItems.map((item, index) => (
           <div key={index} className="flex flex-col items-center rounded-lg bg-background p-8 text-center shadow-sm hover:shadow-md transition-shadow">
             <div className="rounded-full bg-primary/10 p-4 text-primary">

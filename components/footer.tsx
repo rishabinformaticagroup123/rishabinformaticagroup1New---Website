@@ -84,8 +84,11 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-200 pt-8">
-          <p className="text-center text-sm text-muted-foreground">
+       <div className="mt-12 border-t border-gray-200 pt-6 text-center">
+          <p className="text-sm text-muted-foreground mb-2">
+            Designed & Developed by <span className="font-medium text-primary">Rishab Informatica Group</span>
+          </p>
+          <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} Rishab Informatica Group. All rights reserved.
           </p>
         </div>
