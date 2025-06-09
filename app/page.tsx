@@ -134,7 +134,7 @@ export default function Home() {
           <div className="lg:hidden flex flex-col gap-4">
             <div className="flex flex-col justify-center space-y-3">
               <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Kickstart Your Sof <span className="text-primary">with our COMBO Courses</span>
+                Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
               </h1>
 			  
 			   <Link 
