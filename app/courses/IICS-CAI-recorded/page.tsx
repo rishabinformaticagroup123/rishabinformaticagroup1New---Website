@@ -164,7 +164,7 @@ export default function IICSCaiPage() {
             </div>
             <div className={styles.priceTag}>₹3,999 <span className={styles.originalPrice}>₹9,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/498547" target="_blank">
+              <Link href="https://course.rishabinformaticagroup.com/courses/498620" target="_blank">
                 Enroll Now
               </Link>
             </Button>

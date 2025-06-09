@@ -30,35 +30,27 @@ export default function BlogsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="flex flex-col justify-center p-8 lg:p-12">
               <div className="text-sm font-medium text-primary">Featured Article</div>
-             <h2 className="mt-2 text-3xl font-bold tracking-tight">
-  How to Land a High-Paying Software Job in 45 Days (2025 Proven Steps)
-</h2>
-
-<p className="mt-4 text-muted-foreground">
-  🚀 Looking to break into the IT industry fast?  
-  Our powerful Combo Courses — including <strong>Informatica IICS Combo</strong>, <strong>Azure Data Eng. Combo</strong>, and <strong>Snowflake Combo</strong> — are designed to make you job-ready in just 45 days.
-  <br />
-  💼 Whether you're a fresher or from a non-IT background, we've got you covered.
-  <br />
-  👉 <strong>Click below to follow our proven, step-by-step roadmap</strong> and land your dream software job in 2025!
-</p>
-
-<div className="mt-4 flex items-center">
-  <Image
-    src="/placeholder.svg?height=50&width=50"
-    width={50}
-    height={50}
-    alt="Author"
-    className="h-10 w-10 rounded-full object-cover"
+              <h2 className="mt-2 text-3xl font-bold tracking-tight">The Future of Data Engineering in 2025</h2>
+              <p className="mt-4 text-muted-foreground">
+                Explore the emerging trends and technologies shaping the future of data engineering. From real-time
+                analytics to AI-powered data pipelines, discover what's next in the world of data.
+              </p>
+              <div className="mt-4 flex items-center">
+                <Image
+                  src="/placeholder.svg?height=50&width=50"
+                  width={50}
+                  height={50}
+                  alt="Author"
+                  className="h-10 w-10 rounded-full object-cover"
                 />
                 <div className="ml-3">
-                  <p className="text-sm font-medium">Hari.A</p>
-                  <p className="text-sm text-muted-foreground">June , 2025 · 10 min read</p>
+                  <p className="text-sm font-medium">Rajesh Kumar</p>
+                  <p className="text-sm text-muted-foreground">Apr 15, 2025 · 10 min read</p>
                 </div>
               </div>
               <div className="mt-8">
                 <Button asChild>
-                  <Link href="/blogs/job-in-45days">
+                  <Link href="/blogs/future-of-data-engineering">
                     Read Article <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -66,11 +58,11 @@ export default function BlogsPage() {
             </div>
             <div className="order-first lg:order-last">
               <Image
-                src="/images/get-job-45days.jpeg"
+                src="/placeholder.svg?height=400&width=600"
                 width={600}
                 height={400}
                 alt="Featured blog post"
-                className="h-full w-full object-contain"
+                className="h-full w-full object-cover"
               />
             </div>
           </div>
@@ -82,29 +74,7 @@ export default function BlogsPage() {
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {[
             {
-			 title: "What Will You Learn in the IICS Combo online Training?",
-              excerpt: "Dive deep into our 45-day IICS Combo training program covering SQL, PowerCenter, IICS CDI & CAI, Snowflake, mock interviews, and real-time projects—all in one batch. ",
-              image: "/images/content.jpeg",
-              date: "June 9, 2025",
-              author: "Hari.A",
-              authorImage: "/placeholder.svg?height=50&width=50",
-              readTime: "12 min read",
-              href: "/blogs/iics-combo-course-content",
-              category: "Informatica", 
-			 },          	
-			 {															
-			  title: "The Future of Data Engineering in 2025",
-              excerpt: "Explore the emerging trends and technologies shaping the future of data engineering.From real-time   analytics to AI-powered data pipelines, discover what's next in the world of data ",
-              image: "/placeholder.svg?height=200&width=300",
-              date: "Apr 15, 2025",
-              author: "Rajesh Kumar",
-              authorImage: "/placeholder.svg?height=50&width=50",
-              readTime: "10 min read",
-              href: "/blogs/mastering-informatica-iics",
-              category: "Informatica", 
-			 },          	
-			 {			    	  
-			  title: "Mastering Informatica IICS: A Beginner's Guide",
+              title: "Mastering Informatica IICS: A Beginner's Guide",
               excerpt: "Learn the fundamentals of Informatica Intelligent Cloud Services in this comprehensive guide.",
               image: "/placeholder.svg?height=200&width=300",
               date: "Apr 10, 2025",

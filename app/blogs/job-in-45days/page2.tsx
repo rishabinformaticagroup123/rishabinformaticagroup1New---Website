@@ -6,8 +6,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export const metadata = {
-  title: "Informatica IICS COMBO Training | PowerCenter ",
-  description: "Join Batch 11 starting June 9, 2025.Informatica PowerCenter with live projects and placement support.",
+  title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
+  description: "Join Batch 11 starting June 9, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
 };
 
 export default function IICSComboPage() {
@@ -17,8 +17,8 @@ export default function IICSComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>Recorded course with 24*7 Tech support</span>
-            <h1>Informatica Power center <span className={styles.highlight}> Power center </span> course </h1>
+            <span className={styles.batchBadge}>New Batch 11 Starts June 9, 2025</span>
+            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live</h1>
             <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
             <p className={styles.heroDescription}>
               Master both PowerCenter and IICS Cloud with parallel comparisons. 45-day intensive program with real-time projects and placement assistance.
@@ -51,7 +51,7 @@ export default function IICSComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/informaticapc_record.png"
+              src="/courses/informatica.png"
               alt="Informatica IICS COMBO Training"
               width={600}
               height={400}
@@ -156,7 +156,7 @@ export default function IICSComboPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus/syllabus-preview.PNG"
+            src="/syllabus-preview.png"
             alt="Syllabus Preview"
             width={300}
             height={400}
@@ -179,9 +179,9 @@ export default function IICSComboPage() {
               <ClockIcon />
               <span>Timing: 7:30 PM - 9:30 PM IST</span>
             </div>
-            <div className={styles.priceTag}>₹3,100 <span className={styles.originalPrice}>₹18,000</span></div>
+            <div className={styles.priceTag}>₹9,600 <span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/614095?filterId=1&sortId=7" target="_blank">
+              <Link href="https://course.rishabinformaticagroup.com/courses/678331" target="_blank">
                 Enroll Now
               </Link>
             </Button>
