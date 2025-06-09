@@ -109,28 +109,28 @@ export default function IICSCareerBlogPage() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <Image
-            src="/images/testimonial1.png"
+            src="/images/testimonial1.PNG"
             alt="Student Testimonial 1"
             width={500}
             height={300}
             className="rounded-xl shadow-md object-cover"
           />
           <Image
-            src="/images/testimonial2.png"
+            src="/images/testimonial2.PNG"
             alt="Student Testimonial 2"
             width={500}
             height={300}
             className="rounded-xl shadow-md object-cover"
           />
           <Image
-            src="/images/testimonial3.png"
+            src="/images/testimonial3.PNG"
             alt="Student Testimonial 3"
             width={500}
             height={300}
             className="rounded-xl shadow-md object-cover"
           />
           <Image
-            src="/images/testimonial4.png"
+            src="/images/testimonial4.PNG"
             alt="Student Testimonial 4"
             width={500}
             height={300}
