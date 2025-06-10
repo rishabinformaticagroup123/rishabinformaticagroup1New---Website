@@ -48,8 +48,8 @@ export default function ContactUsPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Address</h3>
-                  <p className="text-gray-600">[Your Office Address Here]</p>
-                  <p className="text-gray-600">Chennai, Tamil Nadu, India</p>
+                  <p className="text-gray-600">Rishab Informatica GROUP , No 7 , 5th main , 15th cross,Subbaraju layout</p>
+                  <p className="text-gray-600">Bangalore, Karnataka, India</p>
                 </div>
               </div>
 
@@ -61,8 +61,8 @@ export default function ContactUsPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Working Hours</h3>
-                  <p className="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p className="text-gray-600">Saturday: 10:00 AM - 4:00 PM</p>
+                  <p className="text-gray-600">Monday - Friday: 7:00 AM - 9:00 PM</p>
+                  <p className="text-gray-600">Saturday: 7:00 AM - 4:00 PM</p>
                 </div>
               </div>
             </div>
