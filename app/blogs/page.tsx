@@ -58,7 +58,7 @@ export default function BlogsPage() {
               </div>
               <div className="mt-8">
                 <Button asChild>
-                  <Link href="/blogs/job-in-45days">
+                  <Link href="/blogs/how-to-get-softwarejob-in-45-days">
                     Read Article <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
