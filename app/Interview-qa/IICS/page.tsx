@@ -1404,7 +1404,7 @@ export const interviewData: QA[] = [
     category: "CAI"
   },
   {
-    id: 108,
+   id: 108,
     question: "How do you pass parameters between Taskflows and Processes?",
     answer: (
       <div>
@@ -1414,30 +1414,34 @@ export const interviewData: QA[] = [
       </div>
     ),
     category: "Integration"
-  },
-
- ];
+  }
+];
 
 const InterviewQA: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  // Fixed the categories array - added missing parenthesis and filter for undefined
-  const categories = ["All", ...new Set(interviewData.map(qa => qa.category).filter(Boolean))];
+  const categories = ["All", ...new Set(interviewData.map((qa) => qa.category).filter(Boolean))];
 
-  const filteredData = interviewData.filter(qa => {
-    const answerText = React.isValidElement(qa.answer) 
-      ? qa.answer.props.children.toString() 
-      : '';
-    
-    const matchesSearch = 
+  const filteredData = interviewData.filter((qa) => {
+    const answerText = React.isValidElement(qa.answer)
+      ? (typeof qa.answer.props.children === "string"
+          ? qa.answer.props.children
+          : Array.isArray(qa.answer.props.children)
+            ? qa.answer.props.children.map((child: any) =>
+                typeof child === "string" ? child : ""
+              ).join(" ")
+            : "")
+      : "";
+
+    const matchesSearch =
       qa.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
       answerText.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = 
+
+    const matchesCategory =
       selectedCategory === "All" || qa.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -1447,33 +1451,45 @@ const InterviewQA: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      {/* Header Section with Title and Subtitle */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 drop-shadow-md mb-4">
+          108 Informatica IICS Interview Q&A in Simple Words – 2025 Edition
+        </h1>
+
+        <div className="inline-block bg-blue-700 text-white text-lg font-medium px-6 py-3 rounded-xl shadow-lg">
+             💡 Learn Informatica IICS from scratch – Practical, real-life questions with clear answers<br />
+  by <span className="font-semibold">Rishab Informatica Group</span>
+        </div>
+      </div>
+
+      {/* Sticky Search Bar and Category Filter */}
       <div className="sticky top-0 bg-white py-4 z-50 shadow-sm">
-        <h1 className="text-3xl font-bold mb-4">Top 108 Informatica IICS Interview Q&A for 2025</h1>
-        
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
+        <div className="flex flex-col md:flex-row gap-4 mb-4 justify-center items-center">
           <input
             type="text"
-            placeholder="Search questions..."
-            className="w-full p-2 border rounded"
+            placeholder="🔍 Search IICS questions (e.g., 'task flow')..."
+            className="w-full md:w-2/3 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          
+
           <select
-            className="w-full md:w-48 p-2 border rounded"
+            className="w-full md:w-48 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            {categories.map(category => (
+            {categories.map((category) => (
               <option key={category} value={category}>{category}</option>
             ))}
           </select>
         </div>
       </div>
 
+      {/* Questions Accordion */}
       {filteredData.map(({ id, question, answer }) => (
         <div key={id} className="mb-6 border-b pb-4">
-          <h2 
+          <h2
             className="text-xl font-semibold mb-2 cursor-pointer hover:text-blue-600 flex justify-between items-center"
             onClick={() => toggleExpand(id)}
             role="button"
@@ -1485,7 +1501,7 @@ const InterviewQA: React.FC = () => {
             <span aria-hidden="true">{expandedId === id ? '−' : '+'}</span>
           </h2>
           {expandedId === id && (
-            <div 
+            <div
               className="text-gray-700 pl-4 transition-all duration-300 ease-in-out overflow-hidden"
               aria-labelledby={`question-${id}`}
             >
@@ -1495,6 +1511,7 @@ const InterviewQA: React.FC = () => {
         </div>
       ))}
 
+      {/* No Results Message */}
       {filteredData.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           No questions match your search criteria.

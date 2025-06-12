@@ -139,7 +139,7 @@ export default function RefundPolicyPage() {
                   If you have any questions about our refund policy, please contact us at:
                 </p>
                 <p className="mt-2 text-muted-foreground">
-                  Email: refunds@rishabinformatica.com
+                  Email: support@rishabinformatica.com
                   <br />
                   Phone: +1 (555) 123-4567
                   <br />

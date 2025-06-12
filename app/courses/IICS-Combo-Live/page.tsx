@@ -84,7 +84,7 @@ export default function IICSComboPage() {
             },
             {
               title: "Real Cloud Projects",
-              description: "Work on AWS/GCP integrated implementations",
+              description: "Work on Snowflake/GCP integrated implementations",
               icon: <CloudIcon />
             },
             {
@@ -104,7 +104,7 @@ export default function IICSComboPage() {
             },
             {
               title: "Resume Preparation",
-              description: "With 1:1 mock interviews",
+              description: "With Multiple 1:1 mock interviews",
               icon: <ResumeIcon />
             }
           ].map((feature, index) => (
@@ -156,7 +156,7 @@ export default function IICSComboPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus-preview.png"
+            src="/syllabus/syllabus-preview.png"
             alt="Syllabus Preview"
             width={300}
             height={400}
@@ -224,13 +224,13 @@ export default function IICSComboPage() {
         <div className={styles.testimonialCards}>
           {[
             {
-              quote: "The combo training helped me transition from PowerCenter to IICS in just 2 months and land a cloud ETL role.",
-              name: "Rajesh K.",
+              quote: "I highly recommend the IICS COMBO course for anyone looking to build a strong oundation in data integration and cloud technologies. This course covers SQL,Informatica PowerCenter, Informatica IICS, and also includes essential Snowflake concepts, which makes it a complete package for both beginners and working professionals The way the topics are structured and explained is very clear and easy to understand. I particularly appreciated how real-time examples were used to connect theory with practical scenarios A big thanks to Hari Sir for his excellent teaching, constant support, and for making complex topics easy to grasp. His guidance throughout the course has been incredibly helpful for my learning journey If you're serious about your career in data engineering or ETL tools, this course is definitely worth it!.",
+              name: "Shekar.",
               company: "Infosys"
             },
             {
-              quote: "The Snowflake integration projects were exactly what recruiters were looking for in my interviews.",
-              name: "Priya M.",
+              quote: "My name is Nitish Chandra Sharma,last year in Dec I planned to get into Data Engineer field,I consulted my friend who is a ETL developer,I searched for courses but the course provided by Rishabh Informatica is the best The answer why, other institutions are taking different batches for Powercenter and IICS which is expensive and time taking unlike here where there is a combo batch at a affordable price with payment ease aswell. Hari Sir is putting efforts day and night to help everyone succeed,if you are interested this is the platform for you.",
+              name: "Nithish Sharma.",
               company: "Accenture"
             }
           ].map((testimonial, index) => (

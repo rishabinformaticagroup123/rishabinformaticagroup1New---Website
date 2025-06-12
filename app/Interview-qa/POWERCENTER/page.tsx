@@ -1034,18 +1034,161 @@ export const interviewData: QA[] = [
     category: "Transformations"
   },
   {
-    id: 83,
-    question: "How will you load flatfile by using increment load?",
-    answer: (
-      <div>
-     <p>
-	   Use mapping variables to track last loaded record and filter source data to only include new records since last load.
-	 </p>
-    </div>
-   ),
-   category: "Transformations"
- },
-    
+  id: 83,
+  question: "What is a reusable session?",
+  answer: <p>A session configuration that can be shared across multiple workflows. Changes made to it automatically apply to all workflows using it.</p>,
+  category: "Workflow"
+},
+{
+  id: 84,
+  question: "How to handle NULL values in expressions?",
+  answer: <p>Use ISNULL() or IIF() functions to check for NULLs. You can also set default values in target definitions to replace NULLs.</p>,
+  category: "Transformations"
+},
+{
+  id: 85,
+  question: "What is constraint-based loading?",
+  answer: <p>Loading method where target tables are loaded based on their primary/foreign key relationships. Parent tables load before child tables.</p>,
+  category: "Mappings"
+},
+{
+  id: 86,
+  question: "What is a persistent cache?",
+  answer: <p>A lookup cache that gets saved to disk after session runs. Subsequent sessions can reuse this cache to improve performance.</p>,
+  category: "Performance"
+},
+{
+  id: 87,
+  question: "What is a pre-session command?",
+  answer: <p>A shell command or script that runs before the session starts. Often used for file cleanup or preparation tasks.</p>,
+  category: "Workflow"
+},
+{
+  id: 88,
+  question: "What is a worklet?",
+  answer: <p>A reusable group of tasks that can be added to multiple workflows. Similar to a subroutine in programming.</p>,
+  category: "Workflow"
+},
+{
+  id: 89,
+  question: "What is the stop-on-errors property?",
+  answer: <p>Defines how many errors a session can encounter before stopping. Helps prevent processing bad data.</p>,
+  category: "Error Handling"
+},
+{
+  id: 90,
+  question: "What is a target load plan?",
+  answer: <p>Controls the loading sequence of multiple targets in a mapping. Overrides default loading order.</p>,
+  category: "Mappings"
+},
+{
+  id: 91,
+  question: "What is a source filter?",
+  answer: <p>A condition added to Source Qualifier to limit extracted data. Reduces data volume early in pipeline.</p>,
+  category: "Mappings"
+},
+{
+  id: 92,
+  question: "What is a stored procedure transformation?",
+  answer: <p>Calls database stored procedures during mapping. Can be used for complex logic or data validation.</p>,
+  category: "Transformations"
+},
+{
+  id: 93,
+  question: "What is a transaction control transformation?",
+  answer: <p>Manages commit/rollback points during mapping. Useful for batching large transactions.</p>,
+  category: "Transformations"
+},
+{
+  id: 94,
+  question: "What is a union transformation?",
+  answer: <p>Merges data from multiple pipelines into single output. All input pipelines must have matching metadata.</p>,
+  category: "Transformations"
+},
+{
+  id: 95,
+  question: "What is a joiner transformation?",
+  answer: <p>Combines data from heterogeneous sources using join conditions. Slower than Source Qualifier joins.</p>,
+  category: "Transformations"
+},
+{
+  id: 96,
+  question: "What is a router transformation?",
+  answer: <p>Routes data to different outputs based on conditions. More flexible than Filter transformation.</p>,
+  category: "Transformations"
+},
+{
+  id: 97,
+  question: "What is a sequence generator?",
+  answer: <p>Generates numeric sequences like IDs. Can be cyclic or non-cyclic.</p>,
+  category: "Transformations"
+},
+{
+  id: 98,
+  question: "What is a normalizer transformation?",
+  answer: <p>Converts COBOL/VSAM data to relational format. Handles array/occurs clauses in source data.</p>,
+  category: "Transformations"
+},
+{
+  id: 99,
+  question: "What is a pushdown optimization?",
+  answer: <p>Pushes transformation logic to source database. Improves performance by leveraging database power.</p>,
+  category: "Performance"
+},
+{
+  id: 100,
+  question: "What is a grid in PowerCenter?",
+  answer: <p>Multiple nodes that process sessions in parallel. Provides load balancing and high availability.</p>,
+  category: "Architecture"
+},
+{
+  id: 101,
+  question: "What is a node in PowerCenter?",
+  answer: <p>A server in the grid that processes workflow tasks. Multiple nodes work together in a domain.</p>,
+  category: "Architecture"
+},
+{
+  id: 102,
+  question: "What is a domain?",
+  answer: <p>Central management unit for PowerCenter services. Contains nodes, services, and security configurations.</p>,
+  category: "Architecture"
+},
+{
+  id: 103,
+  question: "What is a repository service?",
+  answer: <p>Manages metadata in the repository. Handles all metadata requests from clients.</p>,
+  category: "Architecture"
+},
+{
+  id: 104,
+  question: "What is an integration service?",
+  answer: <p>Executes workflows and sessions. Can run on grid for distributed processing.</p>,
+  category: "Architecture"
+},
+{
+  id: 105,
+  question: "What is a workflow manager?",
+  answer: <p>Client tool for creating workflows, sessions, and scheduling. Part of PowerCenter Designer client.</p>,
+  category: "Administration"
+},
+{
+  id: 106,
+  question: "What is a workflow monitor?",
+  answer: <p>Client tool for monitoring running workflows. Shows real-time statistics and logs.</p>,
+  category: "Administration"
+},
+{
+  id: 107,
+  question: "What is pmcmd?",
+  answer: <p>Command line utility for workflow operations. Can start/stop workflows and get status.</p>,
+  category: "Administration"
+},
+{
+  id: 108,
+  question: "What is a deployment group?",
+  answer: <p>Collection of objects migrated together between environments. Simplifies promotion process.</p>,
+  category: "Administration"
+  }  
 ];
 
 const InterviewQA: React.FC = () => {
@@ -1053,21 +1196,26 @@ const InterviewQA: React.FC = () => {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  // Fixed the categories array - added missing parenthesis and filter for undefined
-  const categories = ["All", ...new Set(interviewData.map(qa => qa.category).filter(Boolean))];
+  const categories = ["All", ...new Set(interviewData.map((qa) => qa.category).filter(Boolean))];
 
-  const filteredData = interviewData.filter(qa => {
-    const answerText = React.isValidElement(qa.answer) 
-      ? qa.answer.props.children.toString() 
-      : '';
-    
-    const matchesSearch = 
+  const filteredData = interviewData.filter((qa) => {
+    const answerText = React.isValidElement(qa.answer)
+      ? (typeof qa.answer.props.children === "string"
+          ? qa.answer.props.children
+          : Array.isArray(qa.answer.props.children)
+            ? qa.answer.props.children.map((child: any) =>
+                typeof child === "string" ? child : ""
+              ).join(" ")
+            : "")
+      : "";
+
+    const matchesSearch =
       qa.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
       answerText.toLowerCase().includes(searchTerm.toLowerCase());
-    
-    const matchesCategory = 
+
+    const matchesCategory =
       selectedCategory === "All" || qa.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -1077,33 +1225,45 @@ const InterviewQA: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
+      {/* Header Section with Title and Subtitle */}
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 via-red-500 to-pink-500 drop-shadow-md mb-4">
+          108 Informatica Power center Interview Q&A in Simple Words – 2025 Edition
+        </h1>
+
+        <div className="inline-block bg-blue-700 text-white text-lg font-medium px-6 py-3 rounded-xl shadow-lg">
+             💡 Learn Informatica Power center from scratch – Practical, real-life questions with clear answers<br />
+  by <span className="font-semibold">Rishab Informatica Group</span>
+        </div>
+      </div>
+
+      {/* Sticky Search Bar and Category Filter */}
       <div className="sticky top-0 bg-white py-4 z-50 shadow-sm">
-        <h1 className="text-3xl font-bold mb-4">Informatica IICS Interview Q&A</h1>
-        
-        <div className="flex flex-col md:flex-row gap-4 mb-4">
+        <div className="flex flex-col md:flex-row gap-4 mb-4 justify-center items-center">
           <input
             type="text"
-            placeholder="Search questions..."
-            className="w-full p-2 border rounded"
+            placeholder="🔍 Search IICS questions (e.g., 'task flow')..."
+            className="w-full md:w-2/3 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          
+
           <select
-            className="w-full md:w-48 p-2 border rounded"
+            className="w-full md:w-48 p-3 border border-gray-300 rounded shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            {categories.map(category => (
+            {categories.map((category) => (
               <option key={category} value={category}>{category}</option>
             ))}
           </select>
         </div>
       </div>
 
+      {/* Questions Accordion */}
       {filteredData.map(({ id, question, answer }) => (
         <div key={id} className="mb-6 border-b pb-4">
-          <h2 
+          <h2
             className="text-xl font-semibold mb-2 cursor-pointer hover:text-blue-600 flex justify-between items-center"
             onClick={() => toggleExpand(id)}
             role="button"
@@ -1115,7 +1275,7 @@ const InterviewQA: React.FC = () => {
             <span aria-hidden="true">{expandedId === id ? '−' : '+'}</span>
           </h2>
           {expandedId === id && (
-            <div 
+            <div
               className="text-gray-700 pl-4 transition-all duration-300 ease-in-out overflow-hidden"
               aria-labelledby={`question-${id}`}
             >
@@ -1125,6 +1285,7 @@ const InterviewQA: React.FC = () => {
         </div>
       ))}
 
+      {/* No Results Message */}
       {filteredData.length === 0 && (
         <div className="text-center py-8 text-gray-500">
           No questions match your search criteria.

@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const sqlQuestions = [
   {
     id: 1,
-    question: "📌 What is SQL, and Why is it Important?",
+    question: "1. 📌 What is SQL, and Why is it Important?",
     answer: (
       <div>
         <p>🔹 <strong>SQL (Structured Query Language)</strong> is a special language used to talk to <strong>databases</strong> — just like how we use English or any language to talk to people.</p>
@@ -23,7 +23,7 @@ const sqlQuestions = [
   },
   {
     id: 2,
-    question: "🔑 What is a Primary Key, and Why is it Important?",
+    question: "2. 🔑 What is a Primary Key, and Why is it Important?",
     answer: (
       <div>
         <p>🔹 A <strong>Primary Key</strong> is like a <strong>roll number</strong> or <strong>unique ID</strong> given to each record (row) in a database table.</p>
@@ -40,7 +40,7 @@ const sqlQuestions = [
   },
   {
     id: 3,
-    question: "🌉 What is a Foreign Key, and How is it Related to a Primary Key?",
+    question: "3. 🌉 What is a Foreign Key, and How is it Related to a Primary Key?",
     answer: (
       <div>
         <p>🔹 A <strong>Foreign Key</strong> is a column (field) in one table that connects to the <strong>Primary Key of another table</strong> — like a link between two tables.</p>
@@ -57,7 +57,7 @@ const sqlQuestions = [
   },
   {
     id: 4,
-    question: "🔄 Describe the differences between INNER JOIN, LEFT JOIN, and RIGHT JOIN",
+    question: "4. 🔄 Describe the differences between INNER JOIN, LEFT JOIN, and RIGHT JOIN",
     answer: (
       <div>
         <p>🔹 In SQL, <strong>JOINS</strong> are used to bring data together from <strong>two different tables</strong> using a <strong>common column</strong> (usually related by a key like ID).</p>
@@ -89,7 +89,7 @@ const sqlQuestions = [
   },
   {
     id: 5,
-    question: "🔄 What is a Self-Join, and When Do We Use It?",
+    question: "5. 🔄 What is a Self-Join, and When Do We Use It?",
     answer: (
       <div>
         <p>🔹 A <strong>Self-Join</strong> is when a table is <strong>joined with itself</strong> — just like you're comparing rows <strong>within the same table</strong>.</p>
@@ -123,7 +123,7 @@ const sqlQuestions = [
   },
   {
     id: 6,
-    question: "🔄 Difference Between SQL and NoSQL Databases",
+    question: "6. 🔄 Difference Between SQL and NoSQL Databases",
     answer: (
       <div>
         <p>🔹 Databases are used to store and manage data — just like storing files in a cabinet, but digitally. There are two main types: <strong>SQL</strong> and <strong>NoSQL</strong>.</p>
