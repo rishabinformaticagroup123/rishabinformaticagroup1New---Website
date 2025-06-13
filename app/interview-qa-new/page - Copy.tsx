@@ -13,22 +13,17 @@ export default function InterviewQaLandingPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         
         {/* PowerCenter */}
-     <Link href="/interview-qa/sql">
-  <div
-    className="border border-gray-200 rounded-xl p-5 hover:shadow-xl hover:scale-[1.01] transition-all bg-white hover:bg-yellow-50 cursor-pointer"
-    role="link"
-  >
-    <div className="flex items-center gap-3 mb-2">
-      <Code className="text-yellow-600" />
-      <h2 className="text-xl font-semibold">SQL</h2>
-    </div>
-    <p className="text-gray-600 mb-2">
-      Includes basic to advanced SQL questions with scenarios, joins, subqueries, and optimizations.
-    </p>
-    <span className="text-blue-600 font-medium">👉 View Questions</span>
-  </div>
-</Link>
-
+        <Link href="/interview-qa/powercenter">
+          <div className="border border-gray-200 rounded-xl p-5 hover:shadow-lg transition bg-white hover:bg-blue-50">
+            <div className="flex items-center gap-3 mb-2">
+              <Database className="text-blue-600" />
+              <h2 className="text-xl font-semibold">Informatica PowerCenter</h2>
+            </div>
+            <p className="text-gray-600">
+              Covers core ETL concepts, mappings, workflows, performance tuning and real-time scenarios.
+            </p>
+          </div>
+        </Link>
 
         {/* IICS */}
         <Link href="/interview-qa/iics">
