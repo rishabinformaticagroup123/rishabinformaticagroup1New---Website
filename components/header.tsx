@@ -59,12 +59,12 @@ const MENU_ITEMS = [
   },
   {
     name: "Interview Q&A",
-    href: "/Interview-qa",
+    href: "/interview-qa",
     subItems: [
-      { name: "Informatica Power center", href: "/Interview-qa/powercenter" },
-      { name: "Informatica IICS - IDMC", href: "/Interview-qa/iics" },
-      { name: "SQL", href: "/Interview-qa/sql" },
-      { name: "Azure (ADF + ADB )", href: "/Interview-qa/azure" },
+      { name: "Informatica Power center", href: "/interview-qa/powercenter" },
+      { name: "Informatica IICS - IDMC", href: "/interview-qa/iics" },
+      { name: "SQL", href: "/interview-qa/sql" },
+      { name: "Azure (ADF + ADB )", href: "/interview-qa/azure" },
     ],
   },
   {
