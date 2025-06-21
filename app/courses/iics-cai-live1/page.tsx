@@ -25,8 +25,8 @@ export default function IICSCaiPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>Recorded course with 24*7 Tech support</span> 
-            <h1>Informatica IICS <span className={styles.highlight}>CAI</span> FULL Course</h1>
+            <span className={styles.batchBadge}>Join Batch 11 starting June 9, 2025</span> 
+            <h1>Informatica IICS <span className={styles.highlight}>CAI</span> Online Training</h1>
             <h2>Cloud Application Integration with Real-Time Projects</h2>
             <p className={styles.heroDescription}>
               Learn to build service connectors, process objects, and APIs using live public data sources like weather, COVID, and currency exchange APIs. Designed for modern ETL/API roles.
@@ -59,7 +59,7 @@ export default function IICSCaiPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src= "/courses/informaticacai_record.png"
+              src= "/courses/informaticacai-live.png"
               alt="Informatica IICS CAI Training"
               width={600}
               height={400}
@@ -139,7 +139,7 @@ export default function IICSCaiPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus/cai-syllabus-preview.png"
+            src="/syllabus/cai.png"
             alt="CAI Syllabus Preview"
             width={300}
             height={400}
@@ -162,9 +162,9 @@ export default function IICSCaiPage() {
               <ClockIcon />
               <span>Time: 7:30 PM - 9:00 PM IST</span>
             </div>
-            <div className={styles.priceTag}>₹3,999 <span className={styles.originalPrice}>₹9,000</span></div>
+            <div className={styles.priceTag}>₹3,600 <span className={styles.originalPrice}>₹5,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/498620" target="_blank">
+              <Link href="https://course.rishabinformaticagroup.com/courses/679258" target="_blank">
                 Enroll Now
               </Link>
             </Button>
