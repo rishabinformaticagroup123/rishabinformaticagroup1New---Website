@@ -178,7 +178,7 @@ export default function CoursesPage() {
                   duration: "Total 35 + Hours with 100 + Docs",
                   level: "Beginner to Intermediate",
                   price: "₹3300",
-                  href: "/courses/Informatica-Powercenter",
+                  href: "/courses/informatica-powercenter",
                   category: "informatica",		  		 				 	  			  
 				 },
               ].map((course, index) => (
