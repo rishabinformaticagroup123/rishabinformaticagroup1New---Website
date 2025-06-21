@@ -31,22 +31,22 @@ const MENU_ITEMS = [
           {
             title: "Live Courses",
             items: [
-              { name: "Informatica IICS Combo", href: "/courses/IICS-Combo-Live"},
-              { name: "Informatica IICS Cloud", href: "/courses/IICS-Cloud-Live" },
-              { name: "Informatica IICS CAI", href: "/courses/IICS-CAI-Live" },
-			  { name: "Azure Data Eng. COMBO",href: "/courses/AZURE-Combo-Live" },
-			  { name: "Snowflake Combo",href: "/courses/SNOWFLAKE-Combo-Live" },
-			  { name: "Performance Engineering",href: "/courses/Performance-Engineering" },
+              { name: "Informatica IICS Combo", href: "/courses/iics-combo-live1"},
+              { name: "Informatica IICS Cloud", href: "/courses/iics-cloud-live1" },
+              { name: "Informatica IICS CAI", href: "/courses/iics-cai-live1" },
+			  { name: "Azure Data Eng. COMBO",href: "/courses/azure-combo-live1" },
+			  { name: "Snowflake Combo",href: "/courses/snowflake-combo-live1" },
+			  { name: "Performance Engineering",href: "/courses/performance-engineering1" },
             ]
           },
           {
             title: "Recorded Courses with Support",
             items: [
-              { name: "Informatica IICS COMBO Full Course", href: "/courses/IICS-Combo-recorded" },
-			  { name: "Informatica IICS COMBO Full Course Part-1", href: "/courses/IICS-Combo-recorded-Part1" },
-			  { name: "Informatica IICS COMBO Full Course Part-2", href: "/courses/IICS-Combo-recorded-Part2" },
-              { name: " Informatica IICS CAI", href: "/courses/IICS-CAI-recorded" },
-              { name: "Informatica Power Center", href: "/courses/Informatica-Powercenter" }
+              { name: "Informatica IICS COMBO Full Course", href: "/courses/iics-combo-recorded1" },
+			  { name: "Informatica IICS COMBO Full Course Part-1", href: "/courses/iics-combo-recorded-part-11" },
+			  { name: "Informatica IICS COMBO Full Course Part-2", href: "/courses/iics-combo-recorded-part-21" },
+              { name: " Informatica IICS CAI", href: "/courses/iics-cai-recorded1" },
+              { name: "Informatica Power Center", href: "/courses/informatica-powercenter1" }
             ]
           }
         ]
@@ -78,7 +78,7 @@ const MENU_ITEMS = [
     ],
   },
   {
-    name: "Internship",
+    name: "live Job support",
     href: "/internship",
     subItems: [
       { name: "Internship Details", href: "/internship/details" },
