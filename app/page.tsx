@@ -24,25 +24,25 @@ const courses = [
     title: "Informatica IICS COMBO",
     description: "Master IICS, PowerCenter, SQL & Snowflake in 45 days",
     image: "/courses/informatica.png",
-    href: "/courses/iics-combo-live1"
+    href: "/courses/iics-combo-live"
   },
   { 
     title: "Azure Data Engineering",
     description: "Learn to build and optimize data solutions with Microsoft Azure.",
     image: "/courses/azure.png",
-    href: "/courses/azure-combo-live1"
+    href: "/courses/azure-combo-live"
   },
   { 
     title: "Snowflake Training",
     description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
     image: "/courses/snowflake.png",
-    href: "/courses/snowflake-combo-live1"
+    href: "/courses/snowflake-combo-live"
   },
   {
     title: "Performance Engineering",
     description: "Master the techniques to optimize application performance and scalability.",
     image: "/courses/performance.png",
-    href: "/courses/performance-engineering1"
+    href: "/courses/performance-engineering"
   }
 ];
 

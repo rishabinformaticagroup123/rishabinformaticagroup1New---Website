@@ -48,7 +48,7 @@ export default function CoursesPage() {
                   duration:"45 Days  (Daily 1.5 to 2 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹9600",
-                  href: "/courses/iics-combo-live1",
+                  href: "/courses/iics-combo-live",
                   category: "informatica",
 				},
                 { 
@@ -58,7 +58,7 @@ export default function CoursesPage() {
                   duration:"45 Days  (Daily 1.5 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹8200",
-                  href: "/courses/iics-cloud-live1",
+                  href: "/courses/iics-cloud-live",
                   category: "informatica",  				  		  				  			  
 				},
                 {
@@ -68,7 +68,7 @@ export default function CoursesPage() {
                   duration: "60 Days ( Daily 1 Hour)",
                   level: "Beginner to Advanced",
                   price: "₹12000",
-                  href: "/courses/azure-combo-live1",
+                  href: "/courses/azure-combo-live",
                   category: "azure",
                 },
                 {
@@ -78,7 +78,7 @@ export default function CoursesPage() {
                   duration: "42 Days ( Daily 1 Hour)",
                   level: "Intermediate",
                   price: "₹9600",
-                  href: "/courses/snowflake-combo-live1",
+                  href: "/courses/snowflake-combo-live",
                   category: "snowflake",
                 },
                 {
@@ -88,7 +88,7 @@ export default function CoursesPage() {
                   duration: "42 Days ( Daily 1 Hour)",
                   level: "Beginner to Advanced",
                   price: "₹12000",
-                  href: "/courses/performance-engineering1",
+                  href: "/courses/performance-engineering",
                   category: "performance",
                 },
                 {
@@ -108,7 +108,7 @@ export default function CoursesPage() {
                   duration: "Total 40 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
-                  href: "/courses/iics-combo-recorded-part-11",
+                  href: "/courses/iics-combo-recorded-part-1",
                   category: "informatica", 
 				 },
                  { 
@@ -118,7 +118,7 @@ export default function CoursesPage() {
                   duration: "Total 40 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
-                  href: "/courses/iics-combo-recorded-part-21",
+                  href: "/courses/iics-combo-recorded-part-2",
                   category: "informatica",  				  				  		  				  			  
 	             },
                  {		
@@ -128,7 +128,7 @@ export default function CoursesPage() {
                   duration: "11 Days (Daily 1.5 to 2 Hours)",
                   level: "Beginner to Advanced",
                   price: "₹3600",
-                  href: "/courses/iics-cai-live1",
+                  href: "/courses/iics-cai-live",
                   category: "informatica",  
                 },
                 { 
@@ -138,7 +138,7 @@ export default function CoursesPage() {
                   duration: "TOtal 18 + Hours with 20+ Docs",
                   level: "Beginner to Advanced",
                   price: "₹2900",
-                  href: "/courses/iics-cai-recorded1",
+                  href: "/courses/iics-cai-recorded",
                   category: "informatica", 						 
 				}, 
 				{ 		  		  				  			 				                		
@@ -148,7 +148,7 @@ export default function CoursesPage() {
                   duration:  "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Intermediate",
                   price: "₹9600",
-                  href: "/courses/azure-data-factory1",
+                  href: "/courses/azure-data-factory",
                   category: "azure",
                 },
                 {
@@ -158,7 +158,7 @@ export default function CoursesPage() {
                   duration: "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Advanced",
                   price: "₹9600",
-                  href: "/courses/snowflake-administration1",
+                  href: "/courses/snowflake-administration",
                   category: "snowflake",
                 },
                 {
@@ -168,7 +168,7 @@ export default function CoursesPage() {
                   duration: "30 Days (Daily 1.5 to 2 Hours)",
                   level: "Intermediate",
                   price: "₹12000",
-                  href: "/courses/load-testing-jmeter1",
+                  href: "/courses/load-testing-jmeter",
                   category: "performance",
                 },
                 {  
@@ -178,7 +178,7 @@ export default function CoursesPage() {
                   duration: "Total 35 + Hours with 100 + Docs",
                   level: "Beginner to Intermediate",
                   price: "₹3300",
-                  href: "/courses/Informatica-Powercenter1",
+                  href: "/courses/Informatica-Powercenter",
                   category: "informatica",		  		 				 	  			  
 				 },
               ].map((course, index) => (
@@ -229,7 +229,7 @@ export default function CoursesPage() {
                     duration: "45 Days  (Daily 1.5 to Hours)",
                     level: "Beginner to Advanced",
                     price: "₹9600",
-                    href: "/courses/iics-combo-live1",
+                    href: "/courses/iics-combo-live",
                     category: "informatica",
                   },
                   {
@@ -239,7 +239,7 @@ export default function CoursesPage() {
                   duration:"45 Days  (Daily 1.5 Hours)",
                   level:"Beginner to Advanced",
                   price: "₹8200",
-                  href: "/courses/iics-cloud-live1",
+                  href: "/courses/iics-cloud-live",
                   category: "informatica",	  
 				  },
                   { 			  						  				  			  
@@ -249,7 +249,7 @@ export default function CoursesPage() {
                     duration: "60 Days ( Daily 1 Hour)",
                     level: "Intermediate",
                     price: "₹12000",
-                    href: "/courses/azure-combo-live1",
+                    href: "/courses/azure-combo-live",
                     category: "azure",
                   },
                   {
@@ -259,7 +259,7 @@ export default function CoursesPage() {
                     duration: "42 Days ( Daily 1 Hour)",
                     level: "Intermediate",
                     price: "₹9600",
-                    href: "/courses/snowflake-combo-live1",
+                    href: "/courses/snowflake-combo-live",
                     category: "snowflake",
                   },
                   {
@@ -269,7 +269,7 @@ export default function CoursesPage() {
                     duration: "42 Days ( Daily 1 Hour)",
                     level: "Advanced",
                     price: "₹12000",
-                    href: "/courses/performance-engineering1",
+                    href: "/courses/performance-engineering",
                     category: "performance",
                   },
                   {
@@ -279,7 +279,7 @@ export default function CoursesPage() {
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹5100",
-                  href: "/courses/iics-combo-recorded1",
+                  href: "/courses/iics-combo-recorded",
                   category: "informatica",
 				  },
                   {	  
@@ -289,7 +289,7 @@ export default function CoursesPage() {
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
-                  href: "/courses/iics-combo-recorded-part-11",
+                  href: "/courses/iics-combo-recorded-part-1",
                   category: "informatica",
 				  },
                   {
@@ -299,7 +299,7 @@ export default function CoursesPage() {
                   duration: "Total 80 + Hours with 100 + Docs",
                   level: "Beginner to Advanced",
                   price: "₹2500",
-                  href: "/courses/iics-combo-recorded-part-21",
+                  href: "/courses/iics-combo-recorded-part-2",
                   category: "informatica",
                   },
                   {                                			  
@@ -309,7 +309,7 @@ export default function CoursesPage() {
                     duration: "Total 35 + Hours with 100 + Docs",
                     level: "Beginner to Intermediate",
                     price: "₹3300",
-                    href: "/courses/informatica-powercenter1",
+                    href: "/courses/informatica-powercenter",
                     category: "informatica",				 						
 				  },
                   {
@@ -319,7 +319,7 @@ export default function CoursesPage() {
                     duration: "30 Days (Daily 1.5 to 2 Hours)",
                     level: "Intermediate",
                     price: "₹9600",
-                    href: "/courses/azure-data-factory1",
+                    href: "/courses/azure-data-factory",
                     category: "azure",
                   },
                   {
@@ -329,7 +329,7 @@ export default function CoursesPage() {
                     duration: "30 Days (Daily 1.5 to 2 Hours)",
                     level: "Advanced",
                     price: "₹9600",
-                    href: "/courses/snowflake-administration1",
+                    href: "/courses/snowflake-administration",
                     category: "snowflake",
                   },
                   {
@@ -340,7 +340,7 @@ export default function CoursesPage() {
                     duration: "4 Weeks",
                     level: "Intermediate",
                     price: "₹12000",
-                    href: "/courses/load-testing-jmeter1",
+                    href: "/courses/load-testing-jmeter",
                     category: "performance",
                   },
                   {
@@ -350,7 +350,7 @@ export default function CoursesPage() {
                     duration: "11 Days (Daily 1.5 to 2 Hours)",
                     level: "Advanced",
                     price: "₹3600",
-                    href: "/courses/iics-cai-live1",
+                    href: "/courses/iics-cai-live",
                     category: "informatica",
 				  },
                   {	
@@ -360,7 +360,7 @@ export default function CoursesPage() {
                   duration: "TOtal 18 + Hours with 20+ Docs",
                   level: "Advanced",
                   price: "₹2900",
-                  href: "/courses/iics-cai-recorded1",
+                  href: "/courses/iics-cai-recorded",
                   category: "informatica", 			
 	             },
                 ]
