@@ -195,7 +195,7 @@ export default function IICSComboPage() {
       <section className={styles.instructorSection}>
         <div className={styles.instructorContent}>
           <Image
-            src="/instructor-hari.jpg"
+            src="/instructors/hari.png"
             alt="Hari A. - Instructor"
             width={200}
             height={200}

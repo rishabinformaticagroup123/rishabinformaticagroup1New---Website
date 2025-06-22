@@ -176,7 +176,7 @@ export default function IICSCaiPage() {
       <section className={styles.instructorSection}>
         <div className={styles.instructorContent}>
           <Image
-            src="/instructor-hari.jpg"
+            src="/instructors/hari.png"
             alt="Instructor Hari A."
             width={200}
             height={200}

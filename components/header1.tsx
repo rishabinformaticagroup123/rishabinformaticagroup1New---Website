@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, Download, ExternalLink } from "lucide-react";
+import { Menu, X, ChevronDown, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -34,18 +34,18 @@ const MENU_ITEMS = [
               { name: "Informatica IICS Combo", href: "/courses/iics-combo-live"},
               { name: "Informatica IICS Cloud", href: "/courses/iics-cloud-live" },
               { name: "Informatica IICS CAI", href: "/courses/iics-cai-live" },
-              { name: "Azure Data Eng. COMBO",href: "/courses/azure-combo-live" },
-              { name: "Snowflake Combo",href: "/courses/snowflake-combo-live" },
-              { name: "Performance Engineering",href: "/courses/performance-engineering" },
+			  { name: "Azure Data Eng. COMBO",href: "/courses/azure-combo-live" },
+			  { name: "Snowflake Combo",href: "/courses/snowflake-combo-live" },
+			  { name: "Performance Engineering",href: "/courses/performance-engineering" },
             ]
           },
           {
             title: "Recorded Courses with Support",
             items: [
               { name: "Informatica IICS COMBO Full Course", href: "/courses/iics-combo-recorded" },
-              { name: "Informatica IICS COMBO Full Course Part-1", href: "/courses/iics-combo-recorded-part-1" },
-              { name: "Informatica IICS COMBO Full Course Part-2", href: "/courses/iics-combo-recorded-part-2" },
-              { name: "Informatica IICS CAI", href: "/courses/iics-cai-recorded" },
+			  { name: "Informatica IICS COMBO Full Course Part-1", href: "/courses/iics-combo-recorded-part-1" },
+			  { name: "Informatica IICS COMBO Full Course Part-2", href: "/courses/iics-combo-recorded-part-2" },
+              { name: " Informatica IICS CAI", href: "/courses/iics-cai-recorded" },
               { name: "Informatica Power Center", href: "/courses/informatica-powercenter" }
             ]
           }
@@ -78,18 +78,18 @@ const MENU_ITEMS = [
     ],
   },
   {
-    name: "Live Job Support",
-    href: "/job-support",
+    name: "Live Job support",
+    href: "/Job support",
     subItems: [
       { 
-        name: "Job Support Request Form",
-        href: "https://forms.gle/PFat1nZEUnwWW8y89",
-        external: true
-      },
+	   name: "Job Support Request Form",
+	   href: "https://forms.gle/PFat1nZEUnwWW8y89" ,
+	   external: true
+	  },
       { 
-        name: "Real Projects", 
-        href: "/internship/real-projects"
-      }
+	   name: "Real Projects", 
+	   href: "/internship/real-projects"
+	  }
     ]
   },
   {
@@ -119,40 +119,6 @@ export default function Header() {
 
   const toggleMobileDropdown = (itemName) => {
     setMobileDropdown(mobileDropdown === itemName ? null : itemName);
-  };
-
-  const renderLink = (item, isMobile = false) => {
-    if (item.external) {
-      return (
-        <a
-          href={item.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={cn(
-            isMobile ? "block px-3 py-2 text-sm font-semibold" : "block px-4 py-2 text-sm font-semibold transition-colors",
-            "text-orange-600 hover:text-blue-600 flex items-center gap-1"
-          )}
-          onClick={() => isMobile && setMobileMenuOpen(false)}
-        >
-          {item.name}
-          <ExternalLink className="w-3 h-3 ml-1" />
-        </a>
-      );
-    }
-    return (
-      <Link
-        href={item.href}
-        className={cn(
-          isMobile ? "block px-3 py-2 text-sm font-semibold" : "block px-4 py-2 text-sm font-semibold transition-colors",
-          isClient && pathname === item.href 
-            ? "text-blue-600" + (isMobile ? "" : " font-semibold bg-blue-50") 
-            : "text-orange-600 hover:text-blue-600" + (isMobile ? "" : " hover:bg-orange-50")
-        )}
-        onClick={() => isMobile && setMobileMenuOpen(false)}
-      >
-        {item.name}
-      </Link>
-    );
   };
 
   return (
@@ -213,7 +179,17 @@ export default function Header() {
                             <ul className="space-y-2">
                               {column.items.map((subItem) => (
                                 <li key={subItem.href}>
-                                  {renderLink(subItem)}
+                                  <Link
+                                    href={subItem.href}
+                                    className={cn(
+                                      "block px-4 py-2 text-sm font-semibold transition-colors rounded-md",
+                                      isClient && pathname === subItem.href 
+                                        ? "text-blue-600 font-semibold bg-blue-50" 
+                                        : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
+                                    )}
+                                  >
+                                    {subItem.name}
+                                  </Link>
                                 </li>
                               ))}
                             </ul>
@@ -226,7 +202,17 @@ export default function Header() {
                           key={subItem.href}
                           variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}
                         >
-                          {renderLink(subItem)}
+                          <Link
+                            href={subItem.href}
+                            className={cn(
+                              "block px-4 py-2 text-sm font-semibold transition-colors",
+                              isClient && pathname === subItem.href 
+                                ? "text-blue-600 font-" 
+                                : "text-orange-600 hover:bg-orange-50 hover:text-blue-600"
+                            )}
+                          >
+                            {subItem.name}
+                          </Link>
                         </motion.div>
                       ))
                     )}
@@ -324,9 +310,19 @@ export default function Header() {
                                 <h4 className="font-semibold text-gray-800 mb-2">{column.title}</h4>
                                 <div className="space-y-2">
                                   {column.items.map((subItem) => (
-                                    <div key={subItem.href}>
-                                      {renderLink(subItem, true)}
-                                    </div>
+                                    <Link
+                                      key={subItem.href}
+                                      href={subItem.href}
+                                      className={cn(
+                                        "block px-3 py-2 text-sm fm-semibold",
+                                        isClient && pathname === subItem.href 
+                                          ? "text-blue-600" 
+                                          : "text-orange-600 hover:text-blue-600"
+                                      )}
+                                      onClick={() => setMobileMenuOpen(false)}
+                                    >
+                                      {subItem.name}
+                                    </Link>
                                   ))}
                                 </div>
                               </div>
@@ -334,9 +330,19 @@ export default function Header() {
                           </>
                         ) : (
                           item.subItems.map((subItem) => (
-                            <div key={subItem.href}>
-                              {renderLink(subItem, true)}
-                            </div>
+                            <Link
+                              key={subItem.href}
+                              href={subItem.href}
+                              className={cn(
+                                "block px-3 py-2 text-sm font-semi bold",
+                                isClient && pathname === subItem.href 
+                                  ? "text-blue-600"
+                                  : "text-orange-600 hover:text-blue-600"
+                              )}
+                              onClick={() => setMobileMenuOpen(false)}
+                            >
+                              {subItem.name}
+                            </Link>
                           ))
                         )}
                       </motion.div>

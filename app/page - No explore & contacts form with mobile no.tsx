@@ -172,23 +172,27 @@ export default function Home() {
               <p className="text-lg text-muted-foreground max-w-xl">
                   Rishab Informatica Group offers industry-leading courses in Informatica IICS Combo, Azure Data Eng.Combo, Snowflake Combo, and Performance Eng.Courses with 24*7 Support
               </p>
-             <div className="flex flex-col gap-2 mt-2">
-  <div className="flex flex-col sm:flex-row gap-2">
-    <Button asChild size="lg" className="rounded-full text-sm">
-      <Link href="/courses">Explore Courses</Link>
-    </Button>
-    <Button asChild variant="outline" size="lg" className="rounded-full text-sm">
-      <Link href="/contact">Contact Us</Link>
-    </Button>
-  </div>
-
-  {/* Call & WhatsApp */}
-  <div className="text-base font-semibold text-gray-800 text-center sm:text-left">
-    <span>📞 Call/WhatsApp: </span>
-    <a href="tel:+918970853557" className="text-blue-700 hover:underline">+91 8970853557</a>
-    <span> / </span>
-    <a href="tel:+919448005273" className="text-blue-700 hover:underline">+91 9448005273</a>
-    </div>
+               <div className="flex items-center gap-4 mt-4 flex-wrap">
+  <a
+    href="tel:+918970853557"
+    className="flex items-center gap-2 text-green-700 font-semibold hover:underline"
+  >
+    📞 Call: 8970853557
+  </a>
+  <a
+    href="tel:+919448005273"
+    className="flex items-center gap-2 text-green-700 font-semibold hover:underline"
+  >
+    📞 Call: 9448005273
+  </a>
+  <a
+    href="https://wa.me/918970853557"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="flex items-center gap-2 text-green-600 font-semibold hover:underline"
+  >
+    💬 WhatsApp Us
+  </a>
 </div>
 
             </div>
