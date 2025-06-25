@@ -13,7 +13,7 @@ export default function InterviewQaLandingPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
         
         {/* SQL */}
-     <Link href="/interview-qa-new/sql-new">
+     <Link href="/interview-qa/sql">
   <div
     className="border border-gray-200 rounded-xl p-5 hover:shadow-xl hover:scale-[1.01] transition-all bg-white hover:bg-yellow-50 cursor-pointer"
     role="link"
@@ -31,7 +31,7 @@ export default function InterviewQaLandingPage() {
 
 
         {/* IICS */}
-        <Link href="/interview-qa-new/iics-new">
+        <Link href="/interview-qa/iics">
           <div className="border border-gray-200 rounded-xl p-5 hover:shadow-lg transition bg-white hover:bg-green-50">
             <div className="flex items-center gap-3 mb-2">
               <Cloud className="text-green-600 mb-2" />
@@ -45,7 +45,7 @@ export default function InterviewQaLandingPage() {
         </Link>
 
         {/* POWER CENTER */}
-        <Link href="/interview-qa-new/powercenter-new">
+        <Link href="/interview-qa/powercenter">
           <div className="border border-gray-200 rounded-xl p-5 hover:shadow-lg transition bg-white hover:bg-yellow-50">
             <div className="flex items-center gap-3 mb-2">
               <Code className="text-yellow-600" />
@@ -59,7 +59,7 @@ export default function InterviewQaLandingPage() {
         </Link>
 
         {/* AZURE*/}
-        <Link href="/interview-qa-new/azure-new">
+        <Link href="/interview-qa/azure">
           <div className="border border-gray-200 rounded-xl p-5 hover:shadow-lg transition bg-white hover:bg-purple-50">
             <div className="flex items-center gap-3 mb-2">
               <BookOpen className="text-purple-600" />
