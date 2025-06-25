@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Image from "next/image"
 
 interface Logo {
@@ -18,13 +19,26 @@ const speedMap: Record<string, string> = {
   slow: "60s",
   medium: "30s",
   fast: "15s",
+  "very-fast": "8s"
 }
 
 export default function CompanySlider({ logos, speed = "medium" }: CompanySliderProps) {
-  const duration = speedMap[speed] || "30s"
+  const [finalSpeed, setFinalSpeed] = useState<string>(speed)
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth < 768) {
+        setFinalSpeed("very-fast")
+      } else {
+        setFinalSpeed(speed)
+      }
+    }
+  }, [speed])
+
+  const duration = speedMap[finalSpeed] || "30s"
 
   return (
-    <div className="relative overflow-hidden w-full bg-white py-6">
+    <div className="relative overflow-hidden w-full bg-white py-2">
       <div
         className="flex animate-slide gap-12"
         style={{

@@ -51,7 +51,7 @@ export default function IICSComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/informatica_record.png"
+              src="/courses/iics-part1.png"
               alt="Informatica IICS COMBO Training"
               width={600}
               height={400}
@@ -149,7 +149,7 @@ export default function IICSComboPage() {
             <h2 className={styles.sectionTitle}>Detailed Course Syllabus</h2>
             <p>Download complete curriculum with module-wise topics and hands-on exercises</p>
             <Button asChild className={styles.downloadButton}>
-              <Link href="/syllabus/coursecontent.pdf" download>
+              <Link href="/syllabus/course-content.pdf" download>
                 <DownloadIcon className={styles.buttonIcon} />
                 Download Syllabus PDF
               </Link>

@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from "next/link";
 
 export default function CookiePolicyPage() {
   return (
@@ -6,13 +6,13 @@ export default function CookiePolicyPage() {
       <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-blue-800 mb-4">Cookie Policy</h1>
-          <p className="text-lg text-gray-600">Last Updated: {new Date().toLocaleDateString()}</p>
+          <p className="text-lg text-gray-600">Last Updated: June 24, 2025</p>
         </div>
 
         <div className="prose prose-blue max-w-none">
           <section className="mb-10">
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">1. What Are Cookies?</h2>
-            <p className="mb-4">
+            <p>
               Cookies are small text files stored on your device when you visit our website. Like most professional training websites, we use cookies and similar technologies to enhance your experience and analyze site usage.
             </p>
           </section>
@@ -37,17 +37,17 @@ export default function CookiePolicyPage() {
                   <tr className="border-b">
                     <td className="px-4 py-3 text-sm text-gray-700">Performance Cookies</td>
                     <td className="px-4 py-3 text-sm text-gray-700">Analyze site traffic and usage patterns (Google Analytics)</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">1-2 years</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">1–2 years</td>
                   </tr>
                   <tr className="border-b">
                     <td className="px-4 py-3 text-sm text-gray-700">Functional Cookies</td>
                     <td className="px-4 py-3 text-sm text-gray-700">Remember preferences (language, region)</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">30-90 days</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">30–90 days</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-3 text-sm text-gray-700">Marketing Cookies</td>
                     <td className="px-4 py-3 text-sm text-gray-700">Track campaign performance (Facebook Pixel, Google Ads)</td>
-                    <td className="px-4 py-3 text-sm text-gray-700">30-180 days</td>
+                    <td className="px-4 py-3 text-sm text-gray-700">30–180 days</td>
                   </tr>
                 </tbody>
               </table>
@@ -56,10 +56,8 @@ export default function CookiePolicyPage() {
 
           <section className="mb-10">
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">3. Third-Party Cookies</h2>
-            <p className="mb-4">
-              We partner with trusted providers who may set cookies:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
+            <p>We partner with trusted providers who may set cookies:</p>
+            <ul className="list-disc pl-6 space-y-2">
               <li><strong>Google Analytics:</strong> Helps us understand how visitors use our training platform</li>
               <li><strong>Hotjar:</strong> Provides insights into user behavior (optional)</li>
               <li><strong>Payment Processors:</strong> For secure course enrollment transactions</li>
@@ -83,16 +81,14 @@ export default function CookiePolicyPage() {
               You can change your preferences at any time by clicking the <strong>Cookie Settings</strong> link in our website footer.
             </p>
             <p>
-              Most browsers also allow you to manage cookies through their settings (usually found under "Privacy" or "Security").
+              Most browsers also allow you to manage cookies through their settings (usually under "Privacy" or "Security").
             </p>
           </section>
 
           <section className="mb-10">
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">5. Necessary Cookies</h2>
-            <p className="mb-4">
-              Essential cookies cannot be disabled as they are required for:
-            </p>
-            <ul className="list-disc pl-6 mb-4 space-y-2">
+            <p>Essential cookies cannot be disabled as they are required for:</p>
+            <ul className="list-disc pl-6 space-y-2">
               <li>Secure login to our training portal</li>
               <li>Maintaining your session during course access</li>
               <li>Processing payments for enrollments</li>
@@ -101,7 +97,7 @@ export default function CookiePolicyPage() {
 
           <section className="mb-10">
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">6. Changes to This Policy</h2>
-            <p className="mb-4">
+            <p>
               We may update this policy as our services or regulations change. Significant changes will be announced via email or website notice.
             </p>
           </section>
@@ -109,7 +105,15 @@ export default function CookiePolicyPage() {
           <section>
             <h2 className="text-2xl font-semibold text-blue-700 mb-4">7. Contact Us</h2>
             <p>
-              For questions about our Cookie Policy, contact our Data Protection Officer at <Link href="/about/contact-us" className="text-blue-600 hover:underline">dpo@rishabinformaticagroup.com</Link> or through our <Link href="/about/contact-us" className="text-blue-600 hover:underline">contact form</Link>.
+              For questions about our Cookie Policy, contact our Data Protection Officer at{" "}
+              <Link href="mailto:support@rishabinformaticagroup.com" className="text-blue-600 hover:underline">
+                support@rishabinformaticagroup.com
+              </Link>{" "}
+              or via our{" "}
+              <Link href="/contact" className="text-blue-600 hover:underline">
+                contact form
+              </Link>
+              .
             </p>
           </section>
         </div>

@@ -18,10 +18,10 @@ export default function IICSComboPage() {
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
             <span className={styles.batchBadge}>Recorded course with 24*7 Tech support</span>
-            <h1>Informatica Power center <span className={styles.highlight}> Power center </span> course </h1>
-            <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
+            <h1>Informatica <span className={styles.highlight}> Power center </span> course </h1>
+            <h2>SQL + PowerCenter+ Unix</h2>
             <p className={styles.heroDescription}>
-              Master both PowerCenter and IICS Cloud with parallel comparisons. 45-day intensive program with real-time projects and placement assistance.
+              Master Informatica PowerCenter and SQL with parallel comparisons topic wise. 37-day intensive program with real-time projects and placement assistance.
             </p>
             
             <div className={styles.heroStats}>
@@ -74,7 +74,7 @@ export default function IICSComboPage() {
 
       {/* Key Features */}
       <section className={styles.featuresSection}>
-        <h2 className={styles.sectionTitle}>Why Our IICS COMBO Training Stands Out</h2>
+        <h2 className={styles.sectionTitle}>Why Our Informatic power center Training Stands Out</h2>
         <div className={styles.featuresGrid}>
           {[
             {
@@ -149,7 +149,7 @@ export default function IICSComboPage() {
             <h2 className={styles.sectionTitle}>Detailed Course Syllabus</h2>
             <p>Download complete curriculum with module-wise topics and hands-on exercises</p>
             <Button asChild className={styles.downloadButton}>
-              <Link href="/syllabus/coursecontent.pdf" download>
+              <Link href="/syllabus/informatica-pc.pdf" download>
                 <DownloadIcon className={styles.buttonIcon} />
                 Download Syllabus PDF
               </Link>

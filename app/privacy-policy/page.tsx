@@ -24,22 +24,10 @@ export default function PrivacyPolicyPage() {
                 <h2 className="text-2xl font-bold">Information We Collect</h2>
                 <p className="mt-2 text-muted-foreground">We may collect the following types of information:</p>
                 <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>
-                    <strong>Personal Information:</strong> Name, email address, phone number, billing address, and
-                    payment information when you register for our courses or services.
-                  </li>
-                  <li>
-                    <strong>Educational Information:</strong> Academic background, professional experience, and learning
-                    preferences to personalize your learning experience.
-                  </li>
-                  <li>
-                    <strong>Usage Data:</strong> Information about how you interact with our website, including pages
-                    visited, time spent on pages, and other browsing data.
-                  </li>
-                  <li>
-                    <strong>Device Information:</strong> IP address, browser type, operating system, and device
-                    identifiers.
-                  </li>
+                  <li><strong>Personal Information:</strong> Name, email address, phone number, billing address, and payment information when you register for our courses or services.</li>
+                  <li><strong>Educational Information:</strong> Academic background, professional experience, and learning preferences to personalize your learning experience.</li>
+                  <li><strong>Usage Data:</strong> Information about how you interact with our website, including pages visited, time spent on pages, and other browsing data.</li>
+                  <li><strong>Device Information:</strong> IP address, browser type, operating system, and device identifiers.</li>
                 </ul>
               </CardContent>
             </Card>
@@ -69,27 +57,13 @@ export default function PrivacyPolicyPage() {
                   We may share your information in the following circumstances:
                 </p>
                 <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>
-                    <strong>Service Providers:</strong> We may share your information with third-party service providers
-                    who perform services on our behalf, such as payment processing, data analysis, email delivery, and
-                    hosting services.
-                  </li>
-                  <li>
-                    <strong>Business Transfers:</strong> If we are involved in a merger, acquisition, or sale of all or
-                    a portion of our assets, your information may be transferred as part of that transaction.
-                  </li>
-                  <li>
-                    <strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or
-                    in response to valid requests by public authorities.
-                  </li>
-                  <li>
-                    <strong>With Your Consent:</strong> We may share your information with your consent or as otherwise
-                    disclosed at the time of collection.
-                  </li>
+                  <li><strong>Service Providers:</strong> We may share your information with third-party service providers who perform services on our behalf, such as payment processing, data analysis, email delivery, and hosting services.</li>
+                  <li><strong>Business Transfers:</strong> If we are involved in a merger, acquisition, or sale of all or a portion of our assets, your information may be transferred as part of that transaction.</li>
+                  <li><strong>Legal Requirements:</strong> We may disclose your information if required to do so by law or in response to valid requests by public authorities.</li>
+                  <li><strong>With Your Consent:</strong> We may share your information with your consent or as otherwise disclosed at the time of collection.</li>
                 </ul>
                 <p className="mt-2 text-muted-foreground">
-                  We do not sell, rent, or trade your personal information to third parties for their marketing
-                  purposes.
+                  We do not sell, rent, or trade your personal information to third parties for their marketing purposes.
                 </p>
               </CardContent>
             </Card>
@@ -170,11 +144,11 @@ export default function PrivacyPolicyPage() {
                   If you have any questions about this Privacy Policy, please contact us at:
                 </p>
                 <p className="mt-2 text-muted-foreground">
-                  Email: privacy@rishabinformatica.com
+                  Email: support@rishabinformaticagroup.com
                   <br />
-                  Phone: +1 (555) 123-4567
+                  Phone: +91 8970853557 / +91 9448005273
                   <br />
-                  Address: 123 Training Street, Tech City, 12345
+                  Address: Rishab Informatica Group, No 7, 5th Main, 15th Cross, Subbaraju Layout, Lakkasandra, Bangalore - 560030
                 </p>
               </CardContent>
             </Card>

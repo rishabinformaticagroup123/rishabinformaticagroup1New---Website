@@ -59,12 +59,12 @@ const MENU_ITEMS = [
   },
   {
     name: "Interview Q&A",
-    href: "/interview-qa-new",
+    href: "/interview-qa",
     subItems: [
-      { name: "Informatica Power center", href: "/interview-qa-new/powercenter-new" },
-      { name: "Informatica IICS - IDMC", href: "/interview-qa-new/iics-new" },
-      { name: "SQL", href: "/interview-qa-new/sql-new" },
-      { name: "Azure (ADF + ADB )", href: "/interview-qa-new/azure-new" },
+      { name: "Informatica Power center", href: "/interview-qa/powercenter" },
+      { name: "Informatica IICS - IDMC", href: "/interview-qa/iics" },
+      { name: "SQL", href: "/interview-qa/sql" },
+      { name: "Azure (ADF + ADB )", href: "/interview-qa/azure" },
     ],
   },
   {
@@ -74,12 +74,13 @@ const MENU_ITEMS = [
       { name: "Informatica Power center", href: "/study-materials/powercenter" },
       { name: "Informatica IICS - IDMC", href: "/study-materials/iics" },
       { name: "SQL", href: "/study-materials/sql" },
-      { name: "Snowflake", href: "/study-materials/snowflake" },
+      { name: "Azure (ADF + ADB )", href: "/study-materials/azure" },
     ],
   },
   {
     name: "Live Job Support",
-    href: "/job-support",
+    href: "https://forms.gle/PFat1nZEUnwWW8y89",
+	external: true,
     subItems: [
       { 
         name: "Job Support Request Form",
@@ -88,7 +89,7 @@ const MENU_ITEMS = [
       },
       { 
         name: "Real Projects", 
-        href: "/internship/real-projects"
+        href: "/job-support/real-projects"
       }
     ]
   },

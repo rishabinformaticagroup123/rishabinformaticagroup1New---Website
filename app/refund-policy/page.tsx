@@ -12,46 +12,35 @@ export default function RefundPolicyPage() {
         <div className="mx-auto max-w-3xl">
           <h1 className="text-4xl font-extrabold tracking-tight">Refund Policy</h1>
           <p className="mt-6 text-lg text-muted-foreground">
-            At Rishab Informatica Group, we are committed to providing high-quality training programs. We understand
-            that circumstances may arise that require you to request a refund. This policy outlines our refund terms and
-            conditions.
+            At Rishab Informatica Group, we are committed to providing high-quality training programs. We understand that circumstances may arise that require you to request a refund. This policy outlines our refund terms and conditions.
           </p>
 
           <div className="mt-12 space-y-8">
             <Card>
               <CardContent className="p-6">
-                <h2 className="text-2xl font-bold">7-Day Money-Back Guarantee</h2>
+                <h2 className="text-2xl font-bold">Flexible Payment & Refund Policy</h2>
                 <p className="mt-2 text-muted-foreground">
-                  We offer a 7-day money-back guarantee for most of our courses. If you're not satisfied with the course
-                  within the first 7 days from the date of enrollment, you can request a full refund.
-                </p>
-                <p className="mt-2 text-muted-foreground">
-                  To be eligible for a refund under our money-back guarantee, you must:
+                  Students can choose to pay the full course fee upfront or split the payment into two parts:
                 </p>
                 <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>Request the refund within 7 days of enrollment</li>
-                  <li>Have attended no more than 2 sessions or completed no more than 10% of the course content</li>
-                  <li>Provide a reason for your dissatisfaction</li>
+                  <li><strong>First Half</strong>: Pay before course begins</li>
+                  <li><strong>Second Half</strong>: Pay within 14 days after the batch starts</li>
                 </ul>
+                <p className="mt-2 text-muted-foreground">
+                  If you're not satisfied with the course within the first 14 days from the start date and have not made the second half payment, you're eligible for a full refund of the first installment.
+                </p>
               </CardContent>
             </Card>
 
             <Card>
               <CardContent className="p-6">
-                <h2 className="text-2xl font-bold">Partial Refunds</h2>
-                <p className="mt-2 text-muted-foreground">
-                  If you request a refund after the 7-day period but before completing 30% of the course, you may be
-                  eligible for a partial refund as follows:
-                </p>
+                <h2 className="text-2xl font-bold">Non-Refundable Situations</h2>
                 <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>8-14 days from enrollment: 75% refund</li>
-                  <li>15-21 days from enrollment: 50% refund</li>
-                  <li>22-30 days from enrollment: 25% refund</li>
+                  <li>Requests made after 14 days from course start</li>
+                  <li>Full payment already completed</li>
+                  <li>Registration/processing fees</li>
+                  <li>Downloaded course materials or accessed content</li>
                 </ul>
-                <p className="mt-2 text-muted-foreground">
-                  No refunds will be issued after 30 days from the date of enrollment or if more than 30% of the course
-                  has been completed, whichever comes first.
-                </p>
               </CardContent>
             </Card>
 
@@ -59,26 +48,8 @@ export default function RefundPolicyPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold">Special Circumstances</h2>
                 <p className="mt-2 text-muted-foreground">
-                  We understand that special circumstances may arise that prevent you from continuing with the course.
-                  In cases of serious illness, family emergency, or other extenuating circumstances, we may consider
-                  refund requests on a case-by-case basis, even if they fall outside our standard refund policy.
+                  For cases such as serious illness or family emergency, we may consider refund requests on a case-by-case basis with valid documentation.
                 </p>
-                <p className="mt-2 text-muted-foreground">
-                  Documentation may be required to support refund requests based on special circumstances.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold">Non-Refundable Items</h2>
-                <p className="mt-2 text-muted-foreground">The following items are non-refundable:</p>
-                <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>Registration fees</li>
-                  <li>Course materials that have been downloaded or accessed</li>
-                  <li>Certification exam fees</li>
-                  <li>Discounted or promotional courses marked as "non-refundable"</li>
-                </ul>
               </CardContent>
             </Card>
 
@@ -86,28 +57,17 @@ export default function RefundPolicyPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold">How to Request a Refund</h2>
                 <p className="mt-2 text-muted-foreground">
-                  To request a refund, please contact our support team at refunds@rishabinformatica.com with the
-                  following information:
+                  Please email <strong>support@rishabinformaticagroup.com</strong> with:
                 </p>
                 <ul className="mt-2 list-disc pl-6 text-muted-foreground">
-                  <li>Your full name</li>
+                  <li>Full name</li>
                   <li>Course name</li>
-                  <li>Date of enrollment</li>
+                  <li>Date of enrollment & batch start date</li>
                   <li>Reason for requesting a refund</li>
-                  <li>Any supporting documentation (if applicable)</li>
+                  <li>Any supporting documents if applicable</li>
                 </ul>
                 <p className="mt-2 text-muted-foreground">
-                  We will process your refund request within 5-7 business days and notify you of the decision.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardContent className="p-6">
-                <h2 className="text-2xl font-bold">Refund Method</h2>
-                <p className="mt-2 text-muted-foreground">
-                  Refunds will be issued using the same payment method used for the original purchase. Please allow 7-14
-                  business days for the refund to be processed by your financial institution.
+                  Refunds will be processed within 5–7 business days to the original payment method.
                 </p>
               </CardContent>
             </Card>
@@ -116,8 +76,7 @@ export default function RefundPolicyPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold">Course Cancellations</h2>
                 <p className="mt-2 text-muted-foreground">
-                  If Rishab Informatica Group cancels a course for any reason, all enrolled students will receive a full
-                  refund or the option to transfer to another course.
+                  If Rishab Informatica Group cancels a course, all enrolled students will receive a full refund or the option to transfer to another batch.
                 </p>
               </CardContent>
             </Card>
@@ -126,8 +85,7 @@ export default function RefundPolicyPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold">Policy Changes</h2>
                 <p className="mt-2 text-muted-foreground">
-                  Rishab Informatica Group reserves the right to modify this refund policy at any time. Any changes will
-                  be effective immediately upon posting on our website.
+                  We reserve the right to update this refund policy at any time. Changes will be posted on this page.
                 </p>
               </CardContent>
             </Card>
@@ -136,20 +94,18 @@ export default function RefundPolicyPage() {
               <CardContent className="p-6">
                 <h2 className="text-2xl font-bold">Contact Us</h2>
                 <p className="mt-2 text-muted-foreground">
-                  If you have any questions about our refund policy, please contact us at:
+                  For any questions about this policy, reach out to us:
                 </p>
                 <p className="mt-2 text-muted-foreground">
-                  Email: support@rishabinformatica.com
-                  <br />
-                  Phone: +1 (555) 123-4567
-                  <br />
-                  Address: 123 Training Street, Tech City, 12345
+                  Email: support@rishabinformaticagroup.com<br />
+                  Phone: +91 8970853557 / 9448005273<br />
+                  Address: Rishab Informatica GROUP, No. 7, 5th Main, 15th Cross, Subbaraju Layout, Lakkasandra, Bangalore - 560030
                 </p>
               </CardContent>
             </Card>
           </div>
 
-          <p className="mt-8 text-sm text-muted-foreground">Last updated: April 23, 2025</p>
+          <p className="mt-8 text-sm text-muted-foreground">Last updated: June 24, 2025</p>
         </div>
       </section>
     </div>

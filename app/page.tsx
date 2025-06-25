@@ -1,15 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, BookOpen, CheckCircle, GraduationCap, Users } from "lucide-react";
+import { ArrowRight, BookOpen, CheckCircle, GraduationCap, Users, Phone, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import TestimonialSlider from "@/components/testimonial-slider";
 import CompanySlider from "@/components/company-slider";
 import { CheckIcon } from "lucide-react";
 import VideoSlider from "@/components/video-slider";
-
-
-
 
 // Data Constants
 const stats = [
@@ -131,66 +128,86 @@ export default function Home() {
       <div className="flex-1 bg-gradient-to-r from-primary/10 via-primary/5 to-background">
         <section className="container mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-2">
           {/* Mobile Layout */}
-          <div className="lg:hidden flex flex-col gap-4">
-            <div className="flex flex-col justify-center space-y-3">
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
-              </h1>
-			  
-			   <Link 
-                href="/blogs/job-in-45days" 
-                className="text-lg font-medium text-primary hover:underline flex items-center"
-              >
-                👉 Click to see how we make it happen!
-              </Link>
-			  			  		  
-              <p className="text-base text-muted-foreground">
-                Rishab Informatica Group offers industry-leading courses in Informatica IICS Combo, Azure Data Eng. Combo, Snowflake Combo, and Performance Eng.
-              </p>
-                
-            </div>
-            
-            <div className="w-full mt-1">
-              <VideoSlider slides={slides} slideDuration={4000} />
-            </div>
-          </div>
+<div className="lg:hidden flex flex-col gap-4">
+  <div className="flex flex-col justify-center space-y-3">
+    <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
+      Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
+    </h1>
+
+    <Link 
+      href="/blogs/job-in-45days" 
+      className="text-lg font-medium text-primary hover:underline flex items-center"
+    >
+      👉 Click to see how we make it happen!
+    </Link>
+
+    <p className="text-base text-gray-700 font-medium">
+      Rishab Informatica Group offers industry-leading courses in Informatica IICS Combo, Azure Data Eng. Combo, Snowflake Combo.
+    </p>
+
+    {/* Two-line Call / WhatsApp Info */}
+    <div className="mt-2 text-center font-semibold text-blue-700 text-base leading-snug">
+      <div>📞 Call / WhatsApp</div>
+      <div>
+        <a href="tel:+918970853557" className="hover:underline">+91 8970853557</a> /{" "}
+        <a href="tel:+919448005273" className="hover:underline">9448005273</a>
+      </div>
+    </div>
+
+    {/* Buttons side by side */}
+    <div className="flex flex-row gap-2 justify-center mt-3">
+      <Button asChild size="lg" className="rounded-full text-sm w-1/2">
+        <Link href="/courses">Explore Courses</Link>
+      </Button>
+      <Button asChild variant="outline" size="lg" className="rounded-full text-sm w-1/2">
+        <Link href="/contact">Contact Us</Link>
+      </Button>
+    </div>
+  </div>
+
+  {/* Video Slider remains below */}
+  <div className="w-full mt-1">
+    <VideoSlider slides={slides} slideDuration={1000} />base text-gray-700
+  </div>
+</div>
+
 
           {/* Desktop Layout */}
           <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="flex flex-col justify-center space-y-3">
               <h1 className="text-5xl font-extrabold tracking-tight">
-                Kickstart Your Software Career in 45 Days with our  <span className="text-primary"> COMBO Courses</span>
+                Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
               </h1>
-			  
-			  <Link 
+              
+              <Link 
                 href="/blogs/job-in-45days" 
                 className="text-lg font-medium text-primary hover:underline flex items-center"
               >
                 👉 Click to see how we make it happen!
               </Link>
-			  		 			  			  			  
-              <p className="text-lg text-muted-foreground max-w-xl">
-                  Rishab Informatica Group offers industry-leading courses in Informatica IICS Combo, Azure Data Eng.Combo, Snowflake Combo, and Performance Eng.Courses with 24*7 Support
+              
+              <p className="text-base text-gray-700">
+                Rishab Informatica Group offers industry-leading courses in Informatica IICS Combo, Azure Data Eng.Combo, Snowflake Combo, and Performance Eng.Courses with 24*7 Support
               </p>
-             <div className="flex flex-col gap-2 mt-2">
-  <div className="flex flex-col sm:flex-row gap-2">
-    <Button asChild size="lg" className="rounded-full text-sm">
-      <Link href="/courses">Explore Courses</Link>
-    </Button>
-    <Button asChild variant="outline" size="lg" className="rounded-full text-sm">
-      <Link href="/contact">Contact Us</Link>
-    </Button>
-  </div>
+              
+              <div className="flex flex-col gap-2 mt-2">
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <Button asChild size="lg" className="rounded-full text-sm">
+                    <Link href="/courses">Explore Courses</Link>
+                  </Button>
+                  <Button asChild variant="outline" size="lg" className="rounded-full text-sm">
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </div>
 
-  {/* Call & WhatsApp */}
-  <div className="text-base font-semibold text-gray-800 text-center sm:text-left">
-    <span>📞 Call/WhatsApp: </span>
-    <a href="tel:+918970853557" className="text-blue-700 hover:underline">+91 8970853557</a>
-    <span> / </span>
-    <a href="tel:+919448005273" className="text-blue-700 hover:underline">+91 9448005273</a>
-    </div>
-</div>
-
+                {/* Call & WhatsApp */}
+                <div className="mt-4 text-base font-semibold text-gray-800 text-center sm:text-left">
+                  <span>📞 Call/WhatsApp: </span>
+                  <a href="tel:+918970853557" className="text-blue-700 hover:underline">+91 8970853557</a>
+                  <span> / </span>
+                  <a href="tel:+919448005273" className="text-blue-700 hover:underline">+91 9448005273</a>
+                </div>
+              </div>
             </div>
 
             <div className="flex flex-col items-center justify-center">
@@ -206,7 +223,7 @@ export default function Home() {
           </h2>
         </div>
 
-        {/* Moving Logos - Now immediately visible */}
+        {/* Moving Logos */}
         <div className="w-full overflow-hidden py-2 bg-white/10">
           <CompanySlider 
             direction="right-to-left" 
@@ -218,12 +235,12 @@ export default function Home() {
               { name: "Cognizant", src: "/logos/Cognizant.PNG", width: 160, height: 60 },
               { name: "Infosys", src: "/logos/Infosys.PNG", width: 150, height: 60 },
             ]}
-            speed="fast"
+            speed = "medium"
           />
         </div>
       </div>
 
-
+      {/* Rest of the sections remain exactly the same */}
       {/* Stats Section */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
@@ -397,6 +414,25 @@ export default function Home() {
             <Button asChild size="lg" variant="outline" className="rounded-full border-white text-black hover:bg-white/10">
               <Link href="/contact">Contact Us</Link>
             </Button>
+          </div>
+          {/* Mobile Call & WhatsApp in CTA */}
+          <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a 
+              href="tel:+918970853557" 
+              className="flex items-center gap-2 text-base font-semibold text-white hover:underline"
+            >
+              <Phone className="h-5 w-5" />
+              Call: +91 8970853557
+            </a>
+            <a 
+              href="https://wa.me/918970853557" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-base font-semibold text-white hover:underline"
+            >
+              <MessageCircle className="h-5 w-5" />
+              WhatsApp Us
+            </a>
           </div>
         </div>
       </section>
