@@ -125,7 +125,7 @@ export default function ETLImportanceBlogPage() {
               </a>
               <br />
               <a
-                href="https://www.rishabinformaticagroup.com/courses"
+                href="https://www.rishabinformaticagroup.com/courses/iics-combo-live"
                 className="inline-block bg-blue-700 text-white px-6 py-2 rounded hover:bg-blue-800 mt-2"
               >
                 Join the Course Now

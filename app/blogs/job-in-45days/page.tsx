@@ -172,7 +172,7 @@ export default function IICSCareerBlogPage() {
       {/* Final CTA */}
       <div className="text-center mt-10">
         <Link
-          href="/enroll"
+          href="https://www.rishabinformaticagroup.com/courses/iics-combo-live"
           className="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg text-lg font-semibold inline-block"
         >
           🚀 Start Your 45-Day Journey Today!
