@@ -17,7 +17,7 @@ export default function IICSComboCourseContentPage() {
       </p>
 
       <Link
-        href="/downloads/iics-combo-full-course-outline.pdf"
+        href="/syllabus/course-content.pdf"
         download
         className="text-blue-600 underline font-medium mb-10 inline-block"
       >
