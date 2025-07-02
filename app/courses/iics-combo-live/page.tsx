@@ -156,7 +156,7 @@ export default function IICSComboPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus/syllabus-preview.png"
+            src="/syllabus/syllabus.png"
             alt="Syllabus Preview"
             width={300}
             height={400}

@@ -75,7 +75,7 @@ export default function IICSCareerBlogPage() {
       {/* CTA Button */}
       <div className="text-center my-8">
         <Link
-          href="/enroll" 
+          href="https://www.rishabinformaticagroup.com/courses/iics-combo-live" 
           className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-8 rounded-lg text-lg transition shadow-lg inline-block"
         >
           🚀 Enroll Now & Save ₹23,400!
