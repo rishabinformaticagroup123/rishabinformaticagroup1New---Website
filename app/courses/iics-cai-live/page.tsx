@@ -139,7 +139,7 @@ export default function IICSCaiPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus/cai.png"
+            src="/syllabus/cai1.PNG"
             alt="CAI Syllabus Preview"
             width={300}
             height={400}
