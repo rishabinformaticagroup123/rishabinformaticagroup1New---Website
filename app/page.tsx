@@ -135,7 +135,7 @@ export default function Home() {
     </h1>
 
     <Link 
-      href="/blogs/job-in-45days" 
+      href="/blogs/how-to-get-it-job-in-45days" 
       className="text-lg font-medium text-primary hover:underline flex items-center"
     >
       👉 Click to see how we make it happen!
@@ -180,7 +180,7 @@ export default function Home() {
               </h1>
               
               <Link 
-                href="/blogs/job-in-45days" 
+                href="/blogs/how-to-get-it-job-in-45days" 
                 className="text-lg font-medium text-primary hover:underline flex items-center"
               >
                 👉 Click to see how we make it happen!

@@ -58,7 +58,7 @@ export default function BlogsPage() {
               </div>
               <div className="mt-8">
                 <Button asChild>
-                  <Link href="/blogs/job-in-45days">
+                  <Link href="/blogs/how-to-get-it-job-in-45days">
                     Read Article <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
@@ -111,7 +111,7 @@ export default function BlogsPage() {
               author: "Hari.A",
               authorImage: "/placeholder.svg?height=50&width=50",
               readTime: "8 min read",
-              href: "/blogs/nonit-to-it",
+              href: "/blogs/non-it-to-it-without-coding",
               category: "Informatica",
             },
             {
