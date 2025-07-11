@@ -140,8 +140,8 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     name: "Live Job Support",
-    href: "/job-support",
-    external: false,
+    href: "https://forms.gle/PFat1nZEUnwWW8y89",
+    external: true,
     subItems: [
       {
         name: "Job Support Request Form",
@@ -176,9 +176,7 @@ const MobileMenuItem: React.FC<{
 }> = ({ item, level = 0, currentMobileDropdowns, toggleMobileDropdown, closeMobileMenu, isClient, pathname }) => {
   const isOpen = currentMobileDropdowns.includes(item.name);
   const hasSubItems = item.subItems && item.subItems.length > 0;
-  // Check if the *current* item being rendered is a megamenu itself
-  // Or, if it's a parent of a megamenu (like "Courses"), check if its first subItem is a megamenu
-  const isMegamenuParent = hasSubItems && (item.subItems[0] as MegamenuItem)?.isMegamenu;
+  const isMegamenu = (item as MegamenuItem).isMegamenu;
 
   // Determine padding based on nesting level
   const paddingLeft = `${16 + level * 16}px`; // Base 16px + 16px per level
@@ -191,13 +189,9 @@ const MobileMenuItem: React.FC<{
   const textColorClass = cn(
     isClient && pathname === item.href // If it's the exact active page
       ? "text-blue-600"
-      : level === 0 // Top-level main menu items
-        ? item.name === "Home"
-          ? "text-purple-800" // Dark violet for Home
-          : "text-gray-900" // Black for other main menus
-        : level === 1 // First-level sub-menus
-          ? "text-orange-600 hover:text-blue-600"
-          : "text-green-600 hover:text-blue-600", // Second-level and deeper sub-menus
+      : level >= 2 // Deeper nested items (level 2 and above)
+        ? "text-green-600 hover:text-blue-600"
+        : "text-orange-600 hover:text-blue-600", // Level 0 and Level 1 items
     isActivePath && level > 0 && "font-bold" // Make parent items bold if their child is active
   );
 
@@ -263,11 +257,10 @@ const MobileMenuItem: React.FC<{
           transition={{ duration: 0.2 }}
           className="overflow-hidden"
         >
-          {isMegamenuParent ? (
-            // This block handles the "Courses" megamenu specifically for mobile
-            // It iterates through the columns of the *first* subItem (which is the megamenu itself)
+          {isMegamenu && (item as MegamenuItem).columns ? (
+            // Handle megamenu columns for mobile (e.g., Courses -> Live Courses, Recorded Courses)
             <div className="grid grid-cols-1 gap-4 py-2">
-              {(item.subItems[0] as MegamenuItem).columns.map((column, colIndex) => (
+              {(item as MegamenuItem).columns.map((column, colIndex) => (
                 <div key={colIndex}>
                   <h4 className="font-semibold text-gray-800 mb-2" style={{ paddingLeft: `${paddingLeft}` }}>{column.title}</h4>
                   <div className="space-y-1">
@@ -275,7 +268,7 @@ const MobileMenuItem: React.FC<{
                       <MobileMenuItem
                         key={subItem.href}
                         item={subItem}
-                        level={level + 2} // These items are two levels deep from the main menu
+                        level={level + 1} // Increase level for nested items
                         currentMobileDropdowns={currentMobileDropdowns}
                         toggleMobileDropdown={toggleMobileDropdown}
                         closeMobileMenu={closeMobileMenu}
@@ -288,12 +281,12 @@ const MobileMenuItem: React.FC<{
               ))}
             </div>
           ) : (
-            // This block handles regular nested sub-menus (e.g., under Study Materials -> SQL)
+            // Handle regular sub-items (can be nested further)
             item.subItems?.map((subItem) => (
               <MobileMenuItem
                 key={subItem.href}
                 item={subItem}
-                level={level + 1} // Regular nesting level increase
+                level={level + 1} // Increase level for nested items
                 currentMobileDropdowns={currentMobileDropdowns}
                 toggleMobileDropdown={toggleMobileDropdown}
                 closeMobileMenu={closeMobileMenu}

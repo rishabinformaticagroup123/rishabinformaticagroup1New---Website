@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown, ExternalLink, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,7 +41,7 @@ const MENU_ITEMS: MenuItem[] = [
     href: "/courses",
     subItems: [
       {
-        name: "All Courses", // This is the clickable item for the megamenu
+        name: "All Courses",
         href: "/courses",
         isMegamenu: true,
         columns: [
@@ -140,12 +140,12 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     name: "Live Job Support",
-    href: "/job-support",
-    external: false,
+    href: "[https://forms.gle/PFat1nZEUnwWW8y89](https://forms.gle/PFat1nZEUnwWW8y89)",
+    external: true,
     subItems: [
       {
         name: "Job Support Request Form",
-        href: "https://forms.gle/PFat1nZEUnwWW8y89",
+        href: "[https://forms.gle/PFat1nZEUnwWW8y89](https://forms.gle/PFat1nZEUnwWW8y89)",
         external: true
       },
       {
@@ -163,159 +163,12 @@ const MENU_ITEMS: MenuItem[] = [
   }
 ];
 
-// Recursive component for mobile menu items
-// Extracted outside the Header component for better modularity and reusability
-const MobileMenuItem: React.FC<{
-  item: MenuItem;
-  level?: number;
-  currentMobileDropdowns: string[];
-  toggleMobileDropdown: (name: string) => void;
-  closeMobileMenu: () => void;
-  isClient: boolean;
-  pathname: string;
-}> = ({ item, level = 0, currentMobileDropdowns, toggleMobileDropdown, closeMobileMenu, isClient, pathname }) => {
-  const isOpen = currentMobileDropdowns.includes(item.name);
-  const hasSubItems = item.subItems && item.subItems.length > 0;
-  // Check if the *current* item being rendered is a megamenu itself
-  // Or, if it's a parent of a megamenu (like "Courses"), check if its first subItem is a megamenu
-  const isMegamenuParent = hasSubItems && (item.subItems[0] as MegamenuItem)?.isMegamenu;
-
-  // Determine padding based on nesting level
-  const paddingLeft = `${16 + level * 16}px`; // Base 16px + 16px per level
-
-  // Determine if this item or any of its children are the currently active path
-  // This helps highlight parent menus when a child page is active
-  const isActivePath = isClient && pathname.startsWith(item.href) && item.href !== "/";
-
-  // Determine the text color based on level and active state
-  const textColorClass = cn(
-    isClient && pathname === item.href // If it's the exact active page
-      ? "text-blue-600"
-      : level === 0 // Top-level main menu items
-        ? item.name === "Home"
-          ? "text-purple-800" // Dark violet for Home
-          : "text-gray-900" // Black for other main menus
-        : level === 1 // First-level sub-menus
-          ? "text-orange-600 hover:text-blue-600"
-          : "text-green-600 hover:text-blue-600", // Second-level and deeper sub-menus
-    isActivePath && level > 0 && "font-bold" // Make parent items bold if their child is active
-  );
-
-  return (
-    <div className="border-b border-gray-100 pb-2">
-      <div className="flex justify-between items-center">
-        {item.external ? (
-          <a
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              "py-2 text-base font-medium flex-grow flex items-center gap-1",
-              textColorClass
-            )}
-            style={{ paddingLeft }}
-            onClick={closeMobileMenu}
-          >
-            {item.name}
-            <ExternalLink className="w-3 h-3 ml-1" />
-          </a>
-        ) : (
-          <Link
-            href={item.href}
-            className={cn(
-              "py-2 text-base font-medium flex-grow",
-              textColorClass
-            )}
-            style={{ paddingLeft }}
-            onClick={() => {
-              // If it has sub-items, toggle the dropdown instead of navigating directly
-              // If it's a leaf node or external link, close the whole menu
-              if (!hasSubItems || item.external) {
-                closeMobileMenu();
-              } else {
-                toggleMobileDropdown(item.name);
-              }
-            }}
-          >
-            {item.name}
-          </Link>
-        )}
-        {hasSubItems && (
-          <button
-            onClick={() => toggleMobileDropdown(item.name)}
-            className="p-2 rounded-md hover:bg-gray-100"
-            aria-expanded={isOpen}
-          >
-            <motion.span
-              animate={{ rotate: isOpen ? 180 : 0 }}
-            >
-              <ChevronDown className="h-5 w-5 text-gray-500" />
-            </motion.span>
-          </button>
-        )}
-      </div>
-
-      {hasSubItems && isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: 'auto', opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="overflow-hidden"
-        >
-          {isMegamenuParent ? (
-            // This block handles the "Courses" megamenu specifically for mobile
-            // It iterates through the columns of the *first* subItem (which is the megamenu itself)
-            <div className="grid grid-cols-1 gap-4 py-2">
-              {(item.subItems[0] as MegamenuItem).columns.map((column, colIndex) => (
-                <div key={colIndex}>
-                  <h4 className="font-semibold text-gray-800 mb-2" style={{ paddingLeft: `${paddingLeft}` }}>{column.title}</h4>
-                  <div className="space-y-1">
-                    {column.items.map((subItem) => (
-                      <MobileMenuItem
-                        key={subItem.href}
-                        item={subItem}
-                        level={level + 2} // These items are two levels deep from the main menu
-                        currentMobileDropdowns={currentMobileDropdowns}
-                        toggleMobileDropdown={toggleMobileDropdown}
-                        closeMobileMenu={closeMobileMenu}
-                        isClient={isClient}
-                        pathname={pathname}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            // This block handles regular nested sub-menus (e.g., under Study Materials -> SQL)
-            item.subItems?.map((subItem) => (
-              <MobileMenuItem
-                key={subItem.href}
-                item={subItem}
-                level={level + 1} // Regular nesting level increase
-                currentMobileDropdowns={currentMobileDropdowns}
-                toggleMobileDropdown={toggleMobileDropdown}
-                closeMobileMenu={closeMobileMenu}
-                isClient={isClient}
-                pathname={pathname}
-              />
-            ))
-          )}
-        </motion.div>
-      )}
-    </div>
-  );
-};
-
-
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null); // For desktop
   const [mobileDropdowns, setMobileDropdowns] = useState<string[]>([]); // For mobile, tracks open paths
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null); // Ref for mobile menu container
 
   useEffect(() => setIsClient(true), []);
 
@@ -330,28 +183,6 @@ export default function Header() {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = '' };
   }, [mobileMenuOpen]);
-
-  // Close mobile menu on outside click
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      // Ensure the click is outside the mobile menu ref AND not on the menu toggle button itself
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node) &&
-          !(event.target as HTMLElement).closest('button[aria-label="Open menu"]')) {
-        closeMobileMenu();
-      }
-    };
-
-    if (mobileMenuOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [mobileMenuOpen]); // Re-run when mobileMenuOpen changes
-
 
   // Toggles a mobile dropdown. If already open, closes it and its children.
   const toggleMobileDropdown = (itemName: string) => {
@@ -372,6 +203,137 @@ export default function Header() {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setMobileDropdowns([]); // Also close all mobile dropdowns
+  };
+
+  // Recursive component for mobile menu items
+  const MobileMenuItem: React.FC<{
+    item: MenuItem;
+    level?: number;
+    currentMobileDropdowns: string[];
+    toggleMobileDropdown: (name: string) => void;
+    closeMobileMenu: () => void;
+    isClient: boolean;
+    pathname: string;
+  }> = ({ item, level = 0, currentMobileDropdowns, toggleMobileDropdown, closeMobileMenu, isClient, pathname }) => {
+    const isOpen = currentMobileDropdowns.includes(item.name);
+    const hasSubItems = item.subItems && item.subItems.length > 0;
+    const isMegamenu = (item as MegamenuItem).isMegamenu;
+
+    // Determine padding based on nesting level
+    const paddingLeft = `${16 + level * 16}px`; // Base 16px + 16px per level
+
+    return (
+      <div className="border-b border-gray-100 pb-2">
+        <div className="flex justify-between items-center">
+          {item.external ? (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                "py-2 text-base font-medium flex-grow flex items-center gap-1",
+                isClient && pathname === item.href
+                  ? "text-blue-600"
+                  : level > 1 // Apply gray to deeper nested items
+                    ? "text-gray-700 hover:text-blue-600"
+                    : "text-orange-600 hover:text-blue-600"
+              )}
+              style={{ paddingLeft }}
+              onClick={closeMobileMenu}
+            >
+              {item.name}
+              <ExternalLink className="w-3 h-3 ml-1" />
+            </a>
+          ) : (
+            <Link
+              href={item.href}
+              className={cn(
+                "py-2 text-base font-medium flex-grow",
+                isClient && pathname === item.href
+                  ? "text-blue-600"
+                  : level > 1 // Apply gray to deeper nested items
+                    ? "text-gray-700 hover:text-blue-600"
+                    : "text-orange-600 hover:text-blue-600"
+              )}
+              style={{ paddingLeft }}
+              onClick={() => {
+                // Only close menu if it's a leaf node or an external link
+                if (!hasSubItems || item.external) {
+                  closeMobileMenu();
+                } else {
+                  // If it has sub-items, toggle the dropdown instead of closing the whole menu
+                  toggleMobileDropdown(item.name);
+                }
+              }}
+            >
+              {item.name}
+            </Link>
+          )}
+          {hasSubItems && (
+            <button
+              onClick={() => toggleMobileDropdown(item.name)}
+              className="p-2 rounded-md hover:bg-gray-100"
+              aria-expanded={isOpen}
+            >
+              <motion.span
+                animate={{ rotate: isOpen ? 180 : 0 }}
+              >
+                <ChevronDown className="h-5 w-5 text-gray-500" />
+              </motion.span>
+            </button>
+          )}
+        </div>
+
+        {hasSubItems && isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
+          >
+            {isMegamenu && (item as MegamenuItem).columns ? (
+              // Render megamenu columns
+              <div className="grid grid-cols-1 gap-4 py-2">
+                {(item as MegamenuItem).columns.map((column, colIndex) => (
+                  <div key={colIndex}>
+                    <h4 className="font-semibold text-gray-800 mb-2" style={{ paddingLeft: `${paddingLeft}` }}>{column.title}</h4>
+                    <div className="space-y-1">
+                      {column.items.map((subItem) => (
+                        <MobileMenuItem
+                          key={subItem.href} // Using href as key, assuming unique
+                          item={subItem}
+                          level={level + 1}
+                          currentMobileDropdowns={currentMobileDropdowns}
+                          toggleMobileDropdown={toggleMobileDropdown}
+                          closeMobileMenu={closeMobileMenu}
+                          isClient={isClient}
+                          pathname={pathname}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              // Render regular sub-items (can be nested further)
+              item.subItems?.map((subItem) => (
+                <MobileMenuItem
+                  key={subItem.href} // Using href as key, assuming unique
+                  item={subItem}
+                  level={level + 1}
+                  currentMobileDropdowns={currentMobileDropdowns}
+                  toggleMobileDropdown={toggleMobileDropdown}
+                  closeMobileMenu={closeMobileMenu}
+                  isClient={isClient}
+                  pathname={pathname}
+                />
+              ))
+            )}
+          </motion.div>
+        )}
+      </div>
+    );
   };
 
 
@@ -508,11 +470,8 @@ export default function Header() {
                     ) : (
                       // Regular dropdown items (can have nested sub-items)
                       item.subItems.map((subItem, index) => (
-                        <motion.div // Added motion for smoother transition
+                        <div
                           key={subItem.href}
-                          initial={{ opacity: 0, y: -5 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.15, delay: index * 0.05 }} // Staggered delay for effect
                           className="relative group/sub"
                           style={{ marginTop: index > 0 ? '-1px' : '0' }} // removes gap
                         >
@@ -547,12 +506,7 @@ export default function Header() {
 
                           {/* Desktop nested sub-sub-menus */}
                           {subItem.subItems && (
-                            <motion.div // Added motion for smoother transition
-                              initial={{ opacity: 0, x: -10 }}
-                              animate={{ opacity: 1, x: 0 }}
-                              transition={{ duration: 0.2 }}
-                              className="absolute left-full top-0 ml-[1px] bg-white shadow-lg rounded-xl border border-gray-100 w-60 z-50 p-2 opacity-0 group-hover/sub:opacity-100 group-hover/sub:block hidden transition-opacity"
-                            >
+                            <div className="absolute left-full top-0 ml-[1px] bg-white shadow-lg rounded-xl border border-gray-100 w-60 z-50 p-2 opacity-0 group-hover/sub:opacity-100 group-hover/sub:block hidden transition-opacity">
                               {subItem.subItems.map((deepItem) => (
                                 <div key={deepItem.href}>
                                   {deepItem.external ? (
@@ -583,9 +537,9 @@ export default function Header() {
                                   )}
                                 </div>
                               ))}
-                            </motion.div>
+                            </div>
                           )}
-                        </motion.div>
+                        </div>
                       ))
                     )}
                   </motion.div>
@@ -599,9 +553,9 @@ export default function Header() {
         {/* Student Login */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:flex">
           <Button asChild className="bg-orange-600 hover:bg-blue-600 text-white">
-            <Link href="https://login.rishabinformaticagroup.com/login" target="_blank" className="flex items-center gap-2">
+            <Link href="[https://login.rishabinformaticagroup.com/login](https://login.rishabinformaticagroup.com/login)" target="_blank" className="flex items-center gap-2">
               <span>Student Login</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
               </svg>
             </Link>
@@ -612,7 +566,7 @@ export default function Header() {
         <div className="md:hidden flex items-center gap-2">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button asChild size="sm" className="bg-orange-600 hover:bg-blue-600 text-white">
-              <Link href="https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral" target="_blank" className="flex items-center gap-1">
+              <Link href="[https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral](https://zfghut.on-app.in/app/home?orgCode=zfghut&referrer=utm_source=copy-link&utm_medium=tutor-app-referral)" target="_blank" className="flex items-center gap-1">
                 <Download className="h-4 w-4" />
                 <span>App</span>
               </Link>
@@ -633,7 +587,6 @@ export default function Header() {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
-              ref={mobileMenuRef} // Attach ref for outside click detection
               initial={{ opacity: 0, x: '100%' }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
@@ -645,7 +598,6 @@ export default function Header() {
                   <MobileMenuItem
                     key={item.name} // Use name for top-level keys
                     item={item}
-                    level={0} // Top-level item
                     currentMobileDropdowns={mobileDropdowns}
                     toggleMobileDropdown={toggleMobileDropdown}
                     closeMobileMenu={closeMobileMenu}
@@ -658,9 +610,9 @@ export default function Header() {
               {/* Mobile Student Login Button */}
               <div className="mt-6">
                 <Button asChild className="w-full bg-orange-600 hover:bg-blue-600 text-white">
-                  <Link href="https://login.rishabinformaticagroup.com/login" target="_blank" className="flex items-center justify-center gap-2">
+                  <Link href="[https://login.rishabinformaticagroup.com/login](https://login.rishabinformaticagroup.com/login)" target="_blank" className="flex items-center justify-center gap-2">
                     <span>Student Login</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
                     </svg>
                   </Link>

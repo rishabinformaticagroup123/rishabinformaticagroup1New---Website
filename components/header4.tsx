@@ -41,7 +41,7 @@ const MENU_ITEMS: MenuItem[] = [
     href: "/courses",
     subItems: [
       {
-        name: "All Courses", // This is the clickable item for the megamenu
+        name: "All Courses",
         href: "/courses",
         isMegamenu: true,
         columns: [
@@ -140,8 +140,8 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     name: "Live Job Support",
-    href: "/job-support",
-    external: false,
+    href: "https://forms.gle/PFat1nZEUnwWW8y89",
+    external: true,
     subItems: [
       {
         name: "Job Support Request Form",
@@ -164,7 +164,7 @@ const MENU_ITEMS: MenuItem[] = [
 ];
 
 // Recursive component for mobile menu items
-// Extracted outside the Header component for better modularity and reusability
+// Extracted outside the Header component for better modularity
 const MobileMenuItem: React.FC<{
   item: MenuItem;
   level?: number;
@@ -176,30 +176,13 @@ const MobileMenuItem: React.FC<{
 }> = ({ item, level = 0, currentMobileDropdowns, toggleMobileDropdown, closeMobileMenu, isClient, pathname }) => {
   const isOpen = currentMobileDropdowns.includes(item.name);
   const hasSubItems = item.subItems && item.subItems.length > 0;
-  // Check if the *current* item being rendered is a megamenu itself
-  // Or, if it's a parent of a megamenu (like "Courses"), check if its first subItem is a megamenu
-  const isMegamenuParent = hasSubItems && (item.subItems[0] as MegamenuItem)?.isMegamenu;
+  const isMegamenu = (item as MegamenuItem).isMegamenu;
 
   // Determine padding based on nesting level
   const paddingLeft = `${16 + level * 16}px`; // Base 16px + 16px per level
 
   // Determine if this item or any of its children are the currently active path
-  // This helps highlight parent menus when a child page is active
-  const isActivePath = isClient && pathname.startsWith(item.href) && item.href !== "/";
-
-  // Determine the text color based on level and active state
-  const textColorClass = cn(
-    isClient && pathname === item.href // If it's the exact active page
-      ? "text-blue-600"
-      : level === 0 // Top-level main menu items
-        ? item.name === "Home"
-          ? "text-purple-800" // Dark violet for Home
-          : "text-gray-900" // Black for other main menus
-        : level === 1 // First-level sub-menus
-          ? "text-orange-600 hover:text-blue-600"
-          : "text-green-600 hover:text-blue-600", // Second-level and deeper sub-menus
-    isActivePath && level > 0 && "font-bold" // Make parent items bold if their child is active
-  );
+  const isActivePath = isClient && pathname.startsWith(item.href) && item.href !== "/"; // Exclude root path for general active state
 
   return (
     <div className="border-b border-gray-100 pb-2">
@@ -211,7 +194,12 @@ const MobileMenuItem: React.FC<{
             rel="noopener noreferrer"
             className={cn(
               "py-2 text-base font-medium flex-grow flex items-center gap-1",
-              textColorClass
+              isClient && pathname === item.href
+                ? "text-blue-600"
+                : level > 1 // Apply green to deeper nested items
+                  ? "text-green-600 hover:text-blue-600"
+                  : "text-orange-600 hover:text-blue-600",
+              isActivePath && level > 0 && "font-bold" // Bolder if it's an active parent path
             )}
             style={{ paddingLeft }}
             onClick={closeMobileMenu}
@@ -224,15 +212,20 @@ const MobileMenuItem: React.FC<{
             href={item.href}
             className={cn(
               "py-2 text-base font-medium flex-grow",
-              textColorClass
+              isClient && pathname === item.href
+                ? "text-blue-600"
+                : level > 1 // Apply green to deeper nested items
+                  ? "text-green-600 hover:text-blue-600"
+                  : "text-orange-600 hover:text-blue-600",
+              isActivePath && level > 0 && "font-bold" // Bolder if it's an active parent path
             )}
             style={{ paddingLeft }}
             onClick={() => {
-              // If it has sub-items, toggle the dropdown instead of navigating directly
-              // If it's a leaf node or external link, close the whole menu
+              // Only close menu if it's a leaf node or an external link
               if (!hasSubItems || item.external) {
                 closeMobileMenu();
               } else {
+                // If it has sub-items, toggle the dropdown instead of closing the whole menu
                 toggleMobileDropdown(item.name);
               }
             }}
@@ -263,19 +256,18 @@ const MobileMenuItem: React.FC<{
           transition={{ duration: 0.2 }}
           className="overflow-hidden"
         >
-          {isMegamenuParent ? (
-            // This block handles the "Courses" megamenu specifically for mobile
-            // It iterates through the columns of the *first* subItem (which is the megamenu itself)
+          {isMegamenu && (item as MegamenuItem).columns ? (
+            // Render megamenu columns
             <div className="grid grid-cols-1 gap-4 py-2">
-              {(item.subItems[0] as MegamenuItem).columns.map((column, colIndex) => (
+              {(item as MegamenuItem).columns.map((column, colIndex) => (
                 <div key={colIndex}>
                   <h4 className="font-semibold text-gray-800 mb-2" style={{ paddingLeft: `${paddingLeft}` }}>{column.title}</h4>
                   <div className="space-y-1">
                     {column.items.map((subItem) => (
                       <MobileMenuItem
-                        key={subItem.href}
+                        key={subItem.href} // Using href as key, assuming unique
                         item={subItem}
-                        level={level + 2} // These items are two levels deep from the main menu
+                        level={level + 1}
                         currentMobileDropdowns={currentMobileDropdowns}
                         toggleMobileDropdown={toggleMobileDropdown}
                         closeMobileMenu={closeMobileMenu}
@@ -288,12 +280,12 @@ const MobileMenuItem: React.FC<{
               ))}
             </div>
           ) : (
-            // This block handles regular nested sub-menus (e.g., under Study Materials -> SQL)
+            // Render regular sub-items (can be nested further)
             item.subItems?.map((subItem) => (
               <MobileMenuItem
-                key={subItem.href}
+                key={subItem.href} // Using href as key, assuming unique
                 item={subItem}
-                level={level + 1} // Regular nesting level increase
+                level={level + 1}
                 currentMobileDropdowns={currentMobileDropdowns}
                 toggleMobileDropdown={toggleMobileDropdown}
                 closeMobileMenu={closeMobileMenu}
@@ -334,9 +326,7 @@ export default function Header() {
   // Close mobile menu on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Ensure the click is outside the mobile menu ref AND not on the menu toggle button itself
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node) &&
-          !(event.target as HTMLElement).closest('button[aria-label="Open menu"]')) {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
         closeMobileMenu();
       }
     };
@@ -645,7 +635,6 @@ export default function Header() {
                   <MobileMenuItem
                     key={item.name} // Use name for top-level keys
                     item={item}
-                    level={0} // Top-level item
                     currentMobileDropdowns={mobileDropdowns}
                     toggleMobileDropdown={toggleMobileDropdown}
                     closeMobileMenu={closeMobileMenu}
