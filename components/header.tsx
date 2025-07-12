@@ -124,6 +124,7 @@ const MENU_ITEMS: MenuItem[] = [
           { name: "Rank Functions", href: "/study-materials/sql/rank" },
 		  { name: "Sorting Functions", href: "/study-materials/sql/sorting" },
 		  { name: "Union & Union All Functions", href: "/study-materials/sql/union" },
+		  { name: "Excercises", href: "/study-materials/sql/excercises" },
         ]
       },
       {
