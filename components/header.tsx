@@ -24,7 +24,6 @@ interface MegamenuItem extends MenuItem {
   columns: { title: string; items: MenuItem[] }[];
 }
 
-
 const MENU_ITEMS: MenuItem[] = [
   { name: "Home", href: "/" },
   {
@@ -41,7 +40,7 @@ const MENU_ITEMS: MenuItem[] = [
     href: "/courses",
     subItems: [
       {
-        name: "All Courses", // This is the clickable item for the megamenu
+        name: "All Courses",
         href: "/courses",
         isMegamenu: true,
         columns: [
@@ -74,75 +73,82 @@ const MENU_ITEMS: MenuItem[] = [
     name: "Blogs",
     href: "/blogs"
   },
+  // ✅ Moved "Crack the Next Interview" here
   {
-    name: "Interview Q&A",
+    name: "Crack the Next Interview",
     href: "/interview-qa",
     subItems: [
-      { name: "Informatica Power center", href: "/interview-qa/powercenter" },
-      { name: "Informatica IICS - IDMC", href: "/interview-qa/iics" },
-      { name: "SQL", href: "/interview-qa/sql" },
-      { name: "Azure (ADF + ADB )", href: "/interview-qa/azure" },
-    ],
-  },
-  {
-    name: "Study Materials",
-    href: "/study-materials",
-    subItems: [
       {
-        name: "Informatica Power center",
-        href: "/study-materials/powercenter",
+        name: "Informatica Power Center",
+        href: "/interview-qa/powercenter",
         subItems: [
-          { name: "Notes", href: "/study-materials/powercenter/notes" },
-          { name: "Exercises", href: "/study-materials/powercenter/exercises" },
-          { name: "Mapping Docs", href: "/study-materials/powercenter/mappings" },
-          { name: "Project Stuffs", href: "/study-materials/powercenter/projects" },
-          { name: "Sample Resumes", href: "/study-materials/powercenter/resumes" },
+          { name: "Interview Q&A", href: "/interview-qa/powercenter/qa" },
+          { name: "Notes", href: "/interview-qa/powercenter/notes" },
+          { name: "Exercises", href: "/interview-qa/powercenter/exercises" },
+          { name: "Mapping Docs", href: "/interview-qa/powercenter/mappings" },
+          { name: "Project Stuffs", href: "/interview-qa/powercenter/projects" },
+          { name: "Sample Resumes", href: "/interview-qa/powercenter/resumes" },
         ]
       },
       {
         name: "Informatica IICS - IDMC",
-        href: "/study-materials/iics",
+        href: "/interview-qa/iics",
         subItems: [
-          { name: "Notes", href: "/study-materials/iics/notes" },
-          { name: "Exercises", href: "/study-materials/iics/exercises" },
-          { name: "Mapping Docs", href: "/study-materials/iics/mappings" },
-          { name: "Project Stuffs", href: "/study-materials/iics/projects" },
-          { name: "Sample Resumes", href: "/study-materials/iics/resumes" },
+          { name: "Interview Q&A", href: "/interview-qa/iics/qa" },
+          { name: "Notes", href: "/interview-qa/iics/notes" },
+          { name: "Exercises", href: "/interview-qa/iics/exercises" },
+          { name: "Mapping Docs", href: "/interview-qa/iics/mappings" },
+          { name: "Project Stuffs", href: "/interview-qa/iics/projects" },
+          { name: "Sample Resumes", href: "/interview-qa/iics/resumes" },
         ]
       },
       {
-        name: "SQL",
-        href: "/study-materials/sql",
+	    name: "Snowflake",
+        href: "/interview-qa/iics",
         subItems: [
-          { name: "SQL – Introduction", href: "/study-materials/sql/introduction" },
-		  { name: "How to import Tables", href: "/study-materials/sql/students" },
-          { name: "Different Languages of SQL", href: "/study-materials/sql/languages" },
-          { name: "Constraints", href: "/study-materials/sql/constraints" },
-          { name: "Single Row Functions", href: "/study-materials/sql/single-row-functions" },
-          { name: "Joins", href: "/study-materials/sql/joins" },
-          { name: "Aggregation", href: "/study-materials/sql/aggregation" },
-          { name: "Rank Functions", href: "/study-materials/sql/rank" },
-		  { name: "Sorting Functions", href: "/study-materials/sql/sorting" },
-		  { name: "Union & Union All Functions", href: "/study-materials/sql/union" },
-		  { name: "Excercises", href: "/study-materials/sql/excercises" },
-        ]
+          { name: "Interview Q&A", href: "/interview-qa/snowflake/qa" },
+          { name: "Notes", href: "/interview/iics/notes" },
+          { name: "Exercises", href: "/interview/iics/exercises" },
+          { name: "Mapping Docs", href: "/interview/iics/mappings" },
+          { name: "Project Stuffs", href: "/interview/iics/projects" },
+          { name: "Sample Resumes", href: "/interview/iics/resumes" },
+	    ]
       },
       {
-        name: "Azure (ADF + ADB )",
-        href: "/study-materials/azure",
+	    name: "Azure (ADF + ADB)",
+        href: "/interview-qa/azure",
         subItems: [
-          { name: "Notes", href: "/study-materials/azure/notes" },
-          { name: "Exercises", href: "/study-materials/azure/exercises" },
-          { name: "Project Stuffs", href: "/study-materials/azure/projects" },
-          { name: "Sample Resumes", href: "/study-materials/azure/resumes" },
+          { name: "Interview Q&A", href: "/interview-qa/azure/qa" },
+          { name: "Notes", href: "/interview/azure/notes" },
+          { name: "Exercises", href: "/interview/azure/exercises" },
+          { name: "Project Stuffs", href: "/interview/azure/projects" },
+          { name: "Sample Resumes", href: "/interview/azure/resumes" },
         ]
-      },
-    ],
+      }
+    ]
+  },
+  // ✅ Moved "SQL Lab" here
+  {
+    name: "SQL Lab",
+    href: "/sql",
+    subItems: [
+	  { name: "SQL Lab + Practice", href: "/sql/setup" },
+      { name: "SQL – Introduction", href: "/sql/introduction" },
+      { name: "How to Import Tables", href: "/sql/students" },
+      { name: "Different Languages of SQL", href: "/sql/languages" },
+      { name: "Constraints", href: "/sql/constraints" },
+      { name: "Single Row Functions", href: "/sql/single-row-functions" },
+      { name: "Joins", href: "/sql/joins" },
+      { name: "Aggregation", href: "/sql/aggregation" },
+      { name: "Rank Functions", href: "/sql/rank" },
+      { name: "Sorting Functions", href: "/sql/sorting" },
+      { name: "Union & Union All Functions", href: "/sql/union" },
+      { name: "Exercises", href: "/sql/excercises" }
+    ]
   },
   {
     name: "Live Job Support",
     href: "/job-support",
-    external: false,
     subItems: [
       {
         name: "Job Support Request Form",
@@ -163,6 +169,7 @@ const MENU_ITEMS: MenuItem[] = [
     ],
   }
 ];
+    
 
 // Recursive component for mobile menu items
 // Extracted outside the Header component for better modularity and reusability
