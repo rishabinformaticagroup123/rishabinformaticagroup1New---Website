@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { Pool } from 'pg';
-import OpenAI from 'openai';
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-});
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
 });
 
 function convertOracleToPostgres(query: string): string {
@@ -19,17 +14,13 @@ function convertOracleToPostgres(query: string): string {
     .replace(/TO_DATE\(([^)]+),\s*'[^']+'\)/gi, 'CAST($1 AS DATE)');
 }
 
-// Updated drop protection function for exact table names only
 function isDropProtectedTable(query: string): boolean {
   const protectedTables = ['students', 'coordinators', 'address', 'employees', 'departments', 'locations'];
   const lowerQuery = query.toLowerCase().replace(/\s+/g, ' ').trim();
 
   for (const tbl of protectedTables) {
-    // Match: DROP TABLE [IF EXISTS] [schema.]<table> (word boundary after table name)
     const regex = new RegExp(`^drop table( if exists)? (public\\.)?${tbl}\\b`, 'i');
-    if (regex.test(lowerQuery)) {
-      return true;
-    }
+    if (regex.test(lowerQuery)) return true;
   }
   return false;
 }
@@ -41,8 +32,7 @@ function extractTableName(query: string): string | null {
 
 export async function POST(req: NextRequest) {
   try {
-    let { query, mode, dbType } = await req.json();
-    const originalQuery = query;
+    let { query, dbType } = await req.json();
 
     if (isDropProtectedTable(query)) {
       return NextResponse.json({ error: 'Dropping protected tables is not allowed.' }, { status: 403 });
@@ -50,30 +40,6 @@ export async function POST(req: NextRequest) {
 
     if (dbType === 'oracle') {
       query = convertOracleToPostgres(query);
-    }
-
-    if (mode === 'fix') {
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'Fix this SQL query for PostgreSQL. Return ONLY the corrected SQL:' },
-          { role: 'user', content: query }
-        ]
-      });
-      query = completion.choices[0].message.content || query;
-    }
-
-    if (mode === 'chat') {
-      const completion = await openai.chat.completions.create({
-        model: 'gpt-3.5-turbo',
-        messages: [
-          { role: 'system', content: 'You are a PostgreSQL expert. Explain or generate SQL clearly:' },
-          { role: 'user', content: query }
-        ]
-      });
-      return NextResponse.json({
-        reply: completion.choices[0].message.content
-      });
     }
 
     if (query.trim().toLowerCase().startsWith('select * from')) {
@@ -98,7 +64,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       columns: result.fields?.map(f => f.name) || [],
       rows: result.rows,
-      ...(mode === 'fix' && { originalQuery, correctedQuery: query })
     });
 
   } catch (error: any) {
