@@ -104,14 +104,14 @@ const MENU_ITEMS: MenuItem[] = [
       },
       {
 	    name: "Snowflake",
-        href: "/interview-qa/iics",
+        href: "/interview-qa/snowflake",
         subItems: [
           { name: "Interview Q&A", href: "/interview-qa/snowflake/qa" },
-          { name: "Notes", href: "/interview/iics/notes" },
-          { name: "Exercises", href: "/interview/iics/exercises" },
-          { name: "Mapping Docs", href: "/interview/iics/mappings" },
-          { name: "Project Stuffs", href: "/interview/iics/projects" },
-          { name: "Sample Resumes", href: "/interview/iics/resumes" },
+          { name: "Notes", href: "/interview-qa/snowflake/notes" },
+          { name: "Exercises", href: "/interview-qa/snowflake/exercises" },
+          { name: "Mapping Docs", href: "/interview-qa/snowflake/mappings" },
+          { name: "Project Stuffs", href: "/interview-qa/snowflake/projects" },
+          { name: "Sample Resumes", href: "/interview-qa/snowflake/resumes" },
 	    ]
       },
       {
@@ -119,10 +119,10 @@ const MENU_ITEMS: MenuItem[] = [
         href: "/interview-qa/azure",
         subItems: [
           { name: "Interview Q&A", href: "/interview-qa/azure/qa" },
-          { name: "Notes", href: "/interview/azure/notes" },
-          { name: "Exercises", href: "/interview/azure/exercises" },
-          { name: "Project Stuffs", href: "/interview/azure/projects" },
-          { name: "Sample Resumes", href: "/interview/azure/resumes" },
+          { name: "Notes", href: "/interview-qa/azure/notes" },
+          { name: "Exercises", href: "/interview-qa/azure/exercises" },
+          { name: "Project Stuffs", href: "/interview-qa/azure/projects" },
+          { name: "Sample Resumes", href: "/interview-qa/azure/resumes" },
         ]
       }
     ]
