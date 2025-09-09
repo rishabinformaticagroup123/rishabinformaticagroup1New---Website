@@ -179,7 +179,7 @@ export default function IICSComboPage() {
               <ClockIcon />
               <span>Timing: 7:15 AM - 9:00 AM IST</span>
             </div>
-            <div className={styles.priceTag}>₹8,600 <span className={styles.originalPrice}>₹18,000</span></div>
+            <div className={styles.priceTag}>₹8,600<span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
               <Link href="https://course.rishabinformaticagroup.com/courses/679252" target="_blank">
                 Enroll Now
