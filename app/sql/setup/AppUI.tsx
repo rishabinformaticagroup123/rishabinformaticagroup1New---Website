@@ -93,7 +93,31 @@ export default function AppUI({
 
   useEffect(() => {
     setIsClient(true)
+    
+    // Load saved split sizes from localStorage
+    const savedSizes = localStorage.getItem('sql-playground-split-sizes')
+    if (savedSizes) {
+      try {
+        const sizes = JSON.parse(savedSizes)
+        setSplitSizes(sizes)
+      } catch (e) {
+        console.error('Error loading split sizes:', e)
+      }
+    }
   }, [])
+
+  // Handle split drag end and save to localStorage
+  const handleSplitDragEnd = (sizes: number[]) => {
+    setSplitSizes(sizes)
+    localStorage.setItem('sql-playground-split-sizes', JSON.stringify(sizes))
+  }
+
+  // Reset split sizes to default
+  const resetSplitSizes = () => {
+    const defaultSizes = [70, 30]
+    setSplitSizes(defaultSizes)
+    localStorage.setItem('sql-playground-split-sizes', JSON.stringify(defaultSizes))
+  }
 
   // Handle sidebar resizing
   useEffect(() => {
@@ -174,7 +198,7 @@ export default function AppUI({
 
         {/* Center: Title */}
         <h1 className="text-lg md:text-xl font-semibold text-center">
-          Rishab SQL Playground
+          Rishab SQL Play Ground
         </h1>
 
         {/* Right: Auth Buttons */}
@@ -352,13 +376,13 @@ export default function AppUI({
             className="flex flex-col flex-1 h-full"
             direction="vertical" 
             sizes={splitSizes}
-            minSize={[300, 100]}
+            minSize={[200, 150]} // Increased minimum sizes for stability
             gutterSize={6} 
             snapOffset={30}
-            onDragEnd={(sizes) => setSplitSizes(sizes)}
+            onDragEnd={handleSplitDragEnd} // Use the persistent handler
           >
             {/* SQL Editor */}
-            <div className="bg-white p-4 flex flex-col h-full">
+            <div className="bg-white p-4 flex flex-col h-full" style={{ minHeight: '200px' }}>
               <div className="flex-1 overflow-hidden min-h-[150px]">
                 <AceEditor
                   mode="sql"
@@ -389,6 +413,13 @@ export default function AppUI({
                   <button className="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-md text-sm font-medium flex items-center gap-1 transition-colors">
                     Export CSV
                   </button>
+                  <button 
+                    onClick={resetSplitSizes}
+                    className="bg-gray-600 hover:bg-gray-700 text-white py-2 px-3 rounded-md text-sm font-medium flex items-center gap-1 transition-colors"
+                    title="Reset Layout"
+                  >
+                    Reset Layout
+                  </button>
                 </div>
                 <span className="hidden lg:inline text-xs text-gray-500">
                   Press Ctrl+Enter to run query
@@ -399,15 +430,21 @@ export default function AppUI({
               {info && !error && <div className="text-green-700 bg-green-50 rounded p-2 mt-3 text-xs max-h-40 overflow-auto">{info}</div>}
             </div>
 
-            {/* SQL Results - Can be moved up but with minimum height to prevent hiding buttons */}
-            <div className="bg-white p-4 overflow-auto" style={{ minHeight: '100px' }}>
+            {/* SQL Results - Stable positioning */}
+            <div 
+              className="bg-white p-4 overflow-auto relative" 
+              style={{ 
+                minHeight: '150px',
+                maxHeight: 'calc(100vh - 250px)' // Prevent excessive growth
+              }}
+            >
               {renderResultsContent()}
             </div>
           </Split>
         </div>
       </div>
 
-      {/* AI Assistant - Improved for mobile with better positioning */}
+      {/* AI Assistant */}
       {isAIAssistantOpen && (
         <div className="fixed top-0 right-0 h-full w-full lg:w-[350px] border-l border-gray-300 bg-white flex flex-col z-50 shadow-lg">
           <div className="px-4 py-3 border-b border-gray-300 flex justify-between items-center bg-[#2c3e50]">
@@ -426,7 +463,6 @@ export default function AppUI({
               title="SQL AI Assistant"
               style={{ marginBottom: '0' }}
             />
-            {/* Mobile chat input helper - ensures chat input is visible on mobile */}
             <div className="md:hidden absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
           </div>
         </div>
@@ -467,6 +503,30 @@ export default function AppUI({
           </div>
         </div>
       )}
+
+      {/* Add CSS for Split component stability */}
+      <style jsx>{`
+        .gutter.gutter-vertical {
+          background-color: #e1e5e9;
+          cursor: row-resize;
+          position: relative;
+          z-index: 10;
+          background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iNSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48Y2lyY2xlIGN4PSIyLjUiIGN5PSIyLjUiIHI9IjIuNSIgZmlsbD0iI2I4YzFkMSIvPjxjaXJjbGUgY3g9IjEwIiBjeT0iMi41IiByPSIyLjUiIGZpbGw9IiNiOGMxZDEiLz48Y2lyY2xlIGN4PSIxNy41IiBjeT0iMi41IiByPSIyLjUiIGZpbGw9IiNiOGMxZDEiLz48L3N2Zz4=');
+          background-repeat: no-repeat;
+          background-position: 50% 50%;
+        }
+        .gutter.gutter-vertical:hover {
+          background-color: #c8d0d9;
+        }
+        .split-vertical {
+          display: flex;
+          flex-direction: column;
+          height: 100% !important;
+        }
+        .split-vertical > div {
+          overflow: hidden !important;
+        }
+      `}</style>
     </div>
   )
 }

@@ -91,7 +91,22 @@ const blogPosts = [
 ];
 
 const slides = [
-  { 
+   { 
+    type: 'short-video', 
+    src: "/videos/video6.mp4",
+    duration: 10000
+	},
+    {
+	type: 'image',
+    src:  "/courses/diwali7.png",
+	alt: "Hands-on Practice"
+   },
+   {
+     type: 'short-video', 
+    src: "/videos/video6.mp4",
+    duration: 10000
+  },
+  {  
     type: 'short-video', 
     src: "/videos/video1.mp4",
     duration: 10000
@@ -115,8 +130,13 @@ const slides = [
     videoId: "Kg86_3njK6A"
   },
   { 
+	type: 'image',
+    src: "/courses/informatica.png",
+    alt: "Hands-on Practice"
+  },
+  { 
     type: 'image',
-    src: "/courses/informaticaYT.png",
+    src: "/courses/informatica.png",
     alt: "Hands-on Practice"
   }
 ];

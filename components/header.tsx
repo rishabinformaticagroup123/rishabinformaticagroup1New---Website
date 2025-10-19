@@ -79,7 +79,17 @@ const MENU_ITEMS: MenuItem[] = [
     href: "/interview-qa",
     subItems: [
       {
-        name: "Informatica Power Center",
+	     name: "SQL",
+        href: "/interview-qa/sql",
+        subItems: [
+          { name: "Interview Q&A", href: "/interview-qa/sql/qa" },
+          { name: "Notes", href: "/interview-qa/powercenter/notes" },
+          { name: "Exercises", href: "/interview-qa/powercenter/exercises" },
+          { name: "Project Stuffs", href: "/interview-qa/powercenter/projects" },
+   	  	]
+      },
+      {  	 	  	 
+	    name: "Informatica Power Center",
         href: "/interview-qa/powercenter",
         subItems: [
           { name: "Interview Q&A", href: "/interview-qa/powercenter/qa" },
@@ -124,6 +134,15 @@ const MENU_ITEMS: MenuItem[] = [
           { name: "Project Stuffs", href: "/interview-qa/azure/projects" },
           { name: "Sample Resumes", href: "/interview-qa/azure/resumes" },
         ]
+      },
+      {
+		  name: "Unix Commands",
+        href: "/interview-qa/Unix ",
+        subItems: [
+          { name: "Interview Q&A", href: "/interview-qa/azure/qa" },
+          { name: "Notes", href: "/interview-qa/azure/notes" },
+          { name: "Exercises", href: "/interview-qa/azure/exercises" },
+        ]
       }
     ]
   },
@@ -134,6 +153,7 @@ const MENU_ITEMS: MenuItem[] = [
     subItems: [
 	  { name: "SQL Lab + Practice", href: "/sql/setup" },
       { name: "SQL – Introduction", href: "/sql/introduction" },
+	  { name: "SQL – 55 Interview-Q&A", href: "/interview-qa/sql/qa" },
       { name: "How to Import Tables", href: "/sql/students" },
       { name: "Different Languages of SQL", href: "/sql/languages" },
       { name: "Constraints", href: "/sql/constraints" },
