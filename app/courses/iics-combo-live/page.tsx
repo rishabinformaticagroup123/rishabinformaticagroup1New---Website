@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
-  description: "Join Batch 12 starting Sep 10, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
+  description: "Join Batch 12 starting Sep 15, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
 };
 
 export default function IICSComboPage() {
@@ -17,7 +17,7 @@ export default function IICSComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 12 Starts Sep 10, 2025, 7.15 PM to 9.00 PM </span>
+            <span className={styles.batchBadge}>New Batch 12 Starts Sep 15, 2025, 7.15 PM to 9.00 PM </span>
             <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live</h1>
             <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
             <p className={styles.heroDescription}>
@@ -173,7 +173,7 @@ export default function IICSComboPage() {
             <h3>Batch 12</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: Sep 10, 2025</span>
+              <span>Starts: Sep 15, 2025</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />
