@@ -91,20 +91,10 @@ const blogPosts = [
 ];
 
 const slides = [
-   { 
-    type: 'short-video', 
-    src: "/videos/video6.mp4",
-    duration: 10000
-	},
-    {
-	type: 'image',
-    src:  "/courses/diwali7.png",
-	alt: "Hands-on Practice"
-   },
    {
-     type: 'short-video', 
-    src: "/videos/video6.mp4",
-    duration: 10000
+	type: 'image',
+    src:  "/courses/informaticacombobatch13.png",
+	alt: "Hands-on Practice"
   },
   {  
     type: 'short-video', 
@@ -131,12 +121,12 @@ const slides = [
   },
   { 
 	type: 'image',
-    src: "/courses/informatica.png",
+    src: "/courses/informaticacombobatch13.png",
     alt: "Hands-on Practice"
   },
   { 
     type: 'image',
-    src: "/courses/informatica.png",
+    src: "/courses/informaticacombobatch13.png",
     alt: "Hands-on Practice"
   }
 ];
