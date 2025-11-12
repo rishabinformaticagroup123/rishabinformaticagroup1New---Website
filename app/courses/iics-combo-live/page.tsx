@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
-  description: "Join Batch 12 starting Sep 15, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
+  description: "Join Batch 13 starting Nov 14, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
 };
 
 export default function IICSComboPage() {
@@ -17,8 +17,8 @@ export default function IICSComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 12 Starts Sep 15, 2025, 7.15 PM to 9.00 PM </span>
-            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live</h1>
+            <span className={styles.batchBadge}>New Batch 13 Starts Nov 14, 2025, 7.15 PM to 9.00 PM </span>
+            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live - Batch 13</h1>
             <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
             <p className={styles.heroDescription}>
               Master both PowerCenter and IICS Cloud with parallel comparisons. 45-day intensive program with real-time projects and placement assistance.
@@ -170,10 +170,10 @@ export default function IICSComboPage() {
         <h2 className={styles.sectionTitle}>Next Batch Details</h2>
         <div className={styles.batchCards}>
           <div className={styles.batchCard}>
-            <h3>Batch 12</h3>
+            <h3>Batch 13</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: Sep 15, 2025</span>
+              <span>Starts: Nov 14, 2025</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />
@@ -181,7 +181,7 @@ export default function IICSComboPage() {
             </div>
             <div className={styles.priceTag}>₹9,600 <span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/716015" target="_blank">
+              <Link href="https://course.rishabinformaticagroup.com/courses/755945" target="_blank">
                 Enroll Now
               </Link>
             </Button>
@@ -224,11 +224,16 @@ export default function IICSComboPage() {
         <div className={styles.testimonialCards}>
           {[
             {
-              quote: "I highly recommend the IICS COMBO course for anyone looking to build a strong oundation in data integration and cloud technologies. This course covers SQL,Informatica PowerCenter, Informatica IICS, and also includes essential Snowflake concepts, which makes it a complete package for both beginners and working professionals The way the topics are structured and explained is very clear and easy to understand. I particularly appreciated how real-time examples were used to connect theory with practical scenarios A big thanks to Hari Sir for his excellent teaching, constant support, and for making complex topics easy to grasp. His guidance throughout the course has been incredibly helpful for my learning journey If you're serious about your career in data engineering or ETL tools, this course is definitely worth it!.",
+              quote: "I highly recommend the IICS COMBO course for anyone looking to build a strong foundation in data integration and cloud technologies. This course covers SQL,Informatica PowerCenter, Informatica IICS, and also includes essential Snowflake concepts, which makes it a complete package for both beginners and working professionals The way the topics are structured and explained is very clear and easy to understand. I particularly appreciated how real-time examples were used to connect theory with practical scenarios A big thanks to Hari Sir for his excellent teaching, constant support, and for making complex topics easy to grasp. His guidance throughout the course has been incredibly helpful for my learning journey If you're serious about your career in data engineering or ETL tools, this course is definitely worth it!.",
               name: "Shekar.",
               company: "Infosys"
             },
-            {
+			{
+              quote: "Rishabh Informatica Group helped to crack my interview in 40 sessions I never imagine before join IICS Combo training Hari sir helped with mock interviews which really boosted my confidence to crack my interviews. Thanks for their efforts to help everyone.",
+              name: "Arroju Srikanth.",
+              company: "Accenture"
+			 }, 
+			{
               quote: "My name is Nitish Chandra Sharma,last year in Dec I planned to get into Data Engineer field,I consulted my friend who is a ETL developer,I searched for courses but the course provided by Rishabh Informatica is the best The answer why, other institutions are taking different batches for Powercenter and IICS which is expensive and time taking unlike here where there is a combo batch at a affordable price with payment ease aswell. Hari Sir is putting efforts day and night to help everyone succeed,if you are interested this is the platform for you.",
               name: "Nithish Sharma.",
               company: "Accenture"
