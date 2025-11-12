@@ -231,7 +231,7 @@ export default function IICSComboPage() {
 			{
               quote: "Rishabh Informatica Group helped to crack my interview in 40 sessions I never imagine before join IICS Combo training Hari sir helped with mock interviews which really boosted my confidence to crack my interviews. Thanks for their efforts to help everyone.",
               name: "Arroju Srikanth.",
-              company: "Accenture"
+              company: "Tech Mahindra"
 			 }, 
 			{
               quote: "My name is Nitish Chandra Sharma,last year in Dec I planned to get into Data Engineer field,I consulted my friend who is a ETL developer,I searched for courses but the course provided by Rishabh Informatica is the best The answer why, other institutions are taking different batches for Powercenter and IICS which is expensive and time taking unlike here where there is a combo batch at a affordable price with payment ease aswell. Hari Sir is putting efforts day and night to help everyone succeed,if you are interested this is the platform for you.",
