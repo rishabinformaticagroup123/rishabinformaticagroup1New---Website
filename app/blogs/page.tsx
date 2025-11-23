@@ -113,6 +113,17 @@ export default function BlogsPage() {
               readTime: "8 min read",
               href: "/blogs/non-it-to-it-without-coding",
               category: "Informatica",
+            },
+            {
+              title: "The Role of AI in Modern Data Engineering",
+              excerpt: "Explore how artificial intelligence is transforming the field of data engineering.",
+              image: "/placeholder.svg?height=200&width=300",
+              date: "Mar 15, 2025",
+              author: "Rajesh Kumar",
+              authorImage: "/placeholder.svg?height=50&width=50",
+              readTime: "10 min read",
+              href: "/blogs/ai-in-data-engineering",
+              category: "AI",
              },
           ].map((blog, index) => (
             <Card key={index} className="overflow-hidden">
