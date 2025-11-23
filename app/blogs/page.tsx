@@ -124,6 +124,7 @@ export default function BlogsPage() {
               readTime: "6 min read",
               href: "/blogs/performance-engineering-best-practices",
               category: "Performance",
+			  hidden: true,  // 👈 Add this line
             },
             {
               title: "Getting Started with Azure Data Factory",
