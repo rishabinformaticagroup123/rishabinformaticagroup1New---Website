@@ -71,16 +71,9 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     name: "Blogs",
-    href: "/blogs",
-    subItems: [
-     { name: "All Articles", href: "/blogs" },
-    { name: "How to Get IT Job in 45 Days?", href: "/blogs/how-to-get-it-job-in-45days" },
-    { name: "Non-IT to IT Career Guide", href: "/blogs/non-it-to-it-without-coding" },
-    { name: "What is ETL & Why It's Important?", href: "/blogs/what-is-etl" },
-    { name: "IICS Combo Course Content", href: "/blogs/iics-combo-course-content" }
-  ]
-},          
-// ✅ Moved "Crack the Next Interview" here
+    href: "/blogs"
+  },
+  // ✅ Moved "Crack the Next Interview" here
   {
     name: "Crack the Next Interview",
     href: "/interview-qa",
@@ -174,28 +167,25 @@ const MENU_ITEMS: MenuItem[] = [
     ]
   },
   {
-    name: "Job Support Hub",
-     href: "/job-support",   // Landing page
+    name: "Live Job Support",
+    href: "/job-support",
     subItems: [
       {
-        name: "Join Job Support",
-        href: "/job-support/join",
-        external: false
+        name: "Job Support Request Form",
+        href: "https://forms.gle/PFat1nZEUnwWW8y89",
+        external: true
       },
       {
-        name: "Real Industry Projects",
+        name: "Real Projects",
         href: "/job-support/real-projects"
       }
     ]
   },
   {
-    name: "More",
+    name: "Testimonials",
     href: "/testimonials",
     subItems: [
-      { name: "Students Testiomonials", href: "/testimonials" },
-	  { name: "Careers", href: "/careers" },
-	  { name: "Internships", href: "/internships" },
-	  { name: "Join Our Seva (for Gita Dana, other seva)", href: "/seva" },
+      { name: "Student Success Stories", href: "/testimonials" },
     ],
   }
 ];

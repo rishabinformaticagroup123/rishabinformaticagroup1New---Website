@@ -808,31 +808,6 @@ export default function ComprehensiveProjectsPage() {
 
       {/* Page Introduction */}
       <div className="container mx-auto px-4 py-12">
-        {/* ENHANCEMENT ADDED: How to Use This Page */}
-        <div className="bg-blue-50 border-l-4 border-blue-500 p-6 mb-8 rounded-r-lg">
-          <h3 className="text-xl font-bold text-gray-900 mb-3">
-            How to Use This Page for Maximum Learning:
-          </h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="flex items-start">
-              <span className="text-blue-500 mr-3 mt-1">1.</span>
-              <span>Read WHY each project started (business problem)</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-500 mr-3 mt-1">2.</span>
-              <span>See HOW tools were chosen (not random)</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-500 mr-3 mt-1">3.</span>
-              <span>Note MEASURABLE results (impact matters)</span>
-            </div>
-            <div className="flex items-start">
-              <span className="text-blue-500 mr-3 mt-1">4.</span>
-              <span>Apply to YOUR interviews (use as examples)</span>
-            </div>
-          </div>
-        </div>
-
         <div className="max-w-6xl mx-auto bg-white rounded-2xl shadow-xl p-8 mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
             How This Page Helps You Understand REAL Projects
@@ -918,24 +893,7 @@ export default function ComprehensiveProjectsPage() {
                       </span>
                     </div>
                     <h2 className="text-3xl font-bold mb-3">{project.title}</h2>
-                    
-                    {/* ENHANCEMENT ADDED: Industry Relatability */}
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-300">
-                        Similar to projects at:{" "}
-                        {project.sector === 'Banking' && (
-                          <span className="font-semibold text-cyan-300">SBI, HDFC, ICICI</span>
-                        )}
-                        {project.sector === 'Healthcare' && (
-                          <span className="font-semibold text-cyan-300">Apollo, Fortis, Max Healthcare</span>
-                        )}
-                        {project.sector === 'Retail' && (
-                          <span className="font-semibold text-cyan-300">Reliance Retail, DMart, Big Bazaar</span>
-                        )}
-                      </span>
-                    </div>
-                    
-                    <div className="text-gray-300 mt-4">
+                    <div className="text-gray-300">
                       <div className="flex items-center gap-6">
                         <span>Duration: <strong>{project.duration}</strong></span>
                         <span>Team: <strong>{project.teamSize}</strong></span>
