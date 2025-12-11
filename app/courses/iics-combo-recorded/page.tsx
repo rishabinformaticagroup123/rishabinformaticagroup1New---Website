@@ -4,6 +4,7 @@ import { CheckIcon, DownloadIcon, CalendarIcon, ClockIcon, UserIcon, AwardIcon }
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
+import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS IMPORT
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
@@ -218,30 +219,36 @@ export default function IICSComboPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className={styles.testimonialsSection}>
-        <h2 className={styles.sectionTitle}>What Our Students Say</h2>
-        <div className={styles.testimonialCards}>
-          {[
-            {
-              quote: "I highly recommend the IICS COMBO course for anyone looking to build a strong oundation in data integration and cloud technologies. This course covers SQL,Informatica PowerCenter, Informatica IICS, and also includes essential Snowflake concepts, which makes it a complete package for both beginners and working professionals The way the topics are structured and explained is very clear and easy to understand. I particularly appreciated how real-time examples were used to connect theory with practical scenarios A big thanks to Hari Sir for his excellent teaching, constant support, and for making complex topics easy to grasp. His guidance throughout the course has been incredibly helpful for my learning journey If you're serious about your career in data engineering or ETL tools, this course is definitely worth it!.",
-              name: "Shekar.",
-              company: "Infosys"
-            },
-            {
-              quote: "My name is Nitish Chandra Sharma,last year in Dec I planned to get into Data Engineer field,I consulted my friend who is a ETL developer,I searched for courses but the course provided by Rishabh Informatica is the best The answer why, other institutions are taking different batches for Powercenter and IICS which is expensive and time taking unlike here where there is a combo batch at a affordable price with payment ease aswell. Hari Sir is putting efforts day and night to help everyone succeed,if you are interested this is the platform for you.",
-              name: "Nithish Sharma.",
-              company: "Accenture"
-            }
-          ].map((testimonial, index) => (
-            <div key={index} className={styles.testimonialCard}>
-              <p className={styles.testimonialQuote}>"{testimonial.quote}"</p>
-              <div className={styles.testimonialAuthor}>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.company}</span>
-              </div>
-            </div>
-          ))}
+      {/* ✅ UPDATED Testimonials Section - Using TestimonialSlider */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              IICS COMBO Student Success Stories
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Real feedback from students who completed this course
+            </p>
+          </div>
+          
+          {/* ✅ USING YOUR TESTIMONIAL SLIDER COMPONENT */}
+          <TestimonialSlider />
+          
+          {/* Course-specific CTA */}
+          <div className="text-center mt-12">
+            <Link 
+              href="#enroll"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              🚀 Join Batch 13 - Enroll Now
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+            <p className="mt-6 text-gray-600">
+              Limited seats available - Enroll before batch fills up
+            </p>
+          </div>
         </div>
       </section>
     </div>

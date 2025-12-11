@@ -4,6 +4,7 @@ import { CheckIcon, DownloadIcon, CalendarIcon, ClockIcon, UserIcon, AwardIcon }
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
+import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS IMPORT
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
@@ -218,30 +219,36 @@ export default function IICSComboPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className={styles.testimonialsSection}>
-        <h2 className={styles.sectionTitle}>What Our Students Say</h2>
-        <div className={styles.testimonialCards}>
-          {[
-            {
-              quote: "The combo training helped me transition from PowerCenter to IICS in just 2 months and land a cloud ETL role.",
-              name: "Rajesh K.",
-              company: "Infosys"
-            },
-            {
-              quote: "The Snowflake integration projects were exactly what recruiters were looking for in my interviews.",
-              name: "Priya M.",
-              company: "Accenture"
-            }
-          ].map((testimonial, index) => (
-            <div key={index} className={styles.testimonialCard}>
-              <p className={styles.testimonialQuote}>"{testimonial.quote}"</p>
-              <div className={styles.testimonialAuthor}>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.company}</span>
-              </div>
-            </div>
-          ))}
+      {/* ✅ UPDATED Testimonials Section - Using TestimonialSlider */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              IICS COMBO Student Success Stories
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Real feedback from students who completed this course
+            </p>
+          </div>
+          
+          {/* ✅ USING YOUR TESTIMONIAL SLIDER COMPONENT */}
+          <TestimonialSlider />
+          
+          {/* Course-specific CTA */}
+          <div className="text-center mt-12">
+            <Link 
+              href="#enroll"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              🚀 Join Batch 13 - Enroll Now
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+            <p className="mt-6 text-gray-600">
+              Limited seats available - Enroll before batch fills up
+            </p>
+          </div>
         </div>
       </section>
     </div>

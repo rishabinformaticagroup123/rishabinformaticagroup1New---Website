@@ -1,4 +1,5 @@
 // File: app/courses/IICS-CAI/page.tsx
+import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS IMPORT
 import { Button } from "@/components/ui/button";
 import {
   CheckIcon,
@@ -198,30 +199,36 @@ export default function IICSCaiPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className={styles.testimonialsSection}>
-        <h2 className={styles.sectionTitle}>What Students Are Saying</h2>
-        <div className={styles.testimonialCards}>
-          {[
-            {
-              quote: "The CAI training was practical and project-driven. Helped me crack an API role easily.",
-              name: "Swathi R.",
-              company: "Cognizant",
-            },
-            {
-              quote: "Perfect mix of theory and hands-on. The COVID and weather API examples were brilliant!",
-              name: "Kiran J.",
-              company: "Capgemini",
-            },
-          ].map((testimonial, index) => (
-            <div key={index} className={styles.testimonialCard}>
-              <p className={styles.testimonialQuote}>"{testimonial.quote}"</p>
-              <div className={styles.testimonialAuthor}>
-                <strong>{testimonial.name}</strong>
-                <span>{testimonial.company}</span>
-              </div>
-            </div>
-          ))}
+      {/* ✅ UPDATED Testimonials Section - Using TestimonialSlider */}
+      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              IICS COMBO Student Success Stories
+            </h2>
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Real feedback from students who completed this course
+            </p>
+          </div>
+          
+          {/* ✅ USING YOUR TESTIMONIAL SLIDER COMPONENT */}
+          <TestimonialSlider />
+          
+          {/* Course-specific CTA */}
+          <div className="text-center mt-12">
+            <Link 
+              href="#enroll"
+              className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+            >
+              🚀 Join Batch 13 - Enroll Now
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </Link>
+            <p className="mt-6 text-gray-600">
+              Limited seats available - Enroll before batch fills up
+            </p>
+          </div>
         </div>
       </section>
     </div>
