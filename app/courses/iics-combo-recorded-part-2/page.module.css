@@ -1,0 +1,461 @@
+/* app/courses/IICS-Combo/page.module.css */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+  color: #333;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%);
+  color: white;
+  padding: 4rem 1rem;
+}
+
+.heroContent {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.heroText {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.batchBadge {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  width: fit-content;
+  font-weight: 600;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.highlight {
+  color: #f6ad55;
+}
+
+.hero h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.heroDescription {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 90%;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.statItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.statIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.ctaGroup {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primaryButton {
+  background-color: #f6ad55;
+  color: #1a365d;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.primaryButton:hover {
+  background-color: #fbd38d;
+  transform: translateY(-2px);
+}
+
+.secondaryButton {
+  border-color: orange;
+  color: #1a365d;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  border-radius: 0.5rem;
+}
+
+.heroImage {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.courseImage {
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+/* Certification Section */
+.certificationSection {
+  background-color: #f7fafc;
+  padding: 2rem 0;
+}
+
+.certificationBadge {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #f6ad55;
+}
+
+.badgeIcon {
+  color: #f6ad55;
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.certificationBadge h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+/* Features Section */
+.featuresSection {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: #f6ad55;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.featureCard {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.featureCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.featureIcon {
+  width: 3rem;
+  height: 3rem;
+  background: #ebf8ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  color: #3182ce;
+  font-size: 1.5rem;
+}
+
+.featureCard h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Comparison Table */
+.comparisonSection {
+  background: #f7fafc;
+  padding: 4rem 1rem;
+}
+
+.comparisonTable {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  background: #2a4365;
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow div:nth-child(2) {
+  font-weight: 600;
+  color: #2b6cb0;
+}
+
+.tableRow div:nth-child(3) {
+  font-weight: 600;
+  color: #38a169;
+}
+
+/* Syllabus Section */
+.syllabusSection {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.syllabusContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  background: #ebf8ff;
+  padding: 3rem;
+  border-radius: 0.5rem;
+}
+
+.downloadButton {
+  background: #3182ce;
+  color: white;
+  font-weight: 600;
+  padding: 0.8rem 2rem;
+  margin-top: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.buttonIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.syllabusImage {
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+/* Batch Section */
+.batchSection {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.batchCards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.batchCard {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.batchCard h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #2a4365;
+}
+
+.batchInfo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: center;
+}
+
+.priceTag {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #2a4365;
+  margin: 1.5rem 0;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  font-size: 1.25rem;
+  color: #a0aec0;
+  margin-left: 0.5rem;
+}
+
+.enrollButton {
+  background: #38a169;
+  color: white;
+  font-weight: 600;
+  width: 100%;
+  padding: 0.8rem;
+}
+
+/* Instructor Section */
+.instructorSection {
+  background: #f7fafc;
+  padding: 4rem 1rem;
+}
+
+.instructorContent {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.instructorImage {
+  border-radius: 0.5rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+}
+
+.instructorBio {
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.expertise {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.expertise span {
+  background: #ebf8ff;
+  color: #3182ce;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2rem;
+  font-size: 0.9rem;
+}
+
+/* Testimonials */
+.testimonialsSection {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1rem;
+}
+
+.testimonialCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.testimonialCard {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #f6ad55;
+}
+
+.testimonialQuote {
+  font-style: italic;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.testimonialAuthor {
+  font-weight: 600;
+}
+
+.testimonialAuthor span {
+  display: block;
+  font-weight: normal;
+  color: #718096;
+  font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .heroImage {
+    order: -1;
+  }
+  
+  .syllabusContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .batchCards {
+    flex-direction: column;
+  }
+  
+  .instructorContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .instructorImage {
+    margin: 0 auto;
+  }
+}
