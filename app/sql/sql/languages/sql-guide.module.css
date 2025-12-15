@@ -1,0 +1,94 @@
+/* app/study-materials/sql/sql-guide.module.css */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 15px;
+}
+
+.title {
+  color: #2c3e50;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #3498db;
+  font-size: 1.5rem;
+}
+
+.contactInfo {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: #7f8c8d;
+}
+
+.dataTypes {
+  background: #f0f8ff;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.dataType {
+  font-weight: bold;
+  color: #0066cc;
+}
+
+.sqlSection {
+  margin-bottom: 40px;
+  padding: 20px;
+  border-radius: 5px;
+  border-left: 4px solid;
+}
+
+.ddl { background-color: #e6f2ff; border-left-color: #3498db; }
+.dml { background-color: #e6ffe6; border-left-color: #2ecc71; }
+.drl { background-color: #fff0f0; border-left-color: #e74c3c; }
+.tcl { background-color: #fffae6; border-left-color: #f39c12; }
+.dcl { background-color: #f0f0ff; border-left-color: #9b59b6; }
+
+.sqlCode {
+  background: #2d2d2d;
+  color: #f8f8f2;
+  padding: 15px;
+  border-radius: 5px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 15px 0;
+  white-space: pre-wrap;
+}
+
+.commandList {
+  list-style-type: none;
+  padding: 0;
+  font-weight: bold;
+}
+
+.commandList li {
+  margin: 10px 0;
+  position: relative;
+  padding-left: 25px;
+}
+
+.commandList li:before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: #3498db;
+}
+
+.warning {
+  color: #e74c3c;
+  font-weight: bold;
+}
