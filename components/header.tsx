@@ -130,6 +130,9 @@ const MENU_ITEMS: MenuItem[] = [
           { name: "Mapping Docs", href: "/interview-qa/snowflake/mappings" },
           { name: "Project Stuffs", href: "/interview-qa/snowflake/projects" },
           { name: "Sample Resumes", href: "/interview-qa/snowflake/resumes" },
+		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
+		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
+		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
 	    ]
       },
       {
@@ -175,7 +178,7 @@ const MENU_ITEMS: MenuItem[] = [
     ]
   },
   {
-    name: "Job Support Hub",
+    name: "Industry Connect",
      href: "/job-support",   // Landing page
     subItems: [
       {
@@ -186,7 +189,11 @@ const MENU_ITEMS: MenuItem[] = [
       {
         name: "Real Industry Projects",
         href: "/job-support/real-projects"
-      }
+	   },
+       {
+		 name: "Snowflake live lab",
+        href: "/job-support/snowflake-connect"
+	   }
     ]
   },
   {
