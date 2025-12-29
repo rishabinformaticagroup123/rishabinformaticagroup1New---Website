@@ -6,6 +6,12 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-}
+  
+  // ✅ Add ONLY this line for Snowflake SDK
+  serverExternalPackages: ['snowflake-sdk'],
+  
+  // ✅ Add this to fix Turbopack error
+  turbopack: {},
+};
 
-export default nextConfig
+export default nextConfig;
