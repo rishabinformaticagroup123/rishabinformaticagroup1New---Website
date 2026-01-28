@@ -8,7 +8,7 @@ import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
-  description: "Join Batch 13 starting Nov 14, 2025. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
+  description: "Join Batch 14 starting Jan 28, 2026. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
 };
 
 export default function IICSComboPage() {
@@ -18,8 +18,8 @@ export default function IICSComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 13 Starts Nov 14, 2025, 7.15 PM to 9.00 PM </span>
-            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live - Batch 13</h1>
+            <span className={styles.batchBadge}>New Batch 14 Starts Jan 28, 2026, 7.15 PM to 9.00 PM </span>
+            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live - Batch 14</h1>
             <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
             <p className={styles.heroDescription}>
               Master both PowerCenter and IICS Cloud with parallel comparisons. 45-day intensive program with real-time projects and placement assistance.
@@ -171,10 +171,10 @@ export default function IICSComboPage() {
         <h2 className={styles.sectionTitle}>Next Batch Details</h2>
         <div className={styles.batchCards}>
           <div className={styles.batchCard}>
-            <h3>Batch 13</h3>
+            <h3>Batch 14</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: Nov 14, 2025</span>
+              <span>Starts: Jan 28, 2026</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />
@@ -182,7 +182,7 @@ export default function IICSComboPage() {
             </div>
             <div className={styles.priceTag}>₹9,600 <span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/755945" target="_blank">
+              <Link href="https://course.rishabinformaticagroup.com/courses/778212" target="_blank">
                 Enroll Now
               </Link>
             </Button>
@@ -238,7 +238,7 @@ export default function IICSComboPage() {
               href="#enroll"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              🚀 Join Batch 13 - Enroll Now
+              🚀 Join Batch 14 - Enroll Now
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
