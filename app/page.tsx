@@ -94,7 +94,7 @@ const blogPosts = [
 const slides = [
   {
     type: 'image',
-    src: "/courses/informaticacombobatch13.png",
+    src: "/courses/informatica.png",
     alt: "Hands-on Practice"
   },
   {  
@@ -124,12 +124,12 @@ const slides = [
   },
   {
     type: 'image',
-    src: "/courses/informaticacombobatch13.png",
+    src: "/courses/informatica.png",
     alt: "Hands-on Practice"
   },
   { 
     type: 'image',
-    src: "/courses/informaticacombobatch13.png",
+    src: "/courses/informatica.png",
     alt: "Hands-on Practice"
   }
 ];
