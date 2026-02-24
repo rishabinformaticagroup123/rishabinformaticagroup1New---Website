@@ -130,9 +130,7 @@ const MENU_ITEMS: MenuItem[] = [
           { name: "Mapping Docs", href: "/interview-qa/snowflake/mappings" },
           { name: "Project Stuffs", href: "/interview-qa/snowflake/projects" },
           { name: "Sample Resumes", href: "/interview-qa/snowflake/resumes" },
-		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
-		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
-		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },
+		  { name: "Snowflake Demo", href: "/interview-qa/snowflake/demo" },		  	  
 	    ]
       },
       {
@@ -179,14 +177,18 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     name: "Industry Connect",
-     href: "/job-support",   // Landing page
+       href: "/industry-connect/join",
     subItems: [
       {
-        name: "Join Job Support",
+        name: "Join live session",
+        href:"/meeting/meeting-page"  
+        },
+		{
+		name: "Join Job Support",
         href: "/industry-connect/join",
         external: false
-      },
-      {
+		},
+        {
         name: "Real Industry Projects",
         href: "/industry-connect/real-projects"
 	   },
