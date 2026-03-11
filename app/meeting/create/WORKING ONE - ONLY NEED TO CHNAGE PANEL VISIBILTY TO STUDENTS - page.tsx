@@ -44,13 +44,13 @@ export default function CreateMeeting() {
   const copyToClipboard = async () => {
     if (createdRoom) {
       try {
-        await navigator.clipboard.writeText(`${window.location.origin}/meeting/${createdRoom}?host=false`);
+        await navigator.clipboard.writeText(`${window.location.origin}/meeting/${createdRoom}`);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
       } catch (err) {
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
-        textArea.value = `${window.location.origin}/meeting/${createdRoom}?host=false`;
+        textArea.value = `${window.location.origin}/meeting/${createdRoom}`;
         document.body.appendChild(textArea);
         textArea.select();
         document.execCommand('copy');
@@ -61,20 +61,12 @@ export default function CreateMeeting() {
     }
   };
 
-  const startMeeting = () => {
-    if (createdRoom) {
-      // IMPORTANT: Add host=true AND name=Instructor
-      router.push(`/meeting/${createdRoom}?host=true&name=Instructor`);
-    }
-  };
-
-  const copyStudentLink = () => {
-    if (createdRoom) {
-      const studentLink = `${window.location.origin}/meeting/${createdRoom}?host=false&name=Student`;
-      navigator.clipboard.writeText(studentLink);
-      alert('Student link copied! Share this with your students.');
-    }
-  };
+const startMeeting = () => {
+  if (createdRoom) {
+    // Add host=true AND name=Instructor
+    router.push(`/meeting/${createdRoom}?host=true&name=Instructor`);
+  }
+};
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 max-w-2xl">
@@ -133,59 +125,39 @@ export default function CreateMeeting() {
                 <div className="text-green-600 font-semibold mb-2">Meeting Created Successfully!</div>
                 <div className="text-2xl font-bold text-gray-900 mb-4">{createdRoom}</div>
                 
-                <div className="flex flex-col gap-3 mb-4">
-                  {/* Instructor Link - Host */}
-                  <div className="flex items-center gap-2">
-                    <Button 
-                      variant="default" 
-                      onClick={startMeeting} 
-                      size="sm"
-                      className="flex-1 bg-primary"
-                    >
-                      <Video className="h-4 w-4 mr-2" />
-                      Start as Instructor
-                    </Button>
-                  </div>
-
-                  {/* Student Link Copy */}
-                  <div className="flex items-center gap-2">
-                    <Button 
-                      variant="outline" 
-                      onClick={copyStudentLink} 
-                      size="sm"
-                      className="flex-1"
-                    >
-                      <Copy className="h-4 w-4 mr-2" />
-                      Copy Student Link
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      onClick={copyToClipboard} 
-                      size="sm"
-                      className={copied ? "bg-green-50 border-green-200" : ""}
-                    >
-                      <Copy className="h-4 w-4 mr-2" />
-                      {copied ? "Copied!" : "Copy Code"}
-                    </Button>
-                  </div>
+                <div className="flex items-center justify-center gap-2 mb-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={copyToClipboard} 
+                    size="sm"
+                    className={copied ? "bg-green-50 border-green-200" : ""}
+                  >
+                    <Copy className="h-4 w-4 mr-2" />
+                    {copied ? "Copied!" : "Copy Link"}
+                  </Button>
                 </div>
                 
                 <p className="text-sm text-muted-foreground">
-                  Share this meeting code with your students: <strong>{createdRoom}</strong>
+                  Share this meeting ID with your students
                 </p>
               </div>
 
-              <Button 
-                variant="outline" 
-                onClick={() => {
-                  setCreatedRoom('');
-                  setMeetingName('');
-                }}
-                className="w-full"
-              >
-                Create Another Meeting
-              </Button>
+              <div className="space-y-3">
+                <Button onClick={startMeeting} className="w-full" size="lg">
+                  <Video className="h-5 w-5 mr-2" />
+                  Start Meeting Now
+                </Button>
+                <Button 
+                  variant="outline" 
+                  onClick={() => {
+                    setCreatedRoom('');
+                    setMeetingName('');
+                  }}
+                  className="w-full"
+                >
+                  Create Another Meeting
+                </Button>
+              </div>
             </div>
           )}
         </CardContent>
