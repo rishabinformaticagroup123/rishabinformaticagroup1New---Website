@@ -1,33 +1,36 @@
-'use client';
+"use client";
 
 // ─────────────────────────────────────────────────────────────
 //  FILE: /app/meeting/[roomId]/page.tsx
 //
-//  INSTALL (if not already done):
-//    npm install @ffmpeg/ffmpeg @ffmpeg/util
+//  HOW IT WORKS:
+//  - Students visit: /meeting/INFA-BATCH13?name=StudentName
+//  - Host visits:    /meeting/INFA-BATCH13?host=true&name=Hari%20Sir
+//  - Host sees JAAS meeting + hidden recorder panel at bottom
+//  - Students see JAAS meeting only — no recorder visible
 //
-//  next.config.js — add headers for FFmpeg WASM:
-//    async headers() {
-//      return [{
-//        source: "/meeting/:path*",
-//        headers: [
-//          { key: "Cross-Origin-Opener-Policy",   value: "same-origin" },
-//          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
-//        ],
-//      }];
-//    }
+//  next.config.js — add these headers for FFmpeg WASM to work:
+//  async headers() {
+//    return [{
+//      source: "/meeting/:path*",
+//      headers: [
+//        { key: "Cross-Origin-Opener-Policy",   value: "same-origin" },
+//        { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
+//      ],
+//    }];
+//  }
 // ─────────────────────────────────────────────────────────────
 
-import { useState, useEffect, useRef, useCallback } from 'react';
-import { useParams, useSearchParams, useRouter } from 'next/navigation';
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Shield, Video, ArrowLeft, Loader2, Maximize2, Minimize2, AlertCircle } from "lucide-react";
-import { JaaSMeeting } from '@jitsi/react-sdk';
+import { useEffect, useRef, useState, useCallback, Suspense } from "react";
+import { useParams, useSearchParams } from "next/navigation";
+import Script from "next/script";
+
+declare global {
+  interface Window { JitsiMeetExternalAPI: any; }
+}
 
 // ════════════════════════════════════════════════════════════
-//  ADMIN RECORDER — floating panel, only visible to host
+//  ADMIN RECORDER COMPONENT
 // ════════════════════════════════════════════════════════════
 function AdminRecorder() {
   const [uiState, setUiState]           = useState<"idle"|"recording"|"paused"|"converting"|"done">("idle");
@@ -35,7 +38,7 @@ function AdminRecorder() {
   const [pauseCount, setPauseCount]     = useState(0);
   const [pauseLogs, setPauseLogs]       = useState<{ num: number; at: string }[]>([]);
   const [quality, setQuality]           = useState("2500000");
-  const [dayNum, setDayNum]             = useState("COMBO Sessions");
+  const [dayNum, setDayNum]             = useState("Day01");
   const [batchLabel, setBatchLabel]     = useState("IICS_Batch14");
   const [recAlert, setRecAlert]         = useState<{ msg: string; type: string } | null>(null);
   const [dlMeta, setDlMeta]             = useState<{ duration: string; size: string; pauses: number; format: string } | null>(null);
@@ -106,7 +109,7 @@ function AdminRecorder() {
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   };
 
-  // ── Start ─────────────────────────────────────────────────
+  // ── Start Recording ───────────────────────────────────────
   const startRec = async () => {
     try {
       const screenStream = await navigator.mediaDevices.getDisplayMedia({
@@ -115,33 +118,15 @@ function AdminRecorder() {
       });
 
       let micStream: MediaStream | null = null;
-      try {
-        micStream = await navigator.mediaDevices.getUserMedia({
-          audio: {
-            noiseSuppression: true,
-            echoCancellation: true,
-            autoGainControl:  true,
-            sampleRate:       48000,
-          },
-          video: false,
-        });
-      } catch { showRecAlert("Mic not available — screen audio only", "warn"); }
+      try { micStream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false }); }
+      catch { showRecAlert("Mic not available — screen audio only", "warn"); }
 
-      const ctx  = new AudioContext({ sampleRate: 48000 });
+      const ctx  = new AudioContext();
       const dest = ctx.createMediaStreamDestination();
-
-      if (screenStream.getAudioTracks().length > 0) {
-        const tabGain = ctx.createGain();
-        tabGain.gain.value = 0.8;
-        ctx.createMediaStreamSource(screenStream).connect(tabGain);
-        tabGain.connect(dest);
-      }
-      if (micStream) {
-        const micGain = ctx.createGain();
-        micGain.gain.value = 1.0;
-        ctx.createMediaStreamSource(micStream).connect(micGain);
-        micGain.connect(dest);
-      }
+      if (screenStream.getAudioTracks().length > 0)
+        ctx.createMediaStreamSource(screenStream).connect(dest);
+      if (micStream)
+        ctx.createMediaStreamSource(micStream).connect(dest);
 
       const combined = new MediaStream([
         ...screenStream.getVideoTracks(),
@@ -169,14 +154,14 @@ function AdminRecorder() {
       mr.start(500);
       startTimer();
       setUiState("recording");
-      showRecAlert("Recording started — students cannot see this!", "info");
+      showRecAlert("Recording started — students cannot see this panel.", "info");
 
       screenStream.getVideoTracks()[0].onended = () => {
         if (mrRef.current && mrRef.current.state !== "inactive") stopRec();
       };
     } catch (err: any) {
       if (err.name === "NotAllowedError")
-        showRecAlert("Permission denied. Please allow screen sharing.", "warn");
+        showRecAlert("Screen share permission denied. Please allow when prompted.", "warn");
       else showRecAlert("Error: " + err.message, "warn");
     }
   };
@@ -191,7 +176,7 @@ function AdminRecorder() {
       setPauseCount(pauseCountRef.current);
       setPauseLogs(prev => [...prev, { num: pauseCountRef.current, at }]);
       setUiState("paused");
-      showRecAlert("Paused — same video file. Resume when ready.", "warn");
+      showRecAlert("Paused — same video file. Click Resume to continue.", "warn");
     }
   };
 
@@ -223,13 +208,13 @@ function AdminRecorder() {
       const sizeMB = (webmBlob.size / 1024 / 1024).toFixed(1);
       setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "webm" });
       setUiState("done");
-      showRecAlert("FFmpeg not loaded — downloading as WebM.", "warn");
+      showRecAlert("FFmpeg not loaded — downloading as WebM. Try refreshing.", "warn");
       return;
     }
 
     setUiState("converting");
     setConvertProgress(0);
-    showRecAlert("Converting to MP4 — do NOT close this tab!", "info");
+    showRecAlert("Converting to MP4 — do NOT close this tab.", "info");
 
     try {
       const { fetchFile } = await import("@ffmpeg/util");
@@ -245,19 +230,19 @@ function AdminRecorder() {
         "-movflags", "+faststart",
         "output.mp4",
       ]);
-      const data     = await ff.readFile("output.mp4");
-      const mp4Blob  = new Blob([data.buffer], { type: "video/mp4" });
+      const data = await ff.readFile("output.mp4");
+      const mp4Blob = new Blob([data.buffer], { type: "video/mp4" });
       mp4BlobRef.current = mp4Blob;
-      const sizeMB   = (mp4Blob.size / 1024 / 1024).toFixed(1);
+      const sizeMB = (mp4Blob.size / 1024 / 1024).toFixed(1);
       setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "mp4" });
       setUiState("done");
-      showRecAlert("MP4 ready! Click Download to save.", "success");
+      showRecAlert("MP4 ready! Click Download to save to your laptop.", "success");
     } catch (err) {
       console.error("Conversion error:", err);
       const sizeMB = (webmBlobRef.current!.size / 1024 / 1024).toFixed(1);
       setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "webm" });
       setUiState("done");
-      showRecAlert("MP4 conversion failed — downloading as WebM.", "warn");
+      showRecAlert("MP4 conversion failed — downloading as WebM instead.", "warn");
     }
   };
 
@@ -303,42 +288,30 @@ function AdminRecorder() {
   // ── Render ────────────────────────────────────────────────
   return (
     <div style={{
-      position:   "fixed",
-      bottom:     70,           // above the JAAS bottom toolbar
-      right:      16,
-      zIndex:     9999,
-      width:      minimized ? 200 : 400,
-      background: "#0f172a",
-      border:     "1px solid #334155",
-      borderRadius: 12,
-      fontFamily: "system-ui, sans-serif",
-      boxShadow:  "0 8px 32px rgba(0,0,0,0.6)",
+      position: "fixed", bottom: 16, right: 16, zIndex: 9999,
+      width: minimized ? 220 : 420,
+      background: "#0f172a", border: "1px solid #334155",
+      borderRadius: 12, fontFamily: "system-ui, sans-serif",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.5)",
       transition: "width 0.2s",
-      overflow:   "hidden",
+      overflow: "hidden",
     }}>
-
-      {/* ── Header bar (click to minimize/expand) ── */}
-      <div
-        onClick={() => setMinimized(m => !m)}
-        style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderBottom: "1px solid #334155", cursor: "pointer" }}
-      >
+      {/* Header bar */}
+      <div style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderBottom: "1px solid #334155", cursor: "pointer" }}
+        onClick={() => setMinimized(m => !m)}>
         <div style={{
           width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
           background: dotColor[uiState],
           animation: (uiState === "recording" || uiState === "converting") ? "blink 1s infinite" : "none",
         }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: "#f1f5f9", flex: 1 }}>
-          {minimized
-            ? (uiState === "recording" ? `⏺ REC ${timer}` : "🔴 Admin Recorder")
-            : "🔴 Admin Recorder "}
+          {minimized ? (uiState === "recording" ? `⏺ ${timer}` : statusText[uiState]) : "🔴 Admin Recorder"}
         </span>
         <span style={{ fontSize: 11, color: "#64748b" }}>{minimized ? "▲" : "▼"}</span>
       </div>
 
-      {/* ── Body ── */}
       {!minimized && (
         <div style={{ padding: 14 }}>
-
           {/* FFmpeg status */}
           <p style={{ fontSize: 10, color: ffmpegReady ? "#639922" : "#EF9F27", marginBottom: 10 }}>
             {ffmpegReady ? "✅ MP4 converter ready" : "⏳ Loading MP4 converter..."}
@@ -351,7 +324,7 @@ function AdminRecorder() {
             </div>
           )}
 
-          {/* Status + Timer */}
+          {/* Status row */}
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: dotColor[uiState], animation: (uiState === "recording" || uiState === "converting") ? "blink 1s infinite" : "none" }} />
             <span style={{ fontSize: 12, color: "#f1f5f9", flex: 1 }}>{statusText[uiState]}</span>
@@ -365,31 +338,22 @@ function AdminRecorder() {
             </div>
           )}
 
-          {/* Settings — only when idle or done */}
+          {/* Settings — idle / done only */}
           {(uiState === "idle" || uiState === "done") && (
             <div style={{ marginBottom: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
               <div>
                 <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Batch</p>
-                <input
-                  value={batchLabel}
-                  onChange={e => setBatchLabel(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                />
+                <input value={batchLabel} onChange={e => setBatchLabel(e.target.value)}
+                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }} />
               </div>
               <div>
                 <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Day</p>
-                <input
-                  value={dayNum}
-                  onChange={e => setDayNum(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                />
+                <input value={dayNum} onChange={e => setDayNum(e.target.value)}
+                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }} />
               </div>
               <div style={{ gridColumn: "span 2" }}>
-                <select
-                  value={quality}
-                  onChange={e => setQuality(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                >
+                <select value={quality} onChange={e => setQuality(e.target.value)}
+                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}>
                   <option value="2500000">High Quality (2.5 Mbps)</option>
                   <option value="1000000">Medium Quality (1 Mbps)</option>
                   <option value="500000">Low Quality (500 Kbps)</option>
@@ -400,17 +364,23 @@ function AdminRecorder() {
 
           {/* Controls */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
-            {uiState === "idle"       && <RBtn color="red"   onClick={startRec}>▶ Start Recording</RBtn>}
-            {uiState === "recording"  && (<>
+            {uiState === "idle" && (
+              <RBtn color="red" onClick={startRec}>▶ Start Recording</RBtn>
+            )}
+            {uiState === "recording" && (<>
               <RBtn color="amber" onClick={pauseRec}>⏸ Pause</RBtn>
               <RBtn color="gray"  onClick={stopRec}>⏹ Stop & Save</RBtn>
             </>)}
-            {uiState === "paused"     && (<>
+            {uiState === "paused" && (<>
               <RBtn color="green" onClick={resumeRec}>▶ Resume</RBtn>
               <RBtn color="gray"  onClick={stopRec}>⏹ Stop & Save</RBtn>
             </>)}
-            {uiState === "converting" && <RBtn color="gray" onClick={() => {}}>⏳ Converting...</RBtn>}
-            {uiState === "done"       && <RBtn color="red"  onClick={resetAll}>▶ New Recording</RBtn>}
+            {uiState === "converting" && (
+              <RBtn color="gray" onClick={() => {}}>⏳ Converting...</RBtn>
+            )}
+            {uiState === "done" && (
+              <RBtn color="red" onClick={resetAll}>▶ New Recording</RBtn>
+            )}
           </div>
 
           {/* Pause log */}
@@ -418,7 +388,7 @@ function AdminRecorder() {
             <div style={{ marginBottom: 10 }}>
               {pauseLogs.map(p => (
                 <div key={p.num} style={{ fontSize: 10, color: "#64748b", padding: "2px 0", borderBottom: "1px solid #1e293b" }}>
-                  ⏸ Pause {p.num} at {p.at} — same video file
+                  ⏸ Pause {p.num} at {p.at}
                 </div>
               ))}
             </div>
@@ -427,10 +397,8 @@ function AdminRecorder() {
           {/* Download */}
           {uiState === "done" && dlMeta && (
             <div style={{ textAlign: "center", paddingTop: 8, borderTop: "1px solid #334155" }}>
-              <button
-                onClick={downloadFile}
-                style={{ width: "100%", padding: "9px", background: "#185FA5", border: "none", borderRadius: 6, color: "#E6F1FB", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
-              >
+              <button onClick={downloadFile}
+                style={{ width: "100%", padding: "8px", background: "#185FA5", border: "none", borderRadius: 6, color: "#E6F1FB", fontSize: 13, fontWeight: 600, cursor: "pointer" }}>
                 ⬇ Download {dlMeta.format.toUpperCase()}
               </button>
               <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>
@@ -446,7 +414,6 @@ function AdminRecorder() {
   );
 }
 
-// ── Small button component ────────────────────────────────────
 function RBtn({ color, onClick, children }: { color: string; onClick: () => void; children: React.ReactNode }) {
   const map: Record<string, { bg: string; c: string }> = {
     red:   { bg: "#E24B4A", c: "#fff" },
@@ -456,242 +423,160 @@ function RBtn({ color, onClick, children }: { color: string; onClick: () => void
   };
   const s = map[color] || map.gray;
   return (
-    <button
-      onClick={onClick}
-      style={{ padding: "6px 14px", background: s.bg, border: "none", borderRadius: 6, color: s.c, fontSize: 11, fontWeight: 600, cursor: "pointer" }}
-    >
+    <button onClick={onClick}
+      style={{ padding: "6px 12px", background: s.bg, border: "none", borderRadius: 6, color: s.c, fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
       {children}
     </button>
   );
 }
 
 // ════════════════════════════════════════════════════════════
-//  MAIN MEETING PAGE — your original code, unchanged
+//  MAIN MEETING PAGE
 // ════════════════════════════════════════════════════════════
-export default function MeetingRoom() {
+function MeetingRoomContent() {
   const params       = useParams();
   const searchParams = useSearchParams();
-  const router       = useRouter();
 
-  const roomId   = params.roomId as string;
-  const isHost   = searchParams.get('host') === 'true';
-  const userName = searchParams.get('name') || (isHost ? 'Instructor' : 'Student');
+  const roomId      = (params?.roomId as string)?.toUpperCase() || "";
+  const displayName = searchParams?.get("name") || "Guest";
+  const isHost      = searchParams?.get("host") === "true";
 
-  const [jwtToken, setJwtToken]       = useState<string | null>(null);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState<string | null>(null);
-  const [showControls, setShowControls] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const meetingContainerRef           = useRef<HTMLDivElement>(null);
+  const [status, setStatus]   = useState<"loading"|"ready"|"error">("loading");
+  const [errorMsg, setErrorMsg] = useState("");
+  const jitsiRef              = useRef<any>(null);
+  const containerRef          = useRef<HTMLDivElement>(null);
+  const apiLoadedRef          = useRef(false);
 
-  // Fetch JWT token
-  useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch('/api/generate-jitsi-token', {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ roomName: roomId, userName, isModerator: isHost }),
-        });
-        if (!response.ok) throw new Error('Failed to generate meeting token');
-        const data = await response.json();
-        setJwtToken(data.token);
-      } catch (err) {
-        console.error('Token error:', err);
-        setError(err instanceof Error ? err.message : 'Failed to start meeting');
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (roomId && userName) fetchToken();
-  }, [roomId, userName, isHost]);
+  const appId = process.env.NEXT_PUBLIC_JITSI_APP_ID || "";
 
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      meetingContainerRef.current?.requestFullscreen();
-      setIsFullscreen(true);
-    } else {
-      document.exitFullscreen();
-      setIsFullscreen(false);
+  const initJitsi = useCallback(async () => {
+    if (!window.JitsiMeetExternalAPI) return;
+    if (jitsiRef.current) return;
+
+    try {
+      const res = await fetch("/api/generate-jitsi-token", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ roomId, displayName, isHost }),
+      });
+
+      if (!res.ok) throw new Error("Failed to get meeting token");
+      const { token } = await res.json();
+
+      const domain  = "8x8.vc";
+      const options = {
+        roomName:  `${appId}/${roomId}`,
+        width:     "100%",
+        height:    "100%",
+        parentNode: containerRef.current,
+        jwt:        token,
+        configOverwrite: {
+          startWithAudioMuted:  !isHost,
+          startWithVideoMuted:  !isHost,
+          disableDeepLinking:   true,
+          enableNoisyMicDetection: false,
+          prejoinPageEnabled:   false,
+          disableRecordAudioNotification: true,
+        },
+        interfaceConfigOverwrite: {
+          SHOW_JITSI_WATERMARK:         false,
+          SHOW_WATERMARK_FOR_GUESTS:    false,
+          SHOW_BRAND_WATERMARK:         false,
+          SHOW_POWERED_BY:              false,
+          DISPLAY_WELCOME_PAGE_CONTENT: false,
+          TOOLBAR_BUTTONS: isHost
+            ? ["microphone","camera","closedcaptions","desktop","fullscreen","fodeviceselection","hangup","profile","chat","settings","raisehand","videoquality","filmstrip","shortcuts","tileview","select-background","mute-everyone"]
+            : ["microphone","camera","desktop","fullscreen","hangup","chat","raisehand","tileview"],
+        },
+        userInfo: {
+          displayName,
+        },
+      };
+
+      const api = new window.JitsiMeetExternalAPI(domain, options);
+      jitsiRef.current = api;
+
+      api.addEventListener("videoConferenceJoined", () => setStatus("ready"));
+      api.addEventListener("readyToClose", () => {
+        api.dispose();
+        jitsiRef.current = null;
+        window.location.href = "/meeting/meeting-page";
+      });
+
+    } catch (err: any) {
+      console.error("Jitsi init error:", err);
+      setErrorMsg(err.message || "Failed to start meeting");
+      setStatus("error");
     }
-  };
+  }, [roomId, displayName, isHost, appId]);
 
-  const handleApiReady = (api: any) => {
-    console.log('Jitsi API ready');
-  };
+  // Load Jitsi External API script
+  useEffect(() => {
+    if (apiLoadedRef.current) { initJitsi(); return; }
+    const script = document.createElement("script");
+    script.src = `https://8x8.vc/${appId}/external_api.js`;
+    script.async = true;
+    script.onload = () => { apiLoadedRef.current = true; initJitsi(); };
+    script.onerror = () => { setErrorMsg("Failed to load meeting library"); setStatus("error"); };
+    document.head.appendChild(script);
+    return () => { if (jitsiRef.current) { jitsiRef.current.dispose(); jitsiRef.current = null; } };
+  }, [initJitsi]);
 
-  if (error) {
+  if (status === "error") {
     return (
-      <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-950 text-white flex items-center justify-center p-4">
-        <Card className="bg-gray-800/50 border-red-500 max-w-md w-full">
-          <CardContent className="p-8 text-center">
-            <AlertCircle className="h-16 w-16 text-red-400 mx-auto mb-4" />
-            <h2 className="text-2xl font-bold mb-2">Meeting Error</h2>
-            <p className="text-gray-400 mb-6">{error}</p>
-            <Button onClick={() => router.push('/')} className="w-full">Return to Home</Button>
-          </CardContent>
-        </Card>
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0f172a" }}>
+        <div style={{ textAlign: "center", color: "#f1f5f9", padding: 32 }}>
+          <p style={{ fontSize: 48, marginBottom: 16 }}>⚠️</p>
+          <h2 style={{ fontSize: 20, marginBottom: 8 }}>Failed to join meeting</h2>
+          <p style={{ color: "#64748b", fontSize: 14, marginBottom: 24 }}>{errorMsg}</p>
+          <a href="/meeting/meeting-page" style={{ padding: "10px 24px", background: "#185FA5", color: "#fff", borderRadius: 8, textDecoration: "none", fontSize: 14 }}>
+            Back to Meeting Page
+          </a>
+        </div>
       </div>
     );
   }
 
-  // ── Role-based config (your original — unchanged) ─────────
-  const instructorConfig = {
-    startWithAudioMuted: false,
-    startWithVideoMuted: false,
-    prejoinPageEnabled:  false,
-    disableBranding:     true,
-    hideLogo:            true,
-    participantsPane: {
-      hideModeratorSettingsTab: false,
-      hideMoreActionsButton:    false,
-      hideMuteAllButton:        false,
-    },
-    enableModeratorTools:  true,
-    disableGrantModerator: false,
-    toolbarButtons: [
-      'microphone','camera','desktop','fullscreen',
-      'hangup','profile','chat','recording',
-      'settings','raisehand','videoquality',
-      'filmstrip','tileview','participants-pane',
-      'security','invite','stats',
-    ],
-    audioLevels:         { enabled: true },
-    enableTalkWhileMuted: false,
-    height: '100%', width: '100%',
-  };
-
-  const studentConfig = {
-    startWithAudioMuted: false,
-    startWithVideoMuted: false,
-    prejoinPageEnabled:  false,
-    disableBranding:     true,
-    hideLogo:            true,
-    participantsPane: {
-      hideModeratorSettingsTab: true,
-      hideMoreActionsButton:    true,
-      hideMuteAllButton:        true,
-    },
-    disableGrantModerator: true,
-    toolbarButtons: [
-      'microphone','camera','fullscreen','hangup',
-      'chat','raisehand','settings','tileview',
-    ],
-    audioLevels:  { enabled: true },
-    height: '100%', width: '100%',
-  };
-
-  const studentInterfaceConfig = {
-    SHOW_JITSI_WATERMARK:      false,
-    SHOW_WATERMARK_FOR_GUESTS: false,
-    DEFAULT_BACKGROUND:        '#1a1a1a',
-    SHOW_MODERATOR_TOOLS:      false,
-    TOOLBAR_BUTTONS: ['microphone','camera','fullscreen','hangup','chat','raisehand','settings','tileview'],
-    VIDEO_LAYOUT_FIT:          'cover',
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Student',
-  };
-
-  const instructorInterfaceConfig = {
-    SHOW_JITSI_WATERMARK:      false,
-    SHOW_WATERMARK_FOR_GUESTS: false,
-    DEFAULT_BACKGROUND:        '#1a1a1a',
-    SHOW_MODERATOR_TOOLS:      true,
-    TOOLBAR_BUTTONS: [
-      'microphone','camera','desktop','fullscreen',
-      'hangup','profile','chat','recording',
-      'settings','raisehand','videoquality',
-      'filmstrip','tileview','participants-pane',
-      'security','invite','stats',
-    ],
-    VIDEO_LAYOUT_FIT:          'cover',
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Student',
-  };
-
-  const activeConfig          = isHost ? instructorConfig : studentConfig;
-  const activeInterfaceConfig = isHost ? instructorInterfaceConfig : studentInterfaceConfig;
-
   return (
-    <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
+    <div style={{ width: "100vw", height: "100vh", background: "#000", position: "relative" }}>
 
-      {/* Header — your original, unchanged */}
-      {showControls && (
-        <header className="bg-gray-800/90 backdrop-blur-sm px-4 py-2 border-b border-gray-700 flex items-center justify-between flex-shrink-0">
-          <div className="flex items-center gap-3">
-            <Link href="/">
-              <Button variant="ghost" size="sm" className="hover:bg-gray-700 text-white">
-                <ArrowLeft className="h-4 w-4 mr-1" /> Exit
-              </Button>
-            </Link>
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-              <span className="text-white font-medium">Room: {roomId}</span>
-              {isHost && (
-                <span className="px-2 py-0.5 bg-blue-600 rounded-full text-xs flex items-center gap-1">
-                  <Shield className="h-3 w-3" /> Instructor
-                </span>
-              )}
-            </div>
+      {/* Loading overlay */}
+      {status === "loading" && (
+        <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "#0f172a", zIndex: 10 }}>
+          <div style={{ textAlign: "center", color: "#f1f5f9" }}>
+            <div style={{ width: 48, height: 48, border: "3px solid #334155", borderTopColor: "#378ADD", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+            <p style={{ fontSize: 15 }}>Joining {roomId}...</p>
+            <p style={{ fontSize: 12, color: "#64748b", marginTop: 4 }}>Setting up your meeting</p>
           </div>
-          <div className="flex items-center gap-2">
-            <Button onClick={() => setShowControls(false)} variant="ghost" size="sm" className="text-white hover:bg-gray-700" title="Hide controls">
-              <Maximize2 className="h-4 w-4" />
-            </Button>
-          </div>
-        </header>
-      )}
-
-      {/* Meeting Container */}
-      <div
-        ref={meetingContainerRef}
-        className="flex-1 relative bg-black min-h-0 w-full"
-        style={{ height: showControls ? 'calc(100vh - 57px)' : '100vh' }}
-      >
-        {loading ? (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <Loader2 className="h-12 w-12 animate-spin text-blue-500 mx-auto mb-4" />
-              <p className="text-white text-lg">Starting your meeting...</p>
-              <p className="text-gray-400 text-sm mt-2">This will just take a moment</p>
-            </div>
-          </div>
-        ) : jwtToken ? (
-          <JaaSMeeting
-            appId={process.env.NEXT_PUBLIC_JITSI_APP_ID!}
-            roomName={roomId}
-            jwt={jwtToken}
-            getIFrameRef={(node) => {
-              node.style.height    = '100%';
-              node.style.width     = '100%';
-              node.style.border    = 'none';
-              node.style.position  = 'absolute';
-              node.style.top       = '0';
-              node.style.left      = '0';
-              node.style.right     = '0';
-              node.style.bottom    = '0';
-            }}
-            configOverwrite={activeConfig}
-            interfaceConfigOverwrite={activeInterfaceConfig}
-            onApiReady={handleApiReady}
-          />
-        ) : null}
-      </div>
-
-      {/* Bottom Controls — your original, unchanged */}
-      {!showControls && (
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800/90 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-700 shadow-lg z-50">
-          <Button onClick={() => setShowControls(true)} variant="ghost" size="sm" className="text-white hover:bg-gray-700">
-            <Minimize2 className="h-4 w-4 mr-2" /> Show Controls
-          </Button>
-          <Button onClick={toggleFullscreen} variant="ghost" size="sm" className="text-white hover:bg-gray-700 ml-2">
-            <Maximize2 className="h-4 w-4" />
-          </Button>
         </div>
       )}
 
-      {/* ── ADMIN RECORDER — only visible to host ── */}
+      {/* Jitsi container */}
+      <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+
+      {/* Admin recorder — only visible to host */}
       {isHost && <AdminRecorder />}
 
+      <style>{`
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+      `}</style>
     </div>
+  );
+}
+
+export default function MeetingRoomPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", background: "#0f172a" }}>
+        <div style={{ textAlign: "center", color: "#f1f5f9" }}>
+          <div style={{ width: 48, height: 48, border: "3px solid #334155", borderTopColor: "#378ADD", borderRadius: "50%", animation: "spin 0.8s linear infinite", margin: "0 auto 16px" }} />
+          <p>Loading meeting...</p>
+        </div>
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    }>
+      <MeetingRoomContent />
+    </Suspense>
   );
 }
