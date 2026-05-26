@@ -1,21 +1,11 @@
 'use client';
 
 // ─────────────────────────────────────────────────────────────
-//  FILE: /app/meeting/[roomId]/page.tsx
-//
-//  INSTALL (if not already done):
-//    npm install @ffmpeg/ffmpeg @ffmpeg/util
-//
-//  next.config.js — add headers for FFmpeg WASM:
-//    async headers() {
-//      return [{
-//        source: "/meeting/:path*",
-//        headers: [
-//          { key: "Cross-Origin-Opener-Policy",   value: "same-origin" },
-//          { key: "Cross-Origin-Embedder-Policy", value: "require-corp" },
-//        ],
-//      }];
-//    }
+//  MEETING PAGE - WITH RECORDING ONLY (NO MP4 CONVERSION)
+//  - Start / Pause / Resume / Stop recording
+//  - Saves as WebM format only
+//  - Asks for folder permission when clicking Start Recording
+//  - Use external converter.html to convert WebM to MP4 later
 // ─────────────────────────────────────────────────────────────
 
 import { useState, useEffect, useRef, useCallback } from 'react';
@@ -27,59 +17,86 @@ import { Shield, Video, ArrowLeft, Loader2, Maximize2, Minimize2, AlertCircle } 
 import { JaaSMeeting } from '@jitsi/react-sdk';
 
 // ════════════════════════════════════════════════════════════
-//  ADMIN RECORDER — floating panel, only visible to host
+//  ADMIN RECORDER — ONLY RECORDING (NO MP4 CONVERSION)
+//  Saves as WebM with automatic folder selection
 // ════════════════════════════════════════════════════════════
 function AdminRecorder() {
-  const [uiState, setUiState]           = useState<"idle"|"recording"|"paused"|"converting"|"done">("idle");
-  const [timer, setTimer]               = useState("00:00:00");
-  const [pauseCount, setPauseCount]     = useState(0);
-  const [pauseLogs, setPauseLogs]       = useState<{ num: number; at: string }[]>([]);
-  const [quality, setQuality]           = useState("2500000");
-  const [dayNum, setDayNum]             = useState("COMBO Sessions");
-  const [batchLabel, setBatchLabel]     = useState("IICS_Batch14");
-  const [recAlert, setRecAlert]         = useState<{ msg: string; type: string } | null>(null);
-  const [dlMeta, setDlMeta]             = useState<{ duration: string; size: string; pauses: number; format: string } | null>(null);
-  const [convertProgress, setConvertProgress] = useState(0);
-  const [ffmpegReady, setFfmpegReady]   = useState(false);
-  const [minimized, setMinimized]       = useState(false);
+  const [uiState, setUiState] = useState<"idle"|"recording"|"paused"|"saved">("idle");
+  const [timer, setTimer] = useState("00:00:00");
+  const [pauseCount, setPauseCount] = useState(0);
+  const [pauseLogs, setPauseLogs] = useState<{ num: number; at: string }[]>([]);
+  const [quality, setQuality] = useState("2500000");
+  const [dayNum, setDayNum] = useState("COMBO Sessions");
+  const [batchLabel, setBatchLabel] = useState("IICS_Batch14");
+  const [recAlert, setRecAlert] = useState<{ msg: string; type: string } | null>(null);
+  const [minimized, setMinimized] = useState(false);
+  const [voiceEnabled, setVoiceEnabled] = useState(true);
+  const [lastSavedSize, setLastSavedSize] = useState<string | null>(null);
+  const [lastSavedDuration, setLastSavedDuration] = useState<string | null>(null);
+  
+  // Folder selection states
+  const [selectedFolder, setSelectedFolder] = useState<any>(null);
+  const [folderName, setFolderName] = useState("");
+  const [isRequestingFolder, setIsRequestingFolder] = useState(false);
 
-  const mrRef         = useRef<MediaRecorder | null>(null);
-  const chunksRef     = useRef<Blob[]>([]);
-  const streamRef     = useRef<MediaStream | null>(null);
-  const timerRef      = useRef<NodeJS.Timeout | null>(null);
-  const totalSecsRef  = useRef(0);
+  const mrRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const streamRef = useRef<MediaStream | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const totalSecsRef = useRef(0);
   const pauseCountRef = useRef(0);
-  const webmBlobRef   = useRef<Blob | null>(null);
-  const mp4BlobRef    = useRef<Blob | null>(null);
-  const ffmpegRef     = useRef<any>(null);
 
-  // ── Load FFmpeg.wasm ──────────────────────────────────────
+  // Load saved folder name from localStorage on mount
   useEffect(() => {
-    let cancelled = false;
-    async function loadFF() {
-      try {
-        const { FFmpeg }    = await import("@ffmpeg/ffmpeg");
-        const { toBlobURL } = await import("@ffmpeg/util");
-        const ff = new FFmpeg();
-        ff.on("progress", ({ progress }: { progress: number }) => {
-          setConvertProgress(Math.round(progress * 100));
-        });
-        const base = "https://unpkg.com/@ffmpeg/core@0.12.6/dist/umd";
-        await ff.load({
-          coreURL: await toBlobURL(`${base}/ffmpeg-core.js`,   "text/javascript"),
-          wasmURL: await toBlobURL(`${base}/ffmpeg-core.wasm`, "application/wasm"),
-        });
-        if (!cancelled) { ffmpegRef.current = ff; setFfmpegReady(true); }
-      } catch (e) { console.warn("FFmpeg load failed:", e); }
+    const savedFolderName = localStorage.getItem('rishab_folder_name');
+    if (savedFolderName) {
+      setFolderName(savedFolderName);
+      // Note: We can't restore the actual folder handle, just the name
     }
-    loadFF();
-    return () => { cancelled = true; };
   }, []);
+
+  // ── Voice Announcement Function ─────────────────────────────
+  const speak = useCallback((message: string, type: 'start' | 'stop' | 'pause' | 'resume' = 'start') => {
+    if (!voiceEnabled) return;
+    
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      
+      const utterance = new SpeechSynthesisUtterance(message);
+      
+      switch (type) {
+        case 'start':
+          utterance.rate = 0.9;
+          utterance.pitch = 1.1;
+          break;
+        case 'stop':
+          utterance.rate = 0.9;
+          utterance.pitch = 0.9;
+          break;
+        case 'pause':
+          utterance.rate = 0.85;
+          utterance.pitch = 1.0;
+          break;
+        case 'resume':
+          utterance.rate = 0.9;
+          utterance.pitch = 1.0;
+          break;
+      }
+      
+      const voices = window.speechSynthesis.getVoices();
+      const femaleVoice = voices.find(v => v.name.includes('Google UK English Female') || v.name.includes('Samantha'));
+      if (femaleVoice) utterance.voice = femaleVoice;
+      
+      window.speechSynthesis.speak(utterance);
+      showRecAlert(message, 'info');
+    }
+  }, [voiceEnabled]);
 
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
       if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop());
+      window.speechSynthesis.cancel();
     };
   }, []);
 
@@ -89,8 +106,8 @@ function AdminRecorder() {
   }, []);
 
   const fmtTime = (s: number) => {
-    const h   = String(Math.floor(s / 3600)).padStart(2, "0");
-    const m   = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
+    const h = String(Math.floor(s / 3600)).padStart(2, "0");
+    const m = String(Math.floor((s % 3600) / 60)).padStart(2, "0");
     const sec = String(s % 60).padStart(2, "0");
     return `${h}:${m}:${sec}`;
   };
@@ -106,9 +123,69 @@ function AdminRecorder() {
     if (timerRef.current) { clearInterval(timerRef.current); timerRef.current = null; }
   };
 
-  // ── Start ─────────────────────────────────────────────────
-  const startRec = async () => {
+  const resetForNewRecording = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(t => t.stop());
+      streamRef.current = null;
+    }
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+    
+    setUiState("idle");
+    setTimer("00:00:00");
+    setPauseCount(0);
+    setPauseLogs([]);
+    setLastSavedSize(null);
+    setLastSavedDuration(null);
+    
+    chunksRef.current = [];
+    totalSecsRef.current = 0;
+    pauseCountRef.current = 0;
+    
+    window.speechSynthesis.cancel();
+  };
+
+  // ── Request Folder Permission ─────────────────────────────
+  const requestFolderPermission = async (): Promise<boolean> => {
     try {
+      const dirHandle = await (window as any).showDirectoryPicker();
+      setSelectedFolder(dirHandle);
+      setFolderName(dirHandle.name);
+      localStorage.setItem('rishab_folder_name', dirHandle.name);
+      showRecAlert(`📁 Folder selected: ${dirHandle.name}`, "success");
+      showRecAlert(`✅ Recordings will save here automatically!`, "success");
+      return true;
+    } catch (err) {
+      if ((err as any).name !== 'AbortError') {
+        showRecAlert("Folder selection failed", "error");
+      }
+      return false;
+    }
+  };
+
+  // ── Start Recording (asks for folder permission FIRST) ────
+  const startRec = async () => {
+    // If no folder selected, ask for permission first
+    if (!selectedFolder) {
+      setIsRequestingFolder(true);
+      const folderSelected = await requestFolderPermission();
+      setIsRequestingFolder(false);
+      
+      if (!folderSelected) {
+        // User cancelled folder selection
+        showRecAlert("Folder selection required to start recording", "warn");
+        return;
+      }
+    }
+    
+    // Now proceed with actual recording
+    resetForNewRecording();
+    
+    try {
+      speak("Recording started. This session is being recorded.", 'start');
+      
       const screenStream = await navigator.mediaDevices.getDisplayMedia({
         video: { displaySurface: "monitor" },
         audio: true,
@@ -120,14 +197,14 @@ function AdminRecorder() {
           audio: {
             noiseSuppression: true,
             echoCancellation: true,
-            autoGainControl:  true,
-            sampleRate:       48000,
+            autoGainControl: true,
+            sampleRate: 48000,
           },
           video: false,
         });
       } catch { showRecAlert("Mic not available — screen audio only", "warn"); }
 
-      const ctx  = new AudioContext({ sampleRate: 48000 });
+      const ctx = new AudioContext({ sampleRate: 48000 });
       const dest = ctx.createMediaStreamDestination();
 
       if (screenStream.getAudioTracks().length > 0) {
@@ -148,13 +225,13 @@ function AdminRecorder() {
         ...dest.stream.getAudioTracks(),
       ]);
 
-      streamRef.current     = combined;
-      chunksRef.current     = [];
-      totalSecsRef.current  = 0;
+      streamRef.current = combined;
+      chunksRef.current = [];
+      totalSecsRef.current = 0;
       pauseCountRef.current = 0;
-      setPauseCount(0); setPauseLogs([]);
-      webmBlobRef.current = null; mp4BlobRef.current = null;
-      setDlMeta(null); setConvertProgress(0); setTimer("00:00:00");
+      setPauseCount(0);
+      setPauseLogs([]);
+      setTimer("00:00:00");
 
       const mime = MediaRecorder.isTypeSupported("video/webm;codecs=vp9,opus")
         ? "video/webm;codecs=vp9,opus" : "video/webm";
@@ -165,14 +242,13 @@ function AdminRecorder() {
       });
       mrRef.current = mr;
       mr.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
-      mr.onstop = () => handleStop();
       mr.start(500);
       startTimer();
       setUiState("recording");
-      showRecAlert("Recording started — students cannot see this!", "info");
+      showRecAlert("Recording started — students cannot see this panel!", "info");
 
       screenStream.getVideoTracks()[0].onended = () => {
-        if (mrRef.current && mrRef.current.state !== "inactive") stopRec();
+        if (mrRef.current && mrRef.current.state !== "inactive") stopAndSave();
       };
     } catch (err: any) {
       if (err.name === "NotAllowedError")
@@ -181,9 +257,10 @@ function AdminRecorder() {
     }
   };
 
-  // ── Pause ─────────────────────────────────────────────────
+  // ── Pause Recording ───────────────────────────────────────
   const pauseRec = () => {
     if (mrRef.current && mrRef.current.state === "recording") {
+      speak("Recording paused. Will resume shortly.", 'pause');
       mrRef.current.pause();
       stopTimer();
       pauseCountRef.current++;
@@ -195,9 +272,10 @@ function AdminRecorder() {
     }
   };
 
-  // ── Resume ────────────────────────────────────────────────
+  // ── Resume Recording ──────────────────────────────────────
   const resumeRec = () => {
     if (mrRef.current && mrRef.current.state === "paused") {
+      speak("Recording resumed. Continuing session recording.", 'resume');
       mrRef.current.resume();
       startTimer();
       setUiState("recording");
@@ -205,119 +283,98 @@ function AdminRecorder() {
     }
   };
 
-  // ── Stop ──────────────────────────────────────────────────
-  const stopRec = () => {
+  // ── Stop and Save as WebM (saves to selected folder) ──────
+  const stopAndSave = async () => {
     if (mrRef.current && mrRef.current.state !== "inactive") {
+      speak("Recording stopped. Saving your recording.", 'stop');
       mrRef.current.stop();
       if (streamRef.current) streamRef.current.getTracks().forEach(t => t.stop());
       stopTimer();
+      
+      setTimeout(async () => {
+        if (chunksRef.current.length > 0) {
+          const webmBlob = new Blob(chunksRef.current, { type: "video/webm" });
+          const duration = fmtTime(totalSecsRef.current);
+          const sizeMB = (webmBlob.size / 1024 / 1024).toFixed(1);
+          
+          const date = new Date().toISOString().slice(0, 10);
+          const timestamp = new Date().toTimeString().slice(0, 8).replace(/:/g, '-');
+          const fileName = `${batchLabel}_${dayNum}_${date}_${timestamp}.webm`;
+          
+          // Save to selected folder (should always have one now)
+          if (selectedFolder) {
+            try {
+              const fileHandle = await selectedFolder.getFileHandle(fileName, { create: true });
+              const writable = await fileHandle.createWritable();
+              await writable.write(webmBlob);
+              await writable.close();
+              
+              setLastSavedSize(sizeMB);
+              setLastSavedDuration(duration);
+              setUiState("saved");
+              
+              showRecAlert(`✅ Saved to: ${folderName}\\${fileName}`, "success");
+              showRecAlert(`Duration: ${duration} | Size: ~${sizeMB} MB`, "info");
+            } catch (err) {
+              showRecAlert("Error saving to folder", "error");
+              // Fallback to download
+              const url = URL.createObjectURL(webmBlob);
+              const a = document.createElement('a');
+              a.href = url;
+              a.download = fileName;
+              a.click();
+              setTimeout(() => URL.revokeObjectURL(url), 1000);
+            }
+          } else {
+            // Should not happen, but fallback
+            const url = URL.createObjectURL(webmBlob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            setTimeout(() => URL.revokeObjectURL(url), 1000);
+            
+            setLastSavedSize(sizeMB);
+            setLastSavedDuration(duration);
+            setUiState("saved");
+            showRecAlert(`✅ Recording saved! Duration: ${duration} | Size: ~${sizeMB} MB`, "success");
+          }
+          
+          showRecAlert(`📁 Use converter.html to convert to MP4 later`, "info");
+        } else {
+          showRecAlert("No recording data to save", "warn");
+          resetForNewRecording();
+        }
+      }, 100);
     }
-  };
-
-  // ── Convert WebM → MP4 ────────────────────────────────────
-  const handleStop = async () => {
-    const webmBlob = new Blob(chunksRef.current, { type: "video/webm" });
-    webmBlobRef.current = webmBlob;
-
-    if (!ffmpegRef.current) {
-      const sizeMB = (webmBlob.size / 1024 / 1024).toFixed(1);
-      setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "webm" });
-      setUiState("done");
-      showRecAlert("FFmpeg not loaded — downloading as WebM.", "warn");
-      return;
-    }
-
-    setUiState("converting");
-    setConvertProgress(0);
-    showRecAlert("Converting to MP4 — do NOT close this tab!", "info");
-
-    try {
-      const { fetchFile } = await import("@ffmpeg/util");
-      const ff = ffmpegRef.current;
-      await ff.writeFile("input.webm", await fetchFile(webmBlob));
-      await ff.exec([
-        "-i", "input.webm",
-        "-c:v", "libx264",
-        "-preset", "fast",
-        "-crf", "23",
-        "-c:a", "aac",
-        "-b:a", "128k",
-        "-movflags", "+faststart",
-        "output.mp4",
-      ]);
-      const data     = await ff.readFile("output.mp4");
-      const mp4Blob  = new Blob([data.buffer], { type: "video/mp4" });
-      mp4BlobRef.current = mp4Blob;
-      const sizeMB   = (mp4Blob.size / 1024 / 1024).toFixed(1);
-      setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "mp4" });
-      setUiState("done");
-      showRecAlert("MP4 ready! Click Download to save.", "success");
-    } catch (err) {
-      console.error("Conversion error:", err);
-      const sizeMB = (webmBlobRef.current!.size / 1024 / 1024).toFixed(1);
-      setDlMeta({ duration: fmtTime(totalSecsRef.current), size: sizeMB, pauses: pauseCountRef.current, format: "webm" });
-      setUiState("done");
-      showRecAlert("MP4 conversion failed — downloading as WebM.", "warn");
-    }
-  };
-
-  // ── Download ──────────────────────────────────────────────
-  const downloadFile = () => {
-    const blob = mp4BlobRef.current || webmBlobRef.current;
-    if (!blob) return;
-    const ext  = mp4BlobRef.current ? "mp4" : "webm";
-    const date = new Date().toISOString().slice(0, 10);
-    const name = `${batchLabel}_${dayNum}_${date}.${ext}`;
-    const url  = URL.createObjectURL(blob);
-    const a    = document.createElement("a");
-    a.href = url; a.download = name; a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 3000);
-  };
-
-  const resetAll = () => {
-    setUiState("idle"); setTimer("00:00:00");
-    setPauseLogs([]); setPauseCount(0);
-    setDlMeta(null); setConvertProgress(0);
-    webmBlobRef.current = null; mp4BlobRef.current = null;
-  };
-
-  // ── Alert colors ──────────────────────────────────────────
-  const alertColors: Record<string, { bg: string; color: string; border: string }> = {
-    info:    { bg: "#E6F1FB", color: "#0C447C", border: "#B5D4F4" },
-    warn:    { bg: "#FAEEDA", color: "#633806", border: "#FAC775" },
-    success: { bg: "#EAF3DE", color: "#27500A", border: "#C0DD97" },
   };
 
   const dotColor: Record<string, string> = {
-    idle: "#64748b", recording: "#E24B4A", paused: "#EF9F27", converting: "#378ADD", done: "#639922",
+    idle: "#64748b", recording: "#E24B4A", paused: "#EF9F27", saved: "#639922",
   };
 
   const statusText: Record<string, string> = {
-    idle:       "Ready to record",
-    recording:  "Recording in progress",
-    paused:     "Paused — same video file",
-    converting: `Converting to MP4... ${convertProgress}%`,
-    done:       "Recording complete ✓",
+    idle: "Ready to record",
+    recording: "Recording in progress",
+    paused: "Paused — same video file",
+    saved: "Recording saved ✓",
   };
 
-  // ── Render ────────────────────────────────────────────────
   return (
     <div style={{
-      position:   "fixed",
-      bottom:     70,           // above the JAAS bottom toolbar
-      right:      16,
-      zIndex:     9999,
-      width:      minimized ? 200 : 400,
+      position: "fixed",
+      bottom: 70,
+      right: 16,
+      zIndex: 9999,
+      width: minimized ? 200 : 400,
       background: "#0f172a",
-      border:     "1px solid #334155",
+      border: "1px solid #334155",
       borderRadius: 12,
       fontFamily: "system-ui, sans-serif",
-      boxShadow:  "0 8px 32px rgba(0,0,0,0.6)",
+      boxShadow: "0 8px 32px rgba(0,0,0,0.6)",
       transition: "width 0.2s",
-      overflow:   "hidden",
+      overflow: "hidden",
     }}>
-
-      {/* ── Header bar (click to minimize/expand) ── */}
       <div
         onClick={() => setMinimized(m => !m)}
         style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 14px", borderBottom: "1px solid #334155", cursor: "pointer" }}
@@ -325,92 +382,122 @@ function AdminRecorder() {
         <div style={{
           width: 8, height: 8, borderRadius: "50%", flexShrink: 0,
           background: dotColor[uiState],
-          animation: (uiState === "recording" || uiState === "converting") ? "blink 1s infinite" : "none",
+          animation: (uiState === "recording") ? "blink 1s infinite" : "none",
         }} />
         <span style={{ fontSize: 12, fontWeight: 600, color: "#f1f5f9", flex: 1 }}>
-          {minimized
-            ? (uiState === "recording" ? `⏺ REC ${timer}` : "🔴 Admin Recorder")
-            : "🔴 Admin Recorder "}
+          {minimized ? (uiState === "recording" ? `⏺ REC ${timer}` : "🔴 Admin Recorder") : "🔴 Admin Recorder"}
         </span>
         <span style={{ fontSize: 11, color: "#64748b" }}>{minimized ? "▲" : "▼"}</span>
       </div>
 
-      {/* ── Body ── */}
       {!minimized && (
         <div style={{ padding: 14 }}>
+          {/* Voice Toggle */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10, padding: "6px 8px", background: "#1e293b", borderRadius: 6 }}>
+            <span style={{ fontSize: 11, color: "#f1f5f9" }}>🔊 Voice Announcements</span>
+            <button
+              onClick={() => setVoiceEnabled(!voiceEnabled)}
+              style={{
+                width: 44, height: 22, borderRadius: 22, background: voiceEnabled ? "#639922" : "#64748b",
+                border: "none", cursor: "pointer", position: "relative", transition: "0.2s"
+              }}
+            >
+              <div style={{
+                width: 18, height: 18, borderRadius: "50%", background: "#fff",
+                position: "absolute", top: 2, left: voiceEnabled ? 24 : 2, transition: "0.2s"
+              }} />
+            </button>
+          </div>
 
-          {/* FFmpeg status */}
-          <p style={{ fontSize: 10, color: ffmpegReady ? "#639922" : "#EF9F27", marginBottom: 10 }}>
-            {ffmpegReady ? "✅ MP4 converter ready" : "⏳ Loading MP4 converter..."}
-          </p>
-
-          {/* Alert */}
           {recAlert && (
-            <div style={{ padding: "8px 12px", borderRadius: 6, fontSize: 12, marginBottom: 10, background: alertColors[recAlert.type].bg, color: alertColors[recAlert.type].color, border: `1px solid ${alertColors[recAlert.type].border}` }}>
+            <div style={{ padding: "8px 12px", borderRadius: 6, fontSize: 12, marginBottom: 10, background: "#E6F1FB", color: "#0C447C", border: "1px solid #B5D4F4" }}>
               {recAlert.msg}
             </div>
           )}
 
-          {/* Status + Timer */}
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-            <div style={{ width: 8, height: 8, borderRadius: "50%", background: dotColor[uiState], animation: (uiState === "recording" || uiState === "converting") ? "blink 1s infinite" : "none" }} />
+            <div style={{ width: 8, height: 8, borderRadius: "50%", background: dotColor[uiState], animation: (uiState === "recording") ? "blink 1s infinite" : "none" }} />
             <span style={{ fontSize: 12, color: "#f1f5f9", flex: 1 }}>{statusText[uiState]}</span>
             <span style={{ fontSize: 18, fontWeight: 700, fontFamily: "monospace", color: "#f1f5f9" }}>{timer}</span>
           </div>
 
-          {/* Progress bar */}
-          {uiState === "converting" && (
-            <div style={{ background: "#1e293b", borderRadius: 4, height: 5, marginBottom: 12, overflow: "hidden" }}>
-              <div style={{ height: "100%", background: "#378ADD", width: `${convertProgress}%`, transition: "width 0.4s" }} />
-            </div>
-          )}
-
-          {/* Settings — only when idle or done */}
-          {(uiState === "idle" || uiState === "done") && (
-            <div style={{ marginBottom: 12, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
-              <div>
-                <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Batch</p>
-                <input
-                  value={batchLabel}
-                  onChange={e => setBatchLabel(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                />
+          {/* Settings - only when idle or saved */}
+          {(uiState === "idle" || uiState === "saved") && (
+            <div style={{ marginBottom: 12 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 12 }}>
+                <div>
+                  <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Batch</p>
+                  <input value={batchLabel} onChange={e => setBatchLabel(e.target.value)} style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }} />
+                </div>
+                <div>
+                  <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Day</p>
+                  <input value={dayNum} onChange={e => setDayNum(e.target.value)} style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }} />
+                </div>
+                <div style={{ gridColumn: "span 2" }}>
+                  <select value={quality} onChange={e => setQuality(e.target.value)} style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}>
+                    <option value="2500000">High Quality (2.5 Mbps)</option>
+                    <option value="1000000">Medium Quality (1 Mbps)</option>
+                    <option value="500000">Low Quality (500 Kbps)</option>
+                  </select>
+                </div>
               </div>
-              <div>
-                <p style={{ fontSize: 10, color: "#64748b", marginBottom: 3 }}>Day</p>
-                <input
-                  value={dayNum}
-                  onChange={e => setDayNum(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                />
-              </div>
-              <div style={{ gridColumn: "span 2" }}>
-                <select
-                  value={quality}
-                  onChange={e => setQuality(e.target.value)}
-                  style={{ width: "100%", padding: "5px 8px", borderRadius: 6, background: "#1e293b", color: "#f1f5f9", border: "1px solid #334155", fontSize: 11 }}
-                >
-                  <option value="2500000">High Quality (2.5 Mbps)</option>
-                  <option value="1000000">Medium Quality (1 Mbps)</option>
-                  <option value="500000">Low Quality (500 Kbps)</option>
-                </select>
-              </div>
+              
+              {/* Folder info display (no button needed anymore) */}
+              {folderName && (
+                <div style={{ marginBottom: 12, padding: "6px", background: "#1e293b", borderRadius: 6, textAlign: "center" }}>
+                  <p style={{ fontSize: 10, color: "#94a3b8" }}>
+                    💾 Saving to: <strong>{folderName}</strong>
+                  </p>
+                </div>
+              )}
+              {!folderName && (
+                <div style={{ marginBottom: 12, padding: "6px", background: "#451a03", borderRadius: 6, textAlign: "center" }}>
+                  <p style={{ fontSize: 10, color: "#fbbf24" }}>
+                    ⚠️ Click "Start Recording" to select save folder
+                  </p>
+                </div>
+              )}
             </div>
           )}
 
           {/* Controls */}
           <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 10 }}>
-            {uiState === "idle"       && <RBtn color="red"   onClick={startRec}>▶ Start Recording</RBtn>}
-            {uiState === "recording"  && (<>
-              <RBtn color="amber" onClick={pauseRec}>⏸ Pause</RBtn>
-              <RBtn color="gray"  onClick={stopRec}>⏹ Stop & Save</RBtn>
-            </>)}
-            {uiState === "paused"     && (<>
-              <RBtn color="green" onClick={resumeRec}>▶ Resume</RBtn>
-              <RBtn color="gray"  onClick={stopRec}>⏹ Stop & Save</RBtn>
-            </>)}
-            {uiState === "converting" && <RBtn color="gray" onClick={() => {}}>⏳ Converting...</RBtn>}
-            {uiState === "done"       && <RBtn color="red"  onClick={resetAll}>▶ New Recording</RBtn>}
+            {uiState === "idle" && (
+              <button 
+                onClick={startRec} 
+                disabled={isRequestingFolder}
+                style={{ padding: "6px 14px", background: "#E24B4A", border: "none", borderRadius: 6, color: "#fff", fontSize: 11, fontWeight: 600, cursor: isRequestingFolder ? "not-allowed" : "pointer", opacity: isRequestingFolder ? 0.6 : 1 }}
+              >
+                {isRequestingFolder ? "⏳ Selecting Folder..." : "▶ Start Recording"}
+              </button>
+            )}
+            {uiState === "recording" && (
+              <>
+                <button onClick={pauseRec} style={{ padding: "6px 14px", background: "#EF9F27", border: "none", borderRadius: 6, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  ⏸ Pause
+                </button>
+                <button onClick={stopAndSave} style={{ padding: "6px 14px", background: "#334155", border: "none", borderRadius: 6, color: "#94a3b8", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  ⏹ Stop & Save
+                </button>
+              </>
+            )}
+            {uiState === "paused" && (
+              <>
+                <button onClick={resumeRec} style={{ padding: "6px 14px", background: "#639922", border: "none", borderRadius: 6, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  ▶ Resume
+                </button>
+                <button onClick={stopAndSave} style={{ padding: "6px 14px", background: "#334155", border: "none", borderRadius: 6, color: "#94a3b8", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  ⏹ Stop & Save
+                </button>
+              </>
+            )}
+            {uiState === "saved" && (
+              <>
+                <button onClick={resetForNewRecording} style={{ padding: "6px 14px", background: "#E24B4A", border: "none", borderRadius: 6, color: "#fff", fontSize: 11, fontWeight: 600, cursor: "pointer" }}>
+                  ▶ New Recording
+                </button>
+              </>
+            )}
           </div>
 
           {/* Pause log */}
@@ -424,18 +511,12 @@ function AdminRecorder() {
             </div>
           )}
 
-          {/* Download */}
-          {uiState === "done" && dlMeta && (
-            <div style={{ textAlign: "center", paddingTop: 8, borderTop: "1px solid #334155" }}>
-              <button
-                onClick={downloadFile}
-                style={{ width: "100%", padding: "9px", background: "#185FA5", border: "none", borderRadius: 6, color: "#E6F1FB", fontSize: 13, fontWeight: 600, cursor: "pointer" }}
-              >
-                ⬇ Download {dlMeta.format.toUpperCase()}
-              </button>
-              <p style={{ fontSize: 10, color: "#64748b", marginTop: 6 }}>
-                {batchLabel}_{dayNum} · {dlMeta.duration} · ~{dlMeta.size} MB · {dlMeta.pauses} pause(s)
-              </p>
+          {/* Info about conversion */}
+          {uiState === "saved" && lastSavedSize && (
+            <div style={{ textAlign: "center", paddingTop: 8, borderTop: "1px solid #334155", fontSize: 10, color: "#64748b" }}>
+              <p>✅ Recording saved as WebM</p>
+              <p>Duration: {lastSavedDuration} | Size: ~{lastSavedSize} MB</p>
+              <p style={{ marginTop: 6, color: "#60a5fa" }}>💡 Use converter.html to convert to MP4</p>
             </div>
           )}
         </div>
@@ -446,53 +527,33 @@ function AdminRecorder() {
   );
 }
 
-// ── Small button component ────────────────────────────────────
-function RBtn({ color, onClick, children }: { color: string; onClick: () => void; children: React.ReactNode }) {
-  const map: Record<string, { bg: string; c: string }> = {
-    red:   { bg: "#E24B4A", c: "#fff" },
-    amber: { bg: "#EF9F27", c: "#fff" },
-    green: { bg: "#639922", c: "#fff" },
-    gray:  { bg: "#334155", c: "#94a3b8" },
-  };
-  const s = map[color] || map.gray;
-  return (
-    <button
-      onClick={onClick}
-      style={{ padding: "6px 14px", background: s.bg, border: "none", borderRadius: 6, color: s.c, fontSize: 11, fontWeight: 600, cursor: "pointer" }}
-    >
-      {children}
-    </button>
-  );
-}
-
 // ════════════════════════════════════════════════════════════
-//  MAIN MEETING PAGE — your original code, unchanged
+//  MAIN MEETING PAGE
 // ════════════════════════════════════════════════════════════
 export default function MeetingRoom() {
-  const params       = useParams();
+  const params = useParams();
   const searchParams = useSearchParams();
-  const router       = useRouter();
+  const router = useRouter();
 
-  const roomId   = params.roomId as string;
-  const isHost   = searchParams.get('host') === 'true';
+  const roomId = params.roomId as string;
+  const isHost = searchParams.get('host') === 'true';
   const userName = searchParams.get('name') || (isHost ? 'Instructor' : 'Student');
 
-  const [jwtToken, setJwtToken]       = useState<string | null>(null);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState<string | null>(null);
+  const [jwtToken, setJwtToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [showControls, setShowControls] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const meetingContainerRef           = useRef<HTMLDivElement>(null);
+  const meetingContainerRef = useRef<HTMLDivElement>(null);
 
-  // Fetch JWT token
   useEffect(() => {
     const fetchToken = async () => {
       try {
         setLoading(true);
         const response = await fetch('/api/generate-jitsi-token', {
-          method:  'POST',
+          method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body:    JSON.stringify({ roomName: roomId, userName, isModerator: isHost }),
+          body: JSON.stringify({ roomName: roomId, userName, isModerator: isHost }),
         });
         if (!response.ok) throw new Error('Failed to generate meeting token');
         const data = await response.json();
@@ -536,28 +597,27 @@ export default function MeetingRoom() {
     );
   }
 
-  // ── Role-based config (your original — unchanged) ─────────
   const instructorConfig = {
     startWithAudioMuted: false,
     startWithVideoMuted: false,
-    prejoinPageEnabled:  false,
-    disableBranding:     true,
-    hideLogo:            true,
+    prejoinPageEnabled: false,
+    disableBranding: true,
+    hideLogo: true,
     participantsPane: {
       hideModeratorSettingsTab: false,
-      hideMoreActionsButton:    false,
-      hideMuteAllButton:        false,
+      hideMoreActionsButton: false,
+      hideMuteAllButton: false,
     },
-    enableModeratorTools:  true,
+    enableModeratorTools: true,
     disableGrantModerator: false,
     toolbarButtons: [
-      'microphone','camera','desktop','fullscreen',
-      'hangup','profile','chat','recording',
-      'settings','raisehand','videoquality',
-      'filmstrip','tileview','participants-pane',
-      'security','invite','stats',
+      'microphone', 'camera', 'desktop', 'fullscreen',
+      'hangup', 'profile', 'chat', 'recording',
+      'settings', 'raisehand', 'videoquality',
+      'filmstrip', 'tileview', 'participants-pane',
+      'security', 'invite', 'stats',
     ],
-    audioLevels:         { enabled: true },
+    audioLevels: { enabled: true },
     enableTalkWhileMuted: false,
     height: '100%', width: '100%',
   };
@@ -565,56 +625,54 @@ export default function MeetingRoom() {
   const studentConfig = {
     startWithAudioMuted: false,
     startWithVideoMuted: false,
-    prejoinPageEnabled:  false,
-    disableBranding:     true,
-    hideLogo:            true,
+    prejoinPageEnabled: false,
+    disableBranding: true,
+    hideLogo: true,
     participantsPane: {
       hideModeratorSettingsTab: true,
-      hideMoreActionsButton:    true,
-      hideMuteAllButton:        true,
+      hideMoreActionsButton: true,
+      hideMuteAllButton: true,
     },
     disableGrantModerator: true,
     toolbarButtons: [
-      'microphone','camera','fullscreen','hangup',
-      'chat','raisehand','settings','tileview',
+      'microphone', 'camera', 'fullscreen', 'hangup',
+      'chat', 'raisehand', 'settings', 'tileview',
     ],
-    audioLevels:  { enabled: true },
+    audioLevels: { enabled: true },
     height: '100%', width: '100%',
   };
 
   const studentInterfaceConfig = {
-    SHOW_JITSI_WATERMARK:      false,
+    SHOW_JITSI_WATERMARK: false,
     SHOW_WATERMARK_FOR_GUESTS: false,
-    DEFAULT_BACKGROUND:        '#1a1a1a',
-    SHOW_MODERATOR_TOOLS:      false,
-    TOOLBAR_BUTTONS: ['microphone','camera','fullscreen','hangup','chat','raisehand','settings','tileview'],
-    VIDEO_LAYOUT_FIT:          'cover',
+    DEFAULT_BACKGROUND: '#1a1a1a',
+    SHOW_MODERATOR_TOOLS: false,
+    TOOLBAR_BUTTONS: ['microphone', 'camera', 'fullscreen', 'hangup', 'chat', 'raisehand', 'settings', 'tileview'],
+    VIDEO_LAYOUT_FIT: 'cover',
     DEFAULT_REMOTE_DISPLAY_NAME: 'Student',
   };
 
   const instructorInterfaceConfig = {
-    SHOW_JITSI_WATERMARK:      false,
+    SHOW_JITSI_WATERMARK: false,
     SHOW_WATERMARK_FOR_GUESTS: false,
-    DEFAULT_BACKGROUND:        '#1a1a1a',
-    SHOW_MODERATOR_TOOLS:      true,
+    DEFAULT_BACKGROUND: '#1a1a1a',
+    SHOW_MODERATOR_TOOLS: true,
     TOOLBAR_BUTTONS: [
-      'microphone','camera','desktop','fullscreen',
-      'hangup','profile','chat','recording',
-      'settings','raisehand','videoquality',
-      'filmstrip','tileview','participants-pane',
-      'security','invite','stats',
+      'microphone', 'camera', 'desktop', 'fullscreen',
+      'hangup', 'profile', 'chat', 'recording',
+      'settings', 'raisehand', 'videoquality',
+      'filmstrip', 'tileview', 'participants-pane',
+      'security', 'invite', 'stats',
     ],
-    VIDEO_LAYOUT_FIT:          'cover',
+    VIDEO_LAYOUT_FIT: 'cover',
     DEFAULT_REMOTE_DISPLAY_NAME: 'Student',
   };
 
-  const activeConfig          = isHost ? instructorConfig : studentConfig;
+  const activeConfig = isHost ? instructorConfig : studentConfig;
   const activeInterfaceConfig = isHost ? instructorInterfaceConfig : studentInterfaceConfig;
 
   return (
     <div className="h-screen flex flex-col bg-gray-900 overflow-hidden">
-
-      {/* Header — your original, unchanged */}
       {showControls && (
         <header className="bg-gray-800/90 backdrop-blur-sm px-4 py-2 border-b border-gray-700 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3">
@@ -641,7 +699,6 @@ export default function MeetingRoom() {
         </header>
       )}
 
-      {/* Meeting Container */}
       <div
         ref={meetingContainerRef}
         className="flex-1 relative bg-black min-h-0 w-full"
@@ -661,14 +718,14 @@ export default function MeetingRoom() {
             roomName={roomId}
             jwt={jwtToken}
             getIFrameRef={(node) => {
-              node.style.height    = '100%';
-              node.style.width     = '100%';
-              node.style.border    = 'none';
-              node.style.position  = 'absolute';
-              node.style.top       = '0';
-              node.style.left      = '0';
-              node.style.right     = '0';
-              node.style.bottom    = '0';
+              node.style.height = '100%';
+              node.style.width = '100%';
+              node.style.border = 'none';
+              node.style.position = 'absolute';
+              node.style.top = '0';
+              node.style.left = '0';
+              node.style.right = '0';
+              node.style.bottom = '0';
             }}
             configOverwrite={activeConfig}
             interfaceConfigOverwrite={activeInterfaceConfig}
@@ -677,7 +734,6 @@ export default function MeetingRoom() {
         ) : null}
       </div>
 
-      {/* Bottom Controls — your original, unchanged */}
       {!showControls && (
         <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800/90 backdrop-blur-sm rounded-full px-4 py-2 border border-gray-700 shadow-lg z-50">
           <Button onClick={() => setShowControls(true)} variant="ghost" size="sm" className="text-white hover:bg-gray-700">
@@ -689,9 +745,7 @@ export default function MeetingRoom() {
         </div>
       )}
 
-      {/* ── ADMIN RECORDER — only visible to host ── */}
       {isHost && <AdminRecorder />}
-
     </div>
   );
 }
