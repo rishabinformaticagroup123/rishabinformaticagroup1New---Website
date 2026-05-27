@@ -8,7 +8,7 @@ import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
-  description: "Join Batch 14 starting Jan 28, 2026. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
+  description: "Join Batch 15 starting June 1, 2026. Master IICS Cloud, PowerCenter, and Snowflake with live projects and placement support.",
 };
 
 export default function IICSComboPage() {
@@ -18,8 +18,8 @@ export default function IICSComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 14 Starts Jan 28, 2026, 7.15 PM to 9.00 PM </span>
-            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live - Batch 14</h1>
+            <span className={styles.batchBadge}>New Batch 15 Starts June 1, 2026, 7.15 PM to 9.00 PM </span>
+            <h1>Informatica IICS <span className={styles.highlight}>COMBO</span> Training Live - Batch 15</h1>
             <h2>SQL + PowerCenter + IICS Cloud + Snowflake</h2>
             <p className={styles.heroDescription}>
               Master both PowerCenter and IICS Cloud with parallel comparisons. 45-day intensive program with real-time projects and placement assistance.
@@ -171,10 +171,10 @@ export default function IICSComboPage() {
         <h2 className={styles.sectionTitle}>Next Batch Details</h2>
         <div className={styles.batchCards}>
           <div className={styles.batchCard}>
-            <h3>Batch 14</h3>
+            <h3>Batch 15</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: Jan 28, 2026</span>
+              <span>Starts: June 1, 2026</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />
