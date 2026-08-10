@@ -4,7 +4,7 @@ import { CheckIcon, DownloadIcon, CalendarIcon, ClockIcon, UserIcon, AwardIcon }
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./page.module.css";
-import TestimonialSlider from "@/components/testimonial-slider";
+import TestimonialSlider from "@/components/testimonial-slider"; // ✅ ADD THIS IMPORT
 
 export const metadata = {
   title: "Informatica IICS COMBO Training | PowerCenter + IICS + Snowflake",
@@ -42,7 +42,7 @@ export default function IICSComboPage() {
 
             <div className={styles.ctaGroup}>
               <Button asChild className={styles.primaryButton}>
-                <Link href="https://lms.rishabinformaticagroup.com/payment?course_id=1">Enroll Now</Link>
+                <Link href="#enroll">Enroll Now</Link>
               </Button>
               <Button asChild variant="outline" className={styles.secondaryButton}>
                 <Link href="#syllabus">View Syllabus</Link>
@@ -166,7 +166,7 @@ export default function IICSComboPage() {
         </div>
       </section>
 
-      {/* Batch Details - UPDATED LINK */}
+      {/* Batch Details */}
       <section className={styles.batchSection} id="enroll">
         <h2 className={styles.sectionTitle}>Next Batch Details</h2>
         <div className={styles.batchCards}>
@@ -182,7 +182,7 @@ export default function IICSComboPage() {
             </div>
             <div className={styles.priceTag}>₹9,600 <span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="/payment?course_id=1">
+              <Link href="https://course.rishabinformaticagroup.com/courses/778212" target="_blank">
                 Enroll Now
               </Link>
             </Button>
@@ -217,7 +217,7 @@ export default function IICSComboPage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* ✅ UPDATED Testimonials Section - Using TestimonialSlider */}
       <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -229,15 +229,16 @@ export default function IICSComboPage() {
             </p>
           </div>
           
+          {/* ✅ USING YOUR TESTIMONIAL SLIDER COMPONENT */}
           <TestimonialSlider />
           
-          {/* Bottom CTA - UPDATED LINK */}
+          {/* Course-specific CTA */}
           <div className="text-center mt-12">
             <Link 
-              href="/payment?course_id=1"
+              href="#enroll"
               className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
             >
-              🚀 Join Batch 15 - Enroll Now
+              🚀 Join Batch 14 - Enroll Now
               <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -252,7 +253,7 @@ export default function IICSComboPage() {
   );
 }
 
-// Placeholder icons
+// Placeholder icons (replace with actual icon components)
 function CompareIcon() { return <div className={styles.icon}>↔️</div> }
 function CloudIcon() { return <div className={styles.icon}>☁️</div> }
 function DatabaseIcon() { return <div className={styles.icon}>🗄️</div> }

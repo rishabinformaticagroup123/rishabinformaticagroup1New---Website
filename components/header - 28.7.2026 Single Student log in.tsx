@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { Menu, X, ChevronDown, ExternalLink, Download, GraduationCap } from "lucide-react";
+import { Menu, X, ChevronDown, ExternalLink, Download } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -48,11 +48,11 @@ const MENU_ITEMS: MenuItem[] = [
             title: "Live Courses",
             items: [
               { name: "Informatica IICS Combo", href: "/courses/iics-combo-live" },
-              { name: "Snowflake Data Eng Combo", href: "/courses/snowflake-combo-live" },
+              { name: "Informatica IICS Cloud", href: "/courses/iics-cloud-live" },
               { name: "Informatica IICS CAI", href: "/courses/iics-cai-live" },
-              { name: "Azure Data Eng COMBO", href: "/courses/azure-combo-live" },
-              { name: "NextJS & React", href: "/courses/performance-engineering" },
-			  { name: "Data Ops & ML Ops", href: "/courses/data-ops+ml-ops" },
+              { name: "Azure Data Eng. COMBO", href: "/courses/azure-combo-live" },
+              { name: "Snowflake Combo", href: "/courses/snowflake-combo-live" },
+              { name: "Performance Engineering", href: "/courses/performance-engineering" },
             ]
           },
           {
@@ -61,7 +61,6 @@ const MENU_ITEMS: MenuItem[] = [
               { name: "Informatica IICS COMBO Full Course", href: "/courses/iics-combo-recorded" },
               { name: "IICS COMBO Part-1", href: "/courses/iics-combo-recorded-part-1" },
               { name: "IICS COMBO Part-2", href: "/courses/iics-combo-recorded-part-2" },
-			  { name: "Snowflake Data Eng Combo", href: "/courses/snowflake-combo-live" },
               { name: "Informatica IICS CAI", href: "/courses/iics-cai-recorded" },
               { name: "Informatica Power Center", href: "/courses/informatica-powercenter" }
             ]
@@ -181,7 +180,7 @@ const MENU_ITEMS: MenuItem[] = [
        href: "/industry-connect/join",
     subItems: [
       {
-		name: "Class Draw",
+		name: "Draw",
         href:"/industry-connect/draw",
 		},
 		{
@@ -665,15 +664,17 @@ export default function Header() {
         </nav>
 
 
-{/* Student Login - Opens Landing Page */}
-<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:flex">
-  <Button asChild className="bg-orange-600 hover:bg-blue-600 text-white">
-    <Link href="/login-choice" className="flex items-center gap-2">
-      <GraduationCap className="w-4 h-4" />
-      <span>Student Login</span>
-    </Link>
-  </Button>
-</motion.div>
+        {/* Student Login */}
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className="hidden md:flex">
+          <Button asChild className="bg-orange-600 hover:bg-blue-600 text-white">
+            <Link href="https://login.rishabinformaticagroup.com/login" target="_blank" className="flex items-center gap-2">
+              <span>Student Login</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+              </svg>
+            </Link>
+          </Button>
+        </motion.div>
 
         {/* Mobile menu toggle */}
         <div className="md:hidden flex items-center gap-2">
@@ -722,15 +723,17 @@ export default function Header() {
                 ))}
               </div>
 
-        {/* Mobile Student Login Button */}
-<div className="mt-6">
-  <Button asChild className="w-full bg-orange-600 hover:bg-blue-600 text-white">
-    <Link href="/login-choice" className="flex items-center justify-center gap-2">
-      <GraduationCap className="w-4 h-4" />
-      <span>Student Login</span>
-    </Link>
-  </Button>
-</div>
+              {/* Mobile Student Login Button */}
+              <div className="mt-6">
+                <Button asChild className="w-full bg-orange-600 hover:bg-blue-600 text-white">
+                  <Link href="https://login.rishabinformaticagroup.com/login" target="_blank" className="flex items-center justify-center gap-2">
+                    <span>Student Login</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    </svg>
+                  </Link>
+                </Button>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

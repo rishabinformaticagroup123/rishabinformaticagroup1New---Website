@@ -5,8 +5,8 @@ import Image from "next/image";
 import styles from "./page.module.css";
 
 export const metadata = {
-  title: "Snowflake Combo Training | Snowflake + ADF + DBT + IICS",
-  description: "Join Batch 2 starting June 25, 2025. Master Snowflake, ADF, DBT & IICS with real-time projects and placement assistance.",
+  title: "Snowflake Data Eng Combo Training | Snowflake + DBT + Apache Airflow",
+  description: "Join Batch 5 started Aug 1, 2026. Master Snowflake + DBT + Apache Airflow with 3 real-time projects and placement assistance.",
 };
 
 export default function SnowflakeComboPage() {
@@ -16,11 +16,11 @@ export default function SnowflakeComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 2 Starts June 25, 2025</span>
-            <h1>Snowflake <span className={styles.highlight}>COMBO</span> Training Live</h1>
-            <h2>Snowflake + ADF + DBT + IICS</h2>
+            <span className={styles.batchBadge}>New Batch 5 Starts Aug 1, 2026</span>
+            <h1>Snowflake Data Engineering<span className={styles.highlight}> COMBO</span> Training Live</h1>
+            <h2>Snowflake + DBT + Apache Airflow</h2>
             <p className={styles.heroDescription}>
-              Learn industry-demanded skills in cloud data engineering. Master Snowflake with Azure Data Factory, DBT, and IICS. Real-time project experience and interview prep included.
+              Learn industry-demanded skills in cloud data engineering. Master Snowflake , DBT, and Apche Airflow. Real-time project experience and interview prep included.
             </p>
 
             <div className={styles.heroStats}>
@@ -30,11 +30,11 @@ export default function SnowflakeComboPage() {
               </div>
               <div className={styles.statItem}>
                 <ClockIcon className={styles.statIcon} />
-                <span>Daily 1.5hr Sessions</span>
+                <span>Daily 1.5hr to 2hrs Sessions</span>
               </div>
               <div className={styles.statItem}>
                 <UserIcon className={styles.statIcon} />
-                <span>Limited to 30 Students</span>
+                <span>100 % Support till you Get placed</span>
               </div>
             </div>
 
@@ -50,7 +50,7 @@ export default function SnowflakeComboPage() {
 
           <div className={styles.heroImage}>
             <Image
-              src="/courses/snowflake.png"
+              src="/courses/snowflake/snowflake.png"
               alt="Snowflake Combo Training"
               width={600}
               height={400}
@@ -78,7 +78,7 @@ export default function SnowflakeComboPage() {
           {[
             {
               title: "Cloud Pipeline Projects",
-              description: "Build real-time projects with Snowflake, ADF, DBT, and IICS",
+              description: "Build real-time projects with Snowflake + DBT + Apache Airflow",
               icon: <CloudIcon />
             },
             {
@@ -103,7 +103,7 @@ export default function SnowflakeComboPage() {
             },
             {
               title: "Affordable Pricing",
-              description: "₹9,600 for a full 45-day live training program",
+              description: "₹11,400 for a full 45-day live training program",
               icon: <CompareIcon />
             }
           ].map((feature, index) => (
@@ -121,7 +121,7 @@ export default function SnowflakeComboPage() {
         <div className={styles.syllabusContent}>
           <div>
             <h2 className={styles.sectionTitle}>Download Course Syllabus</h2>
-            <p>Complete curriculum with modules covering Snowflake, ADF, DBT, IICS and more.</p>
+            <p>Complete curriculum with modules covering Snowflake, DBT, Apache Airflow and more.</p>
             <Button asChild className={styles.downloadButton}>
               <Link href="/syllabus/snowflake-combo.pdf" download>
                 <DownloadIcon className={styles.buttonIcon} />
@@ -130,7 +130,7 @@ export default function SnowflakeComboPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus-preview.png"
+            src="/syllabus/syllabus-preview.jpg"
             alt="Syllabus Preview"
             width={300}
             height={400}
@@ -144,18 +144,18 @@ export default function SnowflakeComboPage() {
         <h2 className={styles.sectionTitle}>Next Batch Details</h2>
         <div className={styles.batchCards}>
           <div className={styles.batchCard}>
-            <h3>Batch 2</h3>
+            <h3>Batch 6</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: June 25, 2025</span>
+              <span>Starts: Sep 10, 2026</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />
-              <span>Timing: 7:30 PM - 9:30 PM IST</span>
+              <span>Timing: 7:25 PM - 9:15 PM IST</span>
             </div>
-            <div className={styles.priceTag}>₹9,600 <span className={styles.originalPrice}>₹18,000</span></div>
+            <div className={styles.priceTag}>₹11,400 <span className={styles.originalPrice}>₹18,000</span></div>
             <Button asChild className={styles.enrollButton}>
-              <Link href="https://course.rishabinformaticagroup.com/courses/xxxxxx" target="_blank">
+              <Link href="https://lms.rishabinformaticagroup.com/payment?course_id=2"target="_blank">
                 Enroll Now
               </Link>
             </Button>
@@ -167,7 +167,7 @@ export default function SnowflakeComboPage() {
       <section className={styles.instructorSection}>
         <div className={styles.instructorContent}>
           <Image
-            src="/instructor-hari.jpg"
+            src="/instructors/hari.png"
             alt="Hari A. - Instructor"
             width={200}
             height={200}
@@ -177,14 +177,16 @@ export default function SnowflakeComboPage() {
             <h2 className={styles.sectionTitle}>Your Instructor</h2>
             <h3>Hari A.</h3>
             <p className={styles.instructorBio}>
-              14+ years of experience in ETL, Data Engineering and Cloud Integration. 
-              Ex-TCS & IBM. Delivered 100+ batches and trained 1000+ professionals.
+              15+ years of experience in ETL, Data Engineering and Cloud Integration. 
+              TCS, IBM, HCL Tech, Intex Technologies . Delivered 500+ batches and trained 5000+ professionals.
             </p>
             <div className={styles.expertise}>
               <span>Snowflake</span>
-              <span>Azure Data Factory</span>
+              <span>Azure Data Eng</span>
               <span>DBT</span>
-              <span>IICS</span>
+              <span>Informatica IDMC</span>
+			  <span>Big Data Stacks</span>
+			  <span>Data Ops & ML Ops</span>
             </div>
           </div>
         </div>
@@ -196,7 +198,7 @@ export default function SnowflakeComboPage() {
         <div className={styles.testimonialCards}>
           {[
             {
-              quote: "This combo made me job-ready in less than 2 months. Snowflake and ADF project work helped me stand out.",
+              quote: "This combo made me job-ready in less than 2 months. Snowflake + DBT project work helped me stand out.",
               name: "Deepak R.",
               company: "Tata Consultancy Services"
             },
