@@ -130,7 +130,7 @@ export default function SnowflakeComboPage() {
             </Button>
           </div>
           <Image
-            src="/syllabus/syllabus-preview.jpg"
+            src="/syllabus/syllabus-preview.JPG"
             alt="Syllabus Preview"
             width={300}
             height={400}
