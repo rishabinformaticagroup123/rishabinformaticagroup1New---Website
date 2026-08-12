@@ -46,9 +46,9 @@ const engagements = [
     description:
       "Industry-oriented hands-on technical training delivered through a structured academic training program, with practical sessions, demonstrations and guided learning.",
     images: [
-      "/corporate-training/jain-1.JPEG",
-      "/corporate-training/jain-2.JPEG",
-      "/corporate-training/jain-3.JPEG",
+      "/corporate-training/jain-1.jpeg",
+      "/corporate-training/jain-2.jpeg",
+      "/corporate-training/jain-3.jpeg",
     ],
   },
   {
@@ -58,9 +58,9 @@ const engagements = [
     description:
       "Hands-on technical training delivered in a computer-lab environment with live demonstrations, practical exercises and guided implementation.",
     images: [
-      "/corporate-training/hyderabad-2.JPEG",
-      "/corporate-training/hyderabad-1.JPEG",
-      "/corporate-training/hyderabad-3.JPEG",
+      "/corporate-training/hyderabad-2.jpeg",
+      "/corporate-training/hyderabad-1.jpeg",
+      "/corporate-training/hyderabad-3.jpeg",
     ],
   },
   {
@@ -70,9 +70,9 @@ const engagements = [
     description:
       "Interactive technical sessions combining instructor-led concepts, live demonstrations and practical learning with students.",
     images: [
-      "/corporate-training/karur-1.JPEG",
-      "/corporate-training/karur-2.JPEG",
-      "/corporate-training/karur-3.JPEG",
+      "/corporate-training/karur-1.jpeg",
+      "/corporate-training/karur-2.jpeg",
+      "/corporate-training/karur-3.jpeg",
     ],
   },
   {
@@ -82,9 +82,9 @@ const engagements = [
     description:
       "Practical sessions focused on real-world technology concepts, implementation and career-oriented technical skills.",
     images: [
-      "/corporate-training/trichy-1.JPEG",
-      "/corporate-training/trichy-2.JPEG",
-      "/corporate-training/trichy-3.JPEG",
+      "/corporate-training/trichy-1.jpeg",
+      "/corporate-training/trichy-2.jpeg",
+      "/corporate-training/trichy-3.jpeg",
     ],
   },
 ];
@@ -221,7 +221,7 @@ export default function CorporateTrainingsPage() {
               {/* Small photo 2 */}
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
                 <Image
-                  src="/corporate-training/trichy-1.JPEG"
+                  src="/corporate-training/trichy-1.jpeg"
                   alt="Training session"
                   fill
                   className="object-cover"
