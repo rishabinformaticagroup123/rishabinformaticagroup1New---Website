@@ -194,7 +194,7 @@ export default function CorporateTrainingsPage() {
               {/* Main large photo */}
               <div className="relative rounded-2xl overflow-hidden col-span-2 aspect-[4/3]">
                 <Image
-                  src="/corporate-training/hyderabad-1.JPEG"
+                  src="/corporate-training/hyderabad-1.jpeg"
                   alt="Training session main"
                   fill
                   className="object-cover"
@@ -208,7 +208,7 @@ export default function CorporateTrainingsPage() {
               {/* Small photo 1 */}
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
                 <Image
-                  src="/corporate-training/karur-1.JPEG"
+                  src="/corporate-training/karur-1.jpeg"
                   alt="Training session"
                   fill
                   className="object-cover"
