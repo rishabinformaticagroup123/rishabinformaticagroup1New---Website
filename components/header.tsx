@@ -32,6 +32,7 @@ const MENU_ITEMS: MenuItem[] = [
     subItems: [
       { name: "Our Story", href: "/about/our-story" },
       { name: "Mission & Vision", href: "/about/mission-vision" },
+	  { name: "Corporate Trainings", href: "/about/corporate-trainings" },
       { name: "Contact Us", href: "/about/contact" },
     ],
   },
