@@ -103,31 +103,56 @@ const slides = [
 	 type: 'image',
     src: "/courses/snowflake/snowflake.png",
     alt: "Hands-on Practice"	
-  	},
+   },
+   {  
+   type: 'image',
+    src: "/courses/snowflake/snowflake.png",
+    alt: "Hands-on Practice"
+	},
     { 
 	type: 'image',
     src: "/courses/informatica.png",
     alt: "Hands-on Practice"
     },
    {    
-    type: 'image', 
-    src: "/corporate-training/corporate-1.PNG",
-    alt: "Hands-on Practice"
+    type: 'short-video', 
+    src: "/videos/video1.mp4",
+    duration: 8000, // Increased from 10000 to 8000
   },
   { 
-   type: 'image',
-    src: "/courses/hyderabad-1.jpeg",
-    alt: "Hands-on Practice"
-	},
+    type: 'short-video',
+    src: "/videos/video2.mp4",
+    duration: 8000, // Increased from 10000 to 8000
+  },
+  {   
+    type: 'short-video',
+    src: "/videos/video3.mp4",
+    duration: 8000, // Increased from 10000 to 8000  
+  },
   { 
-		type: 'image',
-    src: "/courses/corporate-2.jpeg",
-    alt: "Hands-on Practice"
- },
+    type: 'youtube',
+    videoId: "4DfifZbfk7w",
+    duration: 10000
+  },
   { 
     type: 'youtube',
     videoId: "Kg86_3njK6A",
     duration: 10000
+   },
+  {
+   type: 'youtube',
+    videoId: "g643jsMSfzM",
+    duration: 10000
+  },
+  {
+	 type: 'image',
+    src: "/courses/corporate.png",
+    alt: "Hands-on Practice"
+  },
+  {
+    type: 'image',
+    src: "/courses/informatica.png",
+    alt: "Hands-on Practice"
    }
 ];
 

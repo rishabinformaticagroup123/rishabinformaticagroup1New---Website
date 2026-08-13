@@ -60,7 +60,7 @@ const engagements = [
     images: [
       "/corporate-training/hyderabad-2.jpeg",
       "/corporate-training/hyderabad-1.jpeg",
-      "/corporate-training/hyderabad-3.jpeg",
+      "/corporate-training/hyderabad-4.jpeg",
     ],
   },
   {
