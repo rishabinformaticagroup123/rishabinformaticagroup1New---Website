@@ -126,7 +126,7 @@ const slides = [
  },
   { 
   	type: 'image',
-    src: "/courses/corporate-2.jpg",
+    src: "/courses/corporate-3.JPG",
     alt: "Hands-on Practice"
   },
   { 
