@@ -116,14 +116,19 @@ const slides = [
   },
   { 
    type: 'image',
-    src: "/courses/hyderabad-1.jpeg",
+    src: "/corporate-training/hyderabad-1.png",
     alt: "Hands-on Practice"
 	},
   { 
 		type: 'image',
-    src: "/courses/corporate-2.jpeg",
+    src: "/courses/corporate-2.png",
     alt: "Hands-on Practice"
  },
+  { 
+  	type: 'image',
+    src: "/courses/corporate-2.jpg",
+    alt: "Hands-on Practice"
+  },
   { 
     type: 'youtube',
     videoId: "Kg86_3njK6A",
