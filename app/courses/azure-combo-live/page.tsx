@@ -6,7 +6,7 @@ import styles from "./page.module.css";
 
 export const metadata = {
   title: "Azure Data Engineering COMBO Training | SQL Server + ADF + Databricks",
-  description: "Join Batch 3 starting June 25, 2025. Master Azure Data Engineering with SQL Server, Data Factory, and Databricks with live projects and placement support.",
+  description: "Join Batch 5 starting Aug, 2026. Master Azure Data Engineering with SQL Server, Data Factory, and Databricks with live projects and placement support.",
 };
 
 export default function AzureDataEngineeringComboPage() {
@@ -16,7 +16,7 @@ export default function AzureDataEngineeringComboPage() {
       <section className={styles.hero}>
         <div className={styles.heroContent}>
           <div className={styles.heroText}>
-            <span className={styles.batchBadge}>New Batch 3 Starts June 25, 2025</span>
+            <span className={styles.batchBadge}>New Batch 5 Starts Aug 15, 2026</span>
             <h1>Azure Data Engineering <span className={styles.highlight}>COMBO</span> Training Live</h1>
             <h2>SQL Server + Azure Data Factory + Azure Databricks</h2>
             <p className={styles.heroDescription}>

@@ -141,13 +141,13 @@ export default function SnowflakeComboPage() {
 
       {/* Batch Details */}
       <section className={styles.batchSection} id="enroll">
-        <h2 className={styles.sectionTitle}>Next Batch Details</h2>
+        <h2 className={styles.sectionTitle}>Enroll Now</h2>
         <div className={styles.batchCards}>
           <div className={styles.batchCard}>
-            <h3>Batch 6</h3>
+            <h3>Batch 5</h3>
             <div className={styles.batchInfo}>
               <CalendarIcon />
-              <span>Starts: Sep 10, 2026</span>
+              <span>Started: Aug 1, 2026</span>
             </div>
             <div className={styles.batchInfo}>
               <ClockIcon />

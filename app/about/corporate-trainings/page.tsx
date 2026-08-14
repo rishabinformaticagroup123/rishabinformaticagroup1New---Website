@@ -194,14 +194,14 @@ export default function CorporateTrainingsPage() {
               {/* Main large photo */}
               <div className="relative rounded-2xl overflow-hidden col-span-2 aspect-[4/3]">
                 <Image
-                  src="/corporate-training/hyderabad-1.jpeg"
+                  src="/corporate-training/corporate-1.jpeg"
                   alt="Training session main"
                   fill
                   className="object-cover"
                   priority
                 />
                 <div className="absolute bottom-4 left-4 rounded-full bg-black/60 px-4 py-1.5 text-xs font-bold text-white backdrop-blur-sm">
-                  📍 Hyderabad
+                  📍 Bangalore
                 </div>
               </div>
               

@@ -52,8 +52,10 @@ const MENU_ITEMS: MenuItem[] = [
               { name: "Snowflake Data Eng Combo", href: "/courses/snowflake-combo-live" },
               { name: "Informatica IICS CAI", href: "/courses/iics-cai-live" },
               { name: "Azure Data Eng COMBO", href: "/courses/azure-combo-live" },
-              { name: "NextJS & React", href: "/courses/performance-engineering" },
-			  { name: "Data Ops & ML Ops", href: "/courses/data-ops+ml-ops" },
+              { name: "Performance Engineering", href: "/courses/performance-engineering" },
+			  { name: "Big Data Analytics", href: "/courses/bigdata-analytics" },
+			  { name: "Data Ops & ML Ops", href: "/courses/dataops-mlops" },
+			  { name: "NextJS & React", href: "/courses/nextjs-react" },
             ]
           },
           {

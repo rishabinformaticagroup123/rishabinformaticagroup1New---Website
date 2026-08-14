@@ -32,9 +32,9 @@ export default function CoursesPage() {
           <div className="flex justify-center">
             <TabsList className="mb-8">
               <TabsTrigger value="all">All Courses</TabsTrigger>
+			  <TabsTrigger value="snowflake">Snowflake</TabsTrigger>
               <TabsTrigger value="informatica">Informatica</TabsTrigger>
               <TabsTrigger value="azure">Azure</TabsTrigger>
-              <TabsTrigger value="snowflake">Snowflake</TabsTrigger>
               <TabsTrigger value="performance">Performance</TabsTrigger>
             </TabsList>
           </div>
@@ -42,7 +42,17 @@ export default function CoursesPage() {
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 {
-                  title: "🔴 Live | Informatica IICS COMBO - Online Training",
+				title: "🔴 Live | Snowflake Combo - Online Training",
+                  description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
+                  image: "/courses/snowflake/snowflake.PNG",
+                  duration: "42 Days ( Daily 1 Hour)",
+                  level: "Intermediate",
+                  price: "₹11400",
+                  href: "/courses/snowflake-combo-live",
+                  category: "snowflake", 
+				},
+                {
+	             title: "🔴 Live | Informatica IICS COMBO - Online Training",
                   description: "Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration.",
                   image: "/courses/informatica.png",
                   duration:"45 Days  (Daily 1.5 to 2 Hours)",
@@ -60,9 +70,9 @@ export default function CoursesPage() {
                   price: "₹8200",
                   href: "/courses/iics-cloud-live",
                   category: "informatica",  				  		  				  			  
-				},
-                {
-                  title: "🔴 Live |Azure Data Engineering COMBO - Online Training",
+                },
+                {   	    			  			  		  
+				  title: "🔴 Live |Azure Data Engineering COMBO - Online Training",
                   description: "Learn to build and optimize data solutions with Microsoft Azure.",
                   image: "/courses/azure.png",
                   duration: "60 Days ( Daily 1 Hour)",
@@ -71,17 +81,7 @@ export default function CoursesPage() {
                   href: "/courses/azure-combo-live",
                   category: "azure",
                 },
-                {
-                  title: "🔴 Live | Snowflake Combo - Online Training",
-                  description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
-                  image: "/courses/snowflake.png",
-                  duration: "42 Days ( Daily 1 Hour)",
-                  level: "Intermediate",
-                  price: "₹9600",
-                  href: "/courses/snowflake-combo-live",
-                  category: "snowflake",
-                },
-                {
+                {                         
                   title: "🔴 Live | Performance Engineering - Online Training",
                   description: "Master the techniques to optimize application performance and scalability.",
                   image: "/courses/performance.png",
@@ -222,9 +222,19 @@ export default function CoursesPage() {
               <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                 {[
                   {
-                    title: "🔴 Live | Informatica IICS COMBO - Online Training",
+				     title: "🔴 Live | Snowflake Combo - Online Training",
+                    description: "Master Snowflake to store and analyze data in the cloud.",
+                    image: "/courses/snowflake/snowflake.png",
+                    duration: "42 Days ( Daily 1 Hour)",
+                    level: "Intermediate",
+                    price: "₹11400",
+                    href: "/courses/snowflake-combo-live",
+                    category: "snowflake",
+					},
+                    {  				  		
+				   title: "🔴 Live | Informatica IICS COMBO - Online Training",
                     description:
-                      "Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration..",
+                    "Learn SQL + Informatica PC + Informatica IICS + Snowflake for ETL development and data integration..",
                     image: "/courses/informatica.png",
                     duration: "45 Days  (Daily 1.5 to Hours)",
                     level: "Beginner to Advanced",
@@ -241,8 +251,10 @@ export default function CoursesPage() {
                   price: "₹8200",
                   href: "/courses/iics-cloud-live",
                   category: "informatica",	  
-				  },
-                  { 			  						  				  			  
+				 
+                  
+                  },
+                  { 
 				   title: "🔴 Live |Azure Data Engineering COMBO - Online Training",
                     description: "Learn to build and optimize data solutions with Microsoft Azure.",
                     image: "/courses/azure.png",
@@ -251,16 +263,6 @@ export default function CoursesPage() {
                     price: "₹12000",
                     href: "/courses/azure-combo-live",
                     category: "azure",
-                  },
-                  {
-                    title: "🔴 Live | Snowflake Combo - Online Training",
-                    description: "Master Snowflake to store and analyze data in the cloud.",
-                    image: "/courses/snowflake.png",
-                    duration: "42 Days ( Daily 1 Hour)",
-                    level: "Intermediate",
-                    price: "₹9600",
-                    href: "/courses/snowflake-combo-live",
-                    category: "snowflake",
                   },
                   {
                     title: "🔴 Live | Performance Engineering - Online Training",
@@ -405,51 +407,6 @@ export default function CoursesPage() {
         </Tabs>
       </section>
 
-      {/* Featured Course */}
-      <section className="bg-muted py-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <div className="flex flex-col justify-center">
-              <div className="text-sm font-medium text-primary">Featured Course</div>
-              <h2 className="mt-2 text-3xl font-bold tracking-tight">Informatica IICS COMBO</h2>
-              <p className="mt-4 text-muted-foreground">
-                Our most comprehensive Informatica training program covers all aspects of Informatica Intelligent Cloud
-                Services, including Cloud Data Integration, Cloud Application Integration, and more.
-              </p>
-              <ul className="mt-6 space-y-2">
-                {[
-                  "Learn from industry experts with real-world experience",
-                  "Hands-on projects and case studies",
-                  "24/7 access to learning resources",
-                  "Dedicated placement assistance",
-                  "Industry-recognized certification",
-                ].map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <CheckCircle className="mr-2 h-5 w-5 shrink-0 text-primary" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-8">
-                <Button asChild size="lg">
-                  <Link href="/courses/iics-cloud-live1">
-                    Explore Course <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-              </div>
-            </div>
-            <div className="flex items-center justify-center">
-              <Image
-                src="/placeholder.svg?height=400&width=500"
-                width={500}
-                height={400}
-                alt="Informatica IICS COMBO"
-                className="rounded-lg shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Course Benefits */}
       <section className="container mx-auto px-4 sm:px-6 lg:px-8">

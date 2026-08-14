@@ -20,17 +20,17 @@ const stats = [
 
 const courses = [
   {
-    title: "Snowflake Training",
-    description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
-    image: "/courses/snowflake/snowflake.png",
-    href: "/courses/snowflake-combo-live"
-   },
-   {
     title: "Informatica IICS COMBO",
     description: "Master IICS, PowerCenter, SQL & Snowflake in 45 days",
     image: "/courses/informatica.png",
     href: "/courses/iics-combo-live"
-   },
+  },
+  { 
+    title: "Snowflake Training",
+    description: "Become proficient in Snowflake's cloud data platform and analytics capabilities.",
+    image: "/courses/snowflake/snowflake.png",
+    href: "/courses/snowflake-combo-live"
+  },
   {
     title: "Azure Data Engineering",
     description: "Learn to build and optimize data solutions with Microsoft Azure.",
@@ -146,7 +146,7 @@ export default function Home() {
           <div className="lg:hidden flex flex-col gap-4">
             <div className="flex flex-col justify-center space-y-3">
               <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-                Master In-Demand Technologies with Our Industry-Ready <span className="text-primary">COMBO Courses</span>
+                Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
               </h1>
 
               <Link 
@@ -190,7 +190,7 @@ export default function Home() {
           <div className="hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="flex flex-col justify-center space-y-3">
               <h1 className="text-5xl font-extrabold tracking-tight">
-               Master In-Demand Technologies with Our Industry-Ready <span className="text-primary">COMBO Courses</span>
+                Kickstart Your Software Career in 45 Days with our <span className="text-primary">COMBO Courses</span>
               </h1>
               
               <Link 
