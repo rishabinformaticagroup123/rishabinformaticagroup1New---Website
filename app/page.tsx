@@ -120,7 +120,7 @@ const slides = [
     alt: "Hands-on Practice"
 	},
   { 
-		type: 'image',
+	type: 'image',
     src: "/courses/corporate-2.png",
     alt: "Hands-on Practice"
  },
